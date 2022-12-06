@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户界面</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/user.css">
+    <!-- JS -->
+    <script src="./vendor/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <!-- ==============顶栏============== -->
+        <div class="header">
+            <div class="wrapper">
+                <!-- 左边城市 -->
+                <div class="left">
+                    <ul>
+                        <li>北京</li>
+                        <li>[切换城市]</li>
+                    </ul>
+                </div>
+                <!-- 左边城市 -->
+
+                <!-- 右边导航栏 -->
+                <div class="right">
+                    <ul>
+                        <li><a href="./login.html">登录/注册</a></li>
+
+                        <li>
+                            <!-- 一级导航 -->
+                            <div class="first"><a href="./pages/MyJob.html">个人中心</a></div>
+                            <!-- 二级导航 -->
+                            <div class="second">
+                                <ul>
+                                    <!-- <li>我的收藏</li> -->
+                                    <li>我的求职</li>
+                                    <!-- <li>我的浏览</li> -->
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <!-- 一级导航 -->
+                            <div class="first">商家中心</div>
+                            <!-- 二级导航 -->
+                            <div class="second">
+                                <ul>
+                                    <li>我的发布</li>
+                                    <li>企业信息</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 右边导航栏 -->
+            </div>
+        </div>
+        <!-- ==============顶栏============== -->
+
+        <!-- ==============内容============== -->
+        <div class="neirong">
+            <div class="wrapper">
+                <div class="left shadow">
+                    <!-- 上部地区（头像、昵称） -->
+                    <div class="top">
+                        <div class="header">
+                            <img src="../static/images/user.png" alt="">
+                        </div>
+                        <div class="name text-center font-weight-bold">优秀的求职者</div>
+                        <div class="tel text-center font-weight-bold mt-2 text-light bg-primary"><span
+                                class="iconfont icon-telephone"></span>158****8131</div>
+                    </div>
+
+                    <div class="bottom">
+                        <ul class="menu">
+                            <li class="menu-item ">
+                                <div url="./shoucang.html"><span class="iconfont icon-wodeshoucang"></span>我的收藏</div>
+                            </li>
+
+                            <li class="menu-item">
+                                <div><span class="iconfont icon-zhengjian"></span>我的求职</div>
+                                <ul class="menu-sub collapse">
+                                    <li url="./jianli.html"">我的简历</li>
+                                    <li url = " ./jilu.html">求职记录</li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item">
+                                <div url="./liulan.html"><span class="iconfont icon-jilu"></span>我的浏览</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="right" class="right">
+
+                </div>
+            </div>
+        </div>
+        <!-- ==============内容============== -->
+    </div>
+</body>
+
+</html>
