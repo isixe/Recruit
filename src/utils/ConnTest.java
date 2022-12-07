@@ -1,11 +1,10 @@
 package utils;
 
-import bean.User;
 import dao.UserDao;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
+//测试数据库连接
 public class ConnTest {
     public static void main(String[] args) throws SQLException {
         ConnectionUtils util = new ConnectionUtils();
