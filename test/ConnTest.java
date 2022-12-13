@@ -1,4 +1,4 @@
-import dao.UserDao;
+import dao.impl.UserDaoImpl;
 import utils.ConnectionUtils;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ public class ConnTest {
         Connection conn = util.getConn();
         System.out.println(conn);
 
-        UserDao userDao = new UserDao();
+        UserDaoImpl userDao = new UserDaoImpl();
         System.out.println(userDao.login("user","123456"));
     }
 }
