@@ -14,4 +14,7 @@ public interface UserDao {
     public User findById(int id) throws Exception;
 
     public User findByName(String name) throws Exception;
+
+    public boolean findUser(String username, String password) throws Exception;
+
 }
