@@ -24,7 +24,8 @@ public class UserService {
             UserDao userDao = new UserDaoImpl();
             List<User> users = userDao.findByName(username);
             User user = new User();
-            user.s
+            user.setName(username);
+            user.setPassword(password);
 //            int result = userDao.add(user);
         } catch (Exception e) {
             e.printStackTrace();
