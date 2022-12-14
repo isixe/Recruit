@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet {
                 response.setHeader("refresh", "3;url=login.jsp");
             }
         }
-
     }
 
     @Override
