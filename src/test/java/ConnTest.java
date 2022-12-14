@@ -9,6 +9,8 @@ public class ConnTest {
         ConnectionUtils util = new ConnectionUtils();
         Connection conn = util.getConn();
         System.out.println(conn);
+
+
         UserDaoImpl userDao = new UserDaoImpl();
         System.out.println(userDao.findUser("user","123456"));
     }
