@@ -23,7 +23,8 @@ public class UserService {
         try {
             UserDao userDao = new UserDaoImpl();
             List<User> users = userDao.findByName(username);
-//            User user = new User();
+            User user = new User();
+            user.s
 //            int result = userDao.add(user);
         } catch (Exception e) {
             e.printStackTrace();

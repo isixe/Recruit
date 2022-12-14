@@ -1,7 +1,7 @@
 package bean;
 
 public class User {
-    private String nmae;
+    private String name;
     private String password;
     private String avatars;
     private int sex;
@@ -9,12 +9,12 @@ public class User {
     private String phone;
     private String email;
 
-    public String getNmae() {
-        return nmae;
+    public String getName() {
+        return name;
     }
 
-    public void setNmae(String nmae) {
-        this.nmae = nmae;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -68,7 +68,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "nmae='" + nmae + '\'' +
+                "nmae='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", avatars='" + avatars + '\'' +
                 ", sex=" + sex +
