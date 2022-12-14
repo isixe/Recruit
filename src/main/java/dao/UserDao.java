@@ -2,6 +2,8 @@ package dao;
 
 import bean.User;
 
+import java.util.List;
+
 public interface UserDao {
     public int add(User user) throws Exception;;
 
@@ -13,7 +15,7 @@ public interface UserDao {
 
     public User findById(int id) throws Exception;
 
-    public User findByName(String name) throws Exception;
+    public List<User> findByName(String name) throws Exception;
 
     public boolean findUser(String username, String password) throws Exception;
 

@@ -4,6 +4,8 @@ import bean.User;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 
+import java.util.List;
+
 public class UserService {
     public boolean login(String username, String password){
         boolean flag = true;
@@ -20,8 +22,9 @@ public class UserService {
         boolean flag = true;
         try {
             UserDao userDao = new UserDaoImpl();
-            User user = new User();
-            int result = userDao.add(user);
+            List<User> users = userDao.findByName(username);
+//            User user = new User();
+//            int result = userDao.add(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
