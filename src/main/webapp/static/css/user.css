@@ -1,0 +1,185 @@
+/* 清除样式 */
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* 设置wrapper的宽度并且居中 */
+.wrapper {
+	width: 1200px;
+	margin: 0 auto;
+	border: 1px solid transparent;
+}
+
+/*  ============顶栏样式============ */
+
+/* 设置顶栏的背景色，下边框 */
+.header {
+	background-color: #fafafa;
+	height: 35px;
+	border-bottom: 1px solid #ccc;
+}
+
+/* 将城市浮动 */
+.header > .wrapper > .left {
+	float: left;
+}
+
+/* 设置城市字体样式 */
+.header > .wrapper > .left > ul {
+	line-height: 35px;
+}
+
+/* 将城市li浮动 */
+/* 调整城市和切换城市之间的距离 */
+.header > .wrapper > .left > ul > li {
+	float: left;
+	margin-right: 10px;
+}
+
+/* 调节城市字体样式 */
+.header > .wrapper > .left > ul > li:first-child {
+	font-size: 18px;
+	color: #058cfa;
+	font-weight: bold;
+}
+
+/* 调节城市字体样式 */
+.header > .wrapper > .left > ul > li:last-child {
+	font-size: 14px;
+	color: #9999b2;
+	font-weight: bold;
+}
+
+/* 将右侧导航浮动到右侧 */
+.header > .wrapper > .right {
+	float: right;
+}
+
+/* 设置字体样式 */
+.header > .wrapper > .right > ul {
+	line-height: 35px;
+	text-align: center;
+}
+
+/* 将一级导航浮动, 调节之间的距离 */
+.header > .wrapper > .right > ul > li {
+	float: left;
+	width: 100px;
+	position: relative;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+/* 设置二级导航样式 */
+.header > .wrapper > .right > ul > li > div.second > ul {
+	position: absolute;
+	width: 100%;
+	background-color: #fff;
+	display: none;
+	color: #333;
+	z-index: 100;
+}
+
+/* 设置二级导航悬浮样式 */
+.header > .wrapper > .right > ul > li > div.second > ul > li:hover {
+	color: orange;
+	background-color: #ededed;
+}
+
+/* 浮动到一级导航显示二级导航 */
+.header > .wrapper > .right > ul > li:hover > div.second > ul {
+	display: block;
+}
+
+/* 设置浮动到li改变背景色 */
+.header > .wrapper > .right > ul > li:hover {
+	background-color: #fff;
+	color: orange;
+}
+
+.header > .wrapper > .right > ul > li a {
+	text-decoration: none;
+	color: #333;
+}
+
+.header > .wrapper > .right > ul > li:hover a {
+	background-color: #fff;
+	color: orange;
+}
+
+/* ============顶栏样式============ */
+
+/* ============内容样式============ */
+
+.neirong > .wrapper {
+	margin-top: 30px;
+}
+
+.neirong > .wrapper > .left {
+	width: 220px;
+	height: 600px;
+	float: left;
+}
+
+.neirong > .wrapper > .right {
+	margin-left: 240px;
+	height: 600px;
+}
+
+.neirong .left .top {
+	height: 200px;
+	border-bottom: 1px solid #9999b2;
+}
+
+.neirong .left .top .header {
+	height: 100px;
+	width: 100px;
+	margin: 10px auto;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.neirong .left .top .header > img {
+	width: 100%;
+}
+
+.neirong .left .top > .tel {
+	width: 140px;
+	margin: 0 auto;
+	font-size: 14px;
+}
+
+.neirong .left .top > .tel > span {
+	margin-right: 10px;
+	font-size: 14px;
+}
+
+.neirong .bottom > #menu {
+	text-align: center;
+}
+
+.neirong .bottom > #menu > li {
+	cursor: pointer;
+	margin-top: 20px;
+	font-size: 18px;
+	line-height: 40px;
+}
+
+.neirong .bottom > #menu > li > ul {
+	margin-left: 25px;
+	line-height: 3em;
+	font-size: 15px;
+}
+
+.neirong .bottom > #menu span {
+	margin-right: 10px;
+	font-size: 20px;
+}
+
+ul#menu > li.current {
+	border-left: 3px solid lightblue;
+	background-color: #faf9f9;
+	color: #058cfa;
+}

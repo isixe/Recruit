@@ -1,0 +1,416 @@
+/* 清除样式 */
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.box {
+	padding: 0 40px;
+	background-color: #f4f4f4;
+	padding: 10px 40px;
+}
+
+/* 设置wrapper的宽度并且居中 */
+.wrapper {
+	margin: auto;
+	border: 1px solid transparent;
+}
+
+/*  ============顶栏样式============ */
+
+/* 设置顶栏的背景色，下边框 */
+.header {
+	height: 50px;
+	background: #fff;
+	padding-top: 5px;
+	padding-left: 15px;
+	border-radius: 5px;
+}
+
+/* 将城市浮动 */
+.header > .wrapper > .left {
+	float: left;
+}
+
+/* 设置城市字体样式 */
+.header > .wrapper > .left > ul {
+	line-height: 35px;
+}
+
+/* 将城市li浮动 */ /* 调整城市和切换城市之间的距离 */
+.header > .wrapper > .left > ul > li {
+	float: left;
+	margin-right: 10px;
+}
+
+/* 调节城市字体样式 */
+.header > .wrapper > .left > ul > li:first-child {
+	font-size: 18px;
+	color: #058cfa;
+	font-weight: bold;
+}
+
+/* 调节城市字体样式 */
+.header > .wrapper > .left > ul > li:last-child {
+	font-size: 14px;
+	color: #9999b2;
+	font-weight: bold;
+}
+
+/* 将右侧导航浮动到右侧 */
+.header > .wrapper > .right {
+	float: right;
+}
+
+/* 设置字体样式 */
+.header > .wrapper > .right > ul {
+	line-height: 35px;
+	text-align: center;
+}
+
+/* 将一级导航浮动, 调节之间的距离 */
+.header > .wrapper > .right > ul > li {
+	float: left;
+	width: 100px;
+	position: relative;
+	font-size: 13px;
+	cursor: pointer;
+	background-color: #fff;
+}
+
+/* 设置二级导航样式 */
+.header > .wrapper > .right > ul > li > div.second > ul {
+	position: absolute;
+	width: 100%;
+	background-color: #fff;
+	display: none;
+	color: #333;
+	z-index: 100;
+}
+
+/* 设置二级导航悬浮样式 */
+.header > .wrapper > .right > ul > li > div.second > ul > li:hover {
+	color: orange;
+	background-color: #ededed;
+}
+
+/* 浮动到一级导航显示二级导航 */
+.header > .wrapper > .right > ul > li:hover > div.second > ul {
+	display: block;
+}
+
+/* 设置浮动到li改变背景色 */
+.header > .wrapper > .right > ul > li:hover {
+	background-color: #fff;
+	color: orange;
+}
+
+.header > .wrapper > .right > ul > li a {
+	text-decoration: none;
+	color: #333;
+}
+
+.header > .wrapper > .right > ul > li:hover a {
+	background-color: #fff;
+	color: orange;
+}
+
+/* ============顶栏样式============ */
+
+/* ============中间logo、搜索样式============  */
+
+/* 设置高度 */
+
+.search > .wrapper {
+	position: relative;
+}
+
+/* 调节左边logo的位置以及大小 */
+.search > .wrapper > .left {
+	height: 100px;
+	width: 250px;
+	margin-top: 15px;
+	float: left;
+	overflow: hidden;
+}
+
+/* 调整图片大小 */
+.search > .wrapper > .left > img {
+	width: 100%;
+}
+
+/* 将搜索栏与字体向右移 */
+.search > .wrapper > .center {
+	margin-left: 400px;
+	margin-top: 35px;
+}
+
+/* 将搜索栏浮动 */
+.search > .wrapper > .center > .search > div.input {
+	float: left;
+}
+
+/* 调节字体样式 */
+.search > .wrapper > .center > .search > p {
+	width: 80px;
+	text-align: center;
+	margin-left: 430px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #058cfa;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* 调节搜索框的样式 */
+.search > .wrapper > .center > .search > div.input > input {
+	width: 430px;
+	height: 40px;
+	border: 3px solid #058cfa;
+	outline: none;
+	padding-left: 10px;
+}
+
+/* 调节job关键字的位置以及样式 */
+.search > .wrapper > .center > .job {
+	margin-top: -10px;
+	font-size: 13px;
+}
+
+.search > .wrapper > .center > .job > span {
+	margin-right: 10px;
+}
+
+/* 调整按钮的位置以及样式 */
+.search > .wrapper > .right {
+	position: absolute;
+	right: 0;
+	top: 45px;
+}
+
+/* 调整按钮和字体的样式 */
+.search > .wrapper > .right > button {
+	color: #fff;
+	font-weight: bold;
+}
+
+/* ============中间logo、搜索样式============  */
+
+/* ============地点、职位、福利============  */
+
+/* 调整menu的样式 */
+.menu-item {
+	border-radius: 5px;
+	margin: 15px 0;
+	background-color: #fff;
+	padding: 10px 0;
+}
+
+.menu-item::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/* 让current span有样式 */
+.current {
+	background-color: #058cfa;
+	color: #fff;
+	border-radius: 5px;
+}
+
+.menu-item > ul > li {
+	float: left;
+	margin: 0 10px;
+	text-align: center;
+	cursor: pointer;
+	padding: 5px 10px;
+}
+
+.menu-item > ul > li:first-child {
+	font-weight: bold;
+}
+
+.menu-item > ul > li:hover > div.second > ul {
+	display: block;
+}
+
+.menu-item > ul > li > div.second {
+	position: absolute;
+}
+
+.menu-item > ul > li > div.second > ul {
+	text-align: center;
+	line-height: 2em;
+	/* width: 100%; */
+	/* width: 1200px; */
+	height: 100px;
+	overflow: auto;
+	line-height: 50px;
+	background-color: #fff;
+	color: #333;
+	display: none;
+	font-size: 15px;
+}
+
+.menu-item > ul > li > div.second > ul > li {
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	padding: 0px 10px;
+}
+/* ============地点、职位、福利============  */
+
+/* ============已选============  */
+
+/* 设置wrapper的上边距 */
+.select {
+	padding: 0 10px;
+}
+
+.select > .wrapper {
+	margin-top: 20px;
+	margin-left: 10px;
+	box-sizing: border-box;
+}
+
+/* 设置框框的样式 */
+
+.select > .wrapper::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+/* 设置字体样式 */
+.select > .wrapper > div {
+	float: left;
+	font-weight: bold;
+}
+
+/* 设置边框 */
+.select > .wrapper > p {
+	border: 1px solid #ccc;
+	width: 170px;
+	margin-left: 50px;
+	text-align: center;
+}
+
+/* 设置图标与字之间的距离 */
+.select > .wrapper span {
+	margin-left: 10px;
+	font-size: 12px;
+}
+
+/* ============已选============  */
+
+/* ============工作============  */
+
+/* 调节左边字体样式 */
+.recruit .left > p:first-child {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.recruit .left > p:nth-child(2) {
+	color: orangered;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.recruit .left > p:nth-child(3) > span {
+	font-size: 13px;
+	padding: 5px 10px;
+}
+
+/* 让left悬浮 */
+.recruit > .wrapper > .information > .left {
+	float: left;
+}
+
+.recruit > .wrapper > .information {
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+/* 让中心向右移 */
+.recruit .center {
+	margin-top: 15px;
+	margin-left: 400px;
+}
+
+/* 调节中心字体样式 */
+.recruit .center > .top > span {
+	font-size: 14px;
+}
+
+.recruit .center > .buttom > span {
+	font-size: 14px;
+}
+
+.recruit > .wrapper > .information {
+	position: relative;
+	margin-top: 20px;
+	height: 150px;
+}
+
+.recruit .right {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.recruit .right > button {
+	padding: 8px 20px;
+	font-weight: bold;
+}
+
+.pagination {
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.pagination .page-link {
+	font-size: 16px;
+}
+/* ============工作============  */
+
+/* ============模态框============  */
+
+#registerModalModal form > .form-group > .row > label {
+	margin-top: 5px;
+}
+
+#registerModalModal form .buttons_sex > span {
+	border: 1px solid #9999b2;
+	padding: 5px 22px;
+	margin-right: 20px;
+	margin-left: -12px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-weight: bold;
+	margin-top: 1px;
+	display: inline-block;
+}
+
+#registerModalModal form .buttons_sex > span.current {
+	border: 2px solid orange;
+	background-color: #fff;
+	color: #333;
+}
+
+#registerModalModal form > .row > button {
+	margin-top: 20px;
+}
+
+#registerModalModal form > p {
+	margin-top: 30px;
+	font-size: 14px;
+}
+
+#registerModalModal form > .form-group {
+	margin-top: 30px;
+}
+
+/* ============模态框============  */
