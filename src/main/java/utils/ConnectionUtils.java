@@ -8,9 +8,10 @@ import java.sql.*;
 import java.util.Properties;
 
 /**
- * 工具类-数据库交互
+ * 工具类-数据库交互，已完成
  *
  * @author isixe
+ * @description: 只用于调用，不需要修改
  */
 public class ConnectionUtils {
     private static String url;

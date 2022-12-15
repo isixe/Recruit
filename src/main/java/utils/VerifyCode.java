@@ -11,8 +11,9 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 /**
- * 获取登录注册验证码
+ * 获取登录注册验证码，已完成
  * @author : isixe
+ * @description: 只用于调用，不需要修改
  */
 public class VerifyCode {
     private int w = 70;

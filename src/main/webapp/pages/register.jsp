@@ -9,13 +9,13 @@
 %>
 <html>
 
-<head>
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+<head>>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>前程似锦招聘平台</title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../static/css/login-register.css"/>
-    <!-- Script -->
+    <!-- JS -->
+    <script src="../static/vendor/jquery.1.10.1.min.js" type="text/javascript"></script>
     <script id="allmobilize" charset="utf-8" src="../static/js/allmobilize.min.js"></script>
 </head>
 

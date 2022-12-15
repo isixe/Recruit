@@ -15,10 +15,9 @@
         <title>前程似锦招聘平台</title>
 
         <!-- CSS -->
-        <link rel="Shortcut Icon" href="../static/images/logo.png">
         <link rel="stylesheet" type="text/css" href="../static/css/login-register.css"/>
-        <!-- Script -->
-        <script src="style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
+        <!-- JS -->
+        <script src="../static/vendor/jquery.1.10.1.min.js" type="text/javascript"></script>
         <script id="allmobilize" charset="utf-8" src="../static/js/allmobilize.min.js"></script>
     </head>
 
