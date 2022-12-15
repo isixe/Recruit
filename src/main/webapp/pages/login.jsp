@@ -25,7 +25,7 @@
 <body id="login_bg">
 <div class="login_wrapper">
     <div class="login_header">
-        <a href="../index.jsp"><img src="../static/images/logo.png" width="285" height="92"/></a>
+        <a href="${pageContext.request.contextPath}/index.jsp"><img src="../static/images/logo.png" width="285" height="92"/></a>
         <div id="cloud_s"><img src="../static/images/cloud_s.png" width="81" height="52" alt="cloud"/></div>
         <div id="cloud_m"><img src="../static/images/cloud_m.png" width="136" height="95" alt="cloud"/></div>
     </div>
