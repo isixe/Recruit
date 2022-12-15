@@ -277,26 +277,13 @@ span.error {
 #loginForm a {
 	color: #019875;
 }
-#loginForm input#name {
+#loginForm input {
 	width: 296px;
 	font-size: 16px;
 	color: #777;
 	border: none;
 }
 
-#loginForm input#code {
-	width: 296px;
-	font-size: 16px;
-	color: #777;
-	border: none;
-}
-
-#loginForm input#password {
-	width: 296px;
-	font-size: 16px;
-	color: #777;
-	border: none;
-}
 #loginForm input:focus {
 	border: 2px solid #fff;
 	-webkit-box-shadow: 0px 0px 4px #b5f0e7;
