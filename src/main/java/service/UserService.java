@@ -14,15 +14,15 @@ public class UserService {
      * @param password 密码
      * @return
      */
-    public boolean login(String username, String password) {
-        boolean flag = true;
+    public Integer login(String username, String password) {
+        int id = 0;
         try {
             UserDao userDao = new UserDaoImpl();
-            flag = userDao.findUser(username, password);
+            id = userDao.findUserId(username, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return flag;
+        return id;
     }
 
     /**

@@ -10,8 +10,7 @@ public class ConnTest {
         Connection conn = util.getConn();
         System.out.println(conn);
 
-
         UserDaoImpl userDao = new UserDaoImpl();
-        System.out.println(userDao.findUser("user","123456"));
+        System.out.println(userDao.findUserId("user","123456")>0);
     }
 }

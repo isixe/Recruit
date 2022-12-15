@@ -17,6 +17,6 @@ public interface UserDao {
 
     public List<User> findByName(String name) throws Exception;
 
-    public boolean findUser(String username, String password) throws Exception;
+    public Integer findUserId(String username, String password) throws Exception;
 
 }

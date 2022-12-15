@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
+    private ConnectionUtils utils;
     private ResultSet rs;
     private Connection conn = null;
     private String sql;
@@ -64,11 +65,38 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findById(int id) throws Exception {
-        return null;
+        User user = new User();
+        utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "select * from user where id = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,Integer.toString(id));
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                user.setName(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setAvatars(rs.getString(4));
+                user.setSex(rs.getInt(5));
+                user.setAge(rs.getInt(6));
+                user.setPhone(rs.getString(7));
+                user.setEmail(rs.getString(8));
+                user.setRegisterTime(rs.getString(9));
+                user.setRole(rs.getString(10));
+            }
+            System.out.println("======================");
+            System.out.println(user.toString());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt,rs);
+        }
+        return user;
     }
 
     @Override
     public List<User> findByName(String name) throws Exception {
+        utils = new ConnectionUtils();
         return null;
     }
 
@@ -80,25 +108,25 @@ public class UserDaoImpl implements UserDao {
      * @throws Exception
      */
     @Override
-    public boolean findUser(String username, String password) throws Exception {
-        boolean flag = false;
-        ConnectionUtils utils = new ConnectionUtils();
+    public Integer findUserId(String username, String password) throws Exception {
+        int id = 0;
+        utils = new ConnectionUtils();
         conn = utils.getConn();
-        sql = "select * from user where name=? and password = ?";
+        sql = "select id from user where name = ? and password = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);
             pstmt.setString(2,password);
             rs = pstmt.executeQuery();
-            if (rs.next()){
-                flag = true;
+            while (rs.next()) {
+                id = rs.getInt(1);
             }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
             utils.closeAll(pstmt,rs);
         }
-        return flag;
+        return id;
     }
 
 }

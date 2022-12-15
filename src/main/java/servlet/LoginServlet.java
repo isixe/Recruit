@@ -28,9 +28,11 @@ public class LoginServlet extends HttpServlet {
         String role = request.getParameter("role");
         //登录验证
         if (action.equals("login")){
+            int id = 0;
             UserService userService = new UserService();
-            flag = userService.login(username,password);
-            if (flag){
+            id = userService.login(username,password);
+            if (id>0){
+                request.getSession().setAttribute("userid", Integer.toString(id));
                 request.getSession().setAttribute("username", username);
                 response.getWriter().write("登录成功，3秒后跳转主页！");
                 response.setHeader("refresh", "3;url=index.jsp");
