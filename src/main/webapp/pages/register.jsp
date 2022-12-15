@@ -43,6 +43,10 @@
             <input type="text" id="name" name="name" tabindex="1" placeholder="请输入用户名"/>
             <span class="error" style="display:none;" id="beError"></span>
             <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码"/>
+            <input type="text" id="code" name="vCode" tabindex="3" placeholder="请输入验证码" />
+            <img id="vCode" src="${pageContext.request.contextPath}/VerifyCodeServlet"/>&nbsp;
+            <a href="javascript:_change()">看不清，换一张</a>
+            <br><br>
             <label class="fl registerJianJu" for="checkbox">
                 <input type="checkbox" id="checkbox" name="checkbox" checked class="checkbox valid"/>我已阅读并同意<a
                     href="h/privacy.html" target="_blank">《前程似锦用户协议》</a>

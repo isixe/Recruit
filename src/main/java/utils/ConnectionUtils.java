@@ -7,6 +7,11 @@ import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
 
+/**
+ * 工具类-数据库交互
+ *
+ * @author isixe
+ */
 public class ConnectionUtils {
     private static String url;
     private static String username;

@@ -33,9 +33,13 @@
     <input type="hidden" id="resubmitToken" value=""/>
     <div class="login_box">
         <form id="loginForm" action="${pageContext.request.contextPath}/login?action=login" method="post">
-            <input type="text" id="name" name="name" value="" tabindex="1" placeholder="请输入登录用户名"/>
+            <input type="text"  id="name" name="name" value="" tabindex="1" placeholder="请输入登录用户名"/>
             <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码"/>
-            <span class="error" style="display:none;" id="beError"></span>
+
+            <input type="text" id="code" name="vCode" tabindex="3" placeholder="请输入验证码" />
+            <img id="vCode" src="${pageContext.request.contextPath}/VerifyCodeServlet"/>&nbsp;
+            <a href="javascript:_change()">看不清，换一张</a>
+            <br><br>
             <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked"
                                                     name="autoLogin"/> 记住我</label>
             <a href="#" class="fr" target="_blank">忘记密码？</a>
@@ -54,6 +58,14 @@
     </div>
     <div class="login_box_btm"></div>
 </div>
+
+<script type="text/javascript">
+    function _change() {
+        var imgEle = document.getElementById("vCode");
+        imgEle.src = "${pageContext.request.contextPath}/VerifyCodeServlet?" + new Date().getTime();
+    }
+</script>
+
 </body>
 
 </html>

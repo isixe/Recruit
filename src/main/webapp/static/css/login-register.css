@@ -283,6 +283,14 @@ span.error {
 	color: #777;
 	border: none;
 }
+
+#loginForm input#code {
+	width: 296px;
+	font-size: 16px;
+	color: #777;
+	border: none;
+}
+
 #loginForm input#password {
 	width: 296px;
 	font-size: 16px;
