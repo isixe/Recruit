@@ -8,27 +8,28 @@
     String sid = null;
     //获取登录传递的Session变量（用户id, 用户名）
     username = (String) request.getSession().getAttribute("username");
-    sid = (String)request.getSession().getAttribute("userid");
+    sid = (String) request.getSession().getAttribute("userid");
     request.setAttribute("username", username);
     //System.out.println("用户id："+sid);
 
     //通过id获取用户用户角色，根据用户角色，跳转相应界面
-    if (sid !=null) {
+    if (sid != null) {
         int id = Integer.parseInt(sid);
         User user = new User();
         UserDao userDao = new UserDaoImpl();
         try {
             user = userDao.findById(id);
             String role = user.getRole();
-            request.getSession().setAttribute("role",role);
-            String path = request.getContextPath ();
-            switch (role){
+            request.getSession().setAttribute("role", role);
+            request.setAttribute("role", role);
+            String path = request.getContextPath();
+            switch (role) {
                 case "admin":
-                    response.sendRedirect(path+"/admin.jsp");
+                    response.sendRedirect(path + "/admin.jsp");
                     break;
-                case "company":
-                    response.sendRedirect(path+"/company.jsp");
-                    break;
+//                case "company":
+//                    response.sendRedirect(path+"/company.jsp");
+//                    break;
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -75,35 +76,41 @@
                             <div class="first">欢迎，&nbsp;${requestScope.username}</div>
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/exit.jsp"><li>退出</li></a>
+                                    <a href="${pageContext.request.contextPath}/pages/exit.jsp">
+                                        <li>退出</li>
+                                    </a>
                                 </ul>
                             </div>
                         </c:if>
                     </li>
-                    <li>
-                        <!-- 一级导航 -->
-                        <div class="first"><a href="./pages/user.html">个人中心</a></div>
-                        <!-- 二级导航 -->
-                        <div class="second">
-                            <ul>
-                                <li>我的收藏</li>
-                                <li>我的求职</li>
-                                <li>我的浏览</li>
-                            </ul>
-                        </div>
-                    </li>
 
-                    <li>
-                        <!-- 一级导航 -->
-                        <div class="first">企业中心</div>
-                        <!-- 二级导航 -->
-                        <div class="second">
-                            <ul>
-                                <li>我的发布</li>
-                                <li>企业信息</li>
-                            </ul>
-                        </div>
-                    </li>
+                    <c:if test="${requestScope.role=='user'}">
+                        <li>
+                            <!-- 一级导航 -->
+                            <div class="first"><a href="./pages/user.html">个人中心</a></div>
+                            <!-- 二级导航 -->
+                            <div class="second">
+                                <ul>
+                                    <li>我的简历</li>
+                                    <li>我的求职</li>
+                                    <li>个人资料</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </c:if>
+                    <c:if test="${requestScope.role=='company'}">
+                        <li>
+                            <!-- 一级导航 -->
+                            <a href="${pageContext.request.contextPath}/pages/myCompany.jsp"><div class="first">企业中心</div></a>
+                            <!-- 二级导航 -->
+                            <div class="second">
+                                <ul>
+                                    <li>我的发布</li>
+                                    <li>企业信息</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <!-- 右边导航栏 -->
@@ -569,7 +576,6 @@
                 </div>
             </div>
         </div>
-        <!-- ==============模态框============== -->
 
     </div>
 </div>
