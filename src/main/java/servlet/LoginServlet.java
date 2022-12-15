@@ -20,6 +20,10 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
+
+        String vCode = request.getParameter("code");
+        String sessionVerifyCode = (String)request.getSession().getAttribute("vCode");
+
         boolean flag = false;
         UserService service = new UserService();
         String action = request.getParameter("action");
@@ -57,6 +61,9 @@ public class LoginServlet extends HttpServlet {
             if (flag){
                 response.getWriter().write("注册成功，3秒后跳转登录界面！");
                 response.setHeader("refresh", "3;url=pages/login.jsp");
+            }else {
+                PrintWriter out = response.getWriter();
+                out.print("<script>alert('注册失败，请重新注册...'); window.location='pages/register.jsp' </script>");
             }
         }
     }
