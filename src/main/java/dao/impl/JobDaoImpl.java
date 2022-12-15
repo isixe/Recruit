@@ -14,9 +14,8 @@ public class JobDaoImpl implements JobDao {
     private String sql;
     private PreparedStatement pstmt;
 
-    /**
-     * 工作招聘增删改
-     */
+    // TODO: 2022/12/15 工作招聘增删改
+
     @Override
     public int add(Job job) throws Exception {
         return 0;
@@ -24,11 +23,6 @@ public class JobDaoImpl implements JobDao {
 
     @Override
     public int delete(int id) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public int insert(Job job) throws Exception {
         return 0;
     }
 

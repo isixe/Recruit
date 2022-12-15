@@ -18,10 +18,11 @@ public class UserDaoImpl implements UserDao {
     private String sql;
     private PreparedStatement pstmt;
 
-    // TODO: 2022/12/7 用户增删改查
 
     /**
      * 用户的增加
+     * ===================================================================
+     *
      * @param user 用户实体类
      * @return int 影响的行数
      * @throws Exception
@@ -35,34 +36,42 @@ public class UserDaoImpl implements UserDao {
         try {
             pstmt = conn.prepareStatement(sql);
             Date date = new Date();
-            pstmt.setString(1,user.getName());
-            pstmt.setString(2,user.getPassword());
-            pstmt.setString(3,user.getRegisterTime());
-            pstmt.setString(4,user.getRole());
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getRegisterTime());
+            pstmt.setString(4, user.getRole());
             result = pstmt.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            utils.closeAll(pstmt,rs);
+        } finally {
+            utils.closeAll(pstmt, rs);
         }
         return result;
     }
+
+
+    // TODO: 2022/12/15 用户删除
 
     @Override
     public int delete(int id) throws Exception {
         return 0;
     }
 
-    @Override
-    public int insert(User user) throws Exception {
-        return 0;
-    }
+    // TODO: 2022/12/15 用户添加
 
     @Override
     public int update(User user) throws Exception {
         return 0;
     }
 
+    /**
+     * 根据id查找用户
+     * ===================================================================
+     *
+     * @param id
+     * @return User
+     * @throws Exception
+     */
     @Override
     public User findById(int id) throws Exception {
         User user = new User();
@@ -71,7 +80,7 @@ public class UserDaoImpl implements UserDao {
         sql = "select * from user where id = ?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,Integer.toString(id));
+            pstmt.setString(1, Integer.toString(id));
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 user.setName(rs.getString(2));
@@ -86,10 +95,10 @@ public class UserDaoImpl implements UserDao {
             }
             System.out.println("======================");
             System.out.println(user.toString());
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            utils.closeAll(pstmt,rs);
+        } finally {
+            utils.closeAll(pstmt, rs);
         }
         return user;
     }
@@ -102,6 +111,8 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * 根据用户名和密码，匹配查询数据库是否有此用户
+     * ===================================================================
+     *
      * @param username 用户名
      * @param password 密码
      * @return boolean
@@ -115,16 +126,16 @@ public class UserDaoImpl implements UserDao {
         sql = "select id from user where name = ? and password = ?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,username);
-            pstmt.setString(2,password);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 id = rs.getInt(1);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            utils.closeAll(pstmt,rs);
+        } finally {
+            utils.closeAll(pstmt, rs);
         }
         return id;
     }

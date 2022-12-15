@@ -8,8 +8,6 @@ public interface CompanyDao {
 
     public int delete(int id) throws Exception;;
 
-    public int insert(Company company) throws Exception;
-
     public int update(Company company) throws Exception;
 
     public User findById(int id) throws Exception;

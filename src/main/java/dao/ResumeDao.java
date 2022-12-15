@@ -8,8 +8,6 @@ public interface ResumeDao {
 
     public int delete(int id) throws Exception;;
 
-    public int insert(Resume resume) throws Exception;
-
     public int update(Resume resume) throws Exception;
 
     public User findById(int id) throws Exception;

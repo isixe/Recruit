@@ -14,9 +14,8 @@ public class ResumeDaoImpl implements ResumeDao {
     private String sql;
     private PreparedStatement pstmt;
 
-    /**
-     * 简历增删改
-     */
+    // TODO: 2022/12/15 简历增删改
+
     @Override
     public int add(Resume resume) throws Exception {
         return 0;
@@ -24,11 +23,6 @@ public class ResumeDaoImpl implements ResumeDao {
 
     @Override
     public int delete(int id) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public int insert(Resume resume) throws Exception {
         return 0;
     }
 

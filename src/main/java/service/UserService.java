@@ -4,16 +4,23 @@ import bean.User;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 
-import java.util.List;
-
+/**
+ * 用户服务层，已完成
+ *
+ * @author : isixe
+ * @description: 只用于调用，不需要修改
+ */
 public class UserService {
 
     /**
-     * 用户登录
+     * 用户登录注册
+     * ===================================================================
+     *
      * @param username 用户名
      * @param password 密码
      * @return
      */
+
     public Integer login(String username, String password) {
         int id = 0;
         try {
@@ -27,6 +34,8 @@ public class UserService {
 
     /**
      * 用户注册
+     * ===================================================================
+     *
      * @param user 用户实体类
      * @return
      */
@@ -38,7 +47,7 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result>0;
+        return result > 0;
     }
 
 }

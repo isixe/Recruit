@@ -14,9 +14,8 @@ public class CompanyDaoImpl implements CompanyDao {
     private String sql;
     private PreparedStatement pstmt;
 
-    /**
-     * 公司增删改
-     */
+    // TODO: 2022/12/15 公司增删改
+
     @Override
     public int add(Company company) throws Exception {
         return 0;
@@ -24,11 +23,6 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public int delete(int id) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public int insert(Company company) throws Exception {
         return 0;
     }
 
