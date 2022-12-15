@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Date;
+
 public class User {
     private String name;
     private String password;
@@ -8,6 +10,8 @@ public class User {
     private int age;
     private String phone;
     private String email;
+    private String registerTime;
+    private String role;
 
     public String getName() {
         return name;
@@ -65,16 +69,34 @@ public class User {
         this.email = email;
     }
 
+    public String getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "nmae='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", avatars='" + avatars + '\'' +
                 ", sex=" + sex +
                 ", age=" + age +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", registerTime='" + registerTime + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

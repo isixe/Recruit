@@ -29,15 +29,15 @@
 
     <input type="hidden" id="resubmitToken" value="9b207beb1e014a93bc852b7ba450db27"/>
     <div class="login_box">
-        <form id="loginForm">
+        <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login?action=register">
             <ul class="register_radio clearfix">
                 <li>
                     找工作
-                    <input type="radio" value="0" name="type"/>
+                    <input type="radio" value="user" name="role"/>
                 </li>
                 <li>
                     招人
-                    <input type="radio" value="1" name="type"/>
+                    <input type="radio" value="company" name="role"/>
                 </li>
             </ul>
             <input type="text" id="name" name="name" tabindex="1" placeholder="请输入用户名"/>
@@ -48,11 +48,6 @@
                     href="h/privacy.html" target="_blank">《前程似锦用户协议》</a>
             </label>
             <input type="submit" id="submitLogin" value="注 &nbsp; &nbsp; 册"/>
-
-            <input type="hidden" id="callback" name="callback" value=""/>
-            <input type="hidden" id="authType" name="authType" value=""/>
-            <input type="hidden" id="signature" name="signature" value=""/>
-            <input type="hidden" id="timestamp" name="timestamp" value=""/>
         </form>
         <div class="login_right">
             <div>已有帐号</div>

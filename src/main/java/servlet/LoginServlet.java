@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,8 @@ import service.UserService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -22,6 +25,7 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
         String username = request.getParameter("name");
         String password = request.getParameter("password");
+        String role = request.getParameter("role");
         //登录验证
         if (action.equals("login")){
             UserService userService = new UserService();
@@ -36,13 +40,21 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        //注册验证
+        //用户注册
         if (action.equals("register")){
             UserService userService = new UserService();
-            flag = userService.register(username,password);
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String local_date = format.format(date);
+            User user = new User();
+            user.setName(username);
+            user.setPassword(password);
+            user.setRegisterTime(local_date);
+            user.setRole(role);
+            flag = userService.register(user);
             if (flag){
                 response.getWriter().write("注册成功，3秒后跳转登录界面！");
-                response.setHeader("refresh", "3;url=login.jsp");
+                response.setHeader("refresh", "3;url=pages/login.jsp");
             }
         }
     }
