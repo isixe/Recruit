@@ -7,6 +7,7 @@ import dao.JobDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class JobDaoImpl implements JobDao {
     private ResultSet rs;
@@ -38,6 +39,12 @@ public class JobDaoImpl implements JobDao {
 
     @Override
     public User findByName(String name) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<Job> list(Job job) {
+
         return null;
     }
 
