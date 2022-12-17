@@ -3,7 +3,7 @@ package dao;
 import bean.Job;
 import bean.User;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface JobDao {
     public int add(Job job) throws Exception;;
@@ -15,6 +15,6 @@ public interface JobDao {
     public User findById(int id) throws Exception;
 
     public User findByName(String name) throws Exception;
-
-    public List<Job> list(Job job);
+    //查询职位信息
+    public ArrayList<Job> findJob(int id);
 }
