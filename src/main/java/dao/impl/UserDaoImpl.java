@@ -54,14 +54,47 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int delete(int id) throws Exception {
-        return 0;
+        int result = 0;
+        ConnectionUtils utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "delete from user where id = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            Date date = new Date();
+            pstmt.setInt(1, id);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
     }
 
     // TODO: 2022/12/15 用户添加
 
     @Override
     public int update(User user) throws Exception {
-        return 0;
+        int result = 0;
+        ConnectionUtils utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "update user set name = ?, avatars = ?,sex = ?,age = ?,phone =?,email = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            Date date = new Date();
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2,user.getAvatars());
+            pstmt.setInt(3,user.getSex());
+            pstmt.setInt(4,user.getAge());
+            pstmt.setString(5,user.getPhone());
+            pstmt.setString(6,user.getEmail());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
     }
 
     /**
