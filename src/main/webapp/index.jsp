@@ -87,7 +87,7 @@
                     <c:if test="${requestScope.role=='user'}">
                         <li>
                             <!-- 一级导航 -->
-                            <div class="first"><a href="./pages/user.jsp">个人中心</a></div>
+                            <div class="first"><a href="${pageContext.request.contextPath}/pages/userCenter.jsp">个人中心</a></div>
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>

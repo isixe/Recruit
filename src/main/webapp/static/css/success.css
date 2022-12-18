@@ -1,0 +1,48 @@
+#header{
+	height: 10rem;text-align: center;line-height: 12rem;
+}
+
+
+.header-logo{
+	height: 5rem;
+}
+.header-return{
+	font-size: 2.1rem;
+}
+.header-return button{
+	border: none;border-bottom:0.5rem solid #49A1DD;height: 10rem;background-color: #FFFFFF;
+}
+.main-container{
+	height: 30rem;margin-top: 0.2rem;text-align: center;line-height:50rem;background: #49A1DD;
+}
+.replay{
+	height: 25rem;line-height:2rem;border: 0.1rem solid transparent;color: #FFFFFF;
+}
+.success{
+	background: #FFFFFF;height: 25rem;line-height:20rem;width: 31rem;border-radius: 0.4rem;margin-top: 2.5rem;
+}
+.success-top{
+	height: 15rem;
+}
+.success-bottom{
+	height: 10rem;line-height:5rem;font-size: 4rem;
+}
+.username{
+	font-size: 3rem;color: #FFFFFF;text-decoration: none;
+}
+
+.replay-p1{
+	margin-top: 10rem;
+}
+.replay-p2{
+	font-size:2rem;
+}
+.replay-p3{
+	margin-top: 4rem;
+}
+.return-index{
+	height: 3rem;line-height: 3rem;margin-top: 3rem;display: none;
+}
+.return-index button{
+	border: none;border-radius: 5px;background-color: #FFFFFF;
+}
