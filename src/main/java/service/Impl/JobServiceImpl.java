@@ -14,4 +14,9 @@ public class JobServiceImpl implements JobService {
     public ArrayList<Job> findJob(int id) {
         return jobDao.findJob(id);
     }
+
+    @Override
+    public Integer addJob(Job job) {
+        return jobDao.add(job);
+    }
 }

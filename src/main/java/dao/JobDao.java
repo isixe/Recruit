@@ -6,7 +6,7 @@ import bean.User;
 import java.util.ArrayList;
 
 public interface JobDao {
-    public int add(Job job) throws Exception;;
+    public Integer add(Job job) ;;
 
     public int delete(int id) throws Exception;;
 
