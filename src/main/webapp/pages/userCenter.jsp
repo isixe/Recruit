@@ -5,7 +5,6 @@
   </script>
   <script type="text/javascript" async="" src="../static/js/conversion.js"></script>
   <script src="../static/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
-  <style type="text/css"></style>
   <link media="handheld" rel="alternate">
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>修改资料</title>
@@ -295,8 +294,8 @@
   </div>
 </div>
 
-<script src="style/js/core.min.js" type="text/javascript"></script>
-<script src="style/js/popup.min.js" type="text/javascript"></script>
+<script src="../static/js/core.min.js" type="text/javascript"></script>
+<script src="../static/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 
