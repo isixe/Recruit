@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface JobService {
     public ArrayList<Job> findJob(int id);
+    public Integer addJob(Job job);
 }
