@@ -1,22 +1,24 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <script type="text/javascript" async="" src="../static/js/conversion.js"></script>
-    <script src="../static/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
+    <script type="text/javascript" async="" src="static/js/conversion.js"></script>
+    <script src="static/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
 
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>查看用户简历</title>
 
-    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
-    <link href="../static/css/external.min.css" type="text/css" rel="stylesheet">
-    <link href="../static/css/popup.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="../static/vendor/jquery.1.10.1.min.js"></script>
-    <script src="../static/js/jquery.lib.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../static/js/ajaxfileupload.js"></script>
-    <script src="../static/js/additional-methods.js" type="text/javascript"></script>
+    <link href="static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="static/css/external.min.css" type="text/css" rel="stylesheet">
+    <link href="static/css/popup.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="static/vendor/jquery.1.10.1.min.js"></script>
+    <script src="static/js/jquery.lib.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
+    <script src="static/js/additional-methods.js" type="text/javascript"></script>
 
-    <script src="../static/js/conv.js" type="text/javascript"></script>
-    <script src="../static/js/ajaxCross.json" charset="UTF-8"></script>
+    <script src="static/js/conv.js" type="text/javascript"></script>
+    <script src="static/js/ajaxCross.json" charset="UTF-8"></script>
 </head>
 <body>
 <div id="body">
@@ -26,19 +28,19 @@
             <dl class="company_center_aside">
                 <dt>我收到的简历</dt>
                 <dd>
-                    <a href="">待处理简历</a>
+                    <a href="${pageContext.request.contextPath}/findResumeServlet?status=待处理">待处理简历</a>
                 </dd>
                 <dd>
-                    <a href="canInterviewResumes.html">待定简历</a>
+                    <a href="findResumeServlet?status=待定">待定简历</a>
                 </dd>
                 <dd>
-                    <a href="haveNoticeResumes.html">已通知面试简历</a>
+                    <a href="findResumeServlet?status=已通知面试">已通知面试简历</a>
                 </dd>
                 <dd>
-                    <a href="haveRefuseResumes.html">不合适简历</a>
+                    <a href="findResumeServlet?status=不合适">不合适简历</a>
                 </dd>
                 <dd class="current btm">
-                    <a href="autoFilterResumes.html">自动过滤简历</a>
+                    <a href="findResumeServlet?status=自动过滤">自动过滤简历</a>
                     <span>1</span>
                 </dd>
             </dl>
@@ -121,55 +123,57 @@
                             <input type="hidden" value="0" name="filterStatus" id="filterStatus">
                             <input type="hidden" value="" name="positionId" id="positionId">
                         </div><!-- end .filter_options -->
+                        <c:forEach items = "${resumes}" var="resume">
                         <ul class="reset resumeLists">
                             <li data-id="1686182" class="onlineResume">
                                 <label class="checkbox">
                                     <input type="checkbox">
                                     <i></i>
                                 </label>
+
                                 <div class="resumeShow">
                                     <a title="预览在线简历" target="_blank" class="resumeImg"
                                        href="resumeView.html?deliverId=1686182">
-                                        <img src="style/images/default_headpic.png">
+                                        <img src="${resume.picture}">
                                     </a>
-                                    <div class="resumeIntro">
-                                        <h3 class="unread">
-                                            <a target="_blank" title="预览jason的简历"
-                                               href="resumeView.html?deliverId=1686182">
-                                                jason的简历
+
+                                        <div class="resumeIntro">
+                                            <h3 class="unread">
+                                                <a target="_blank" title="预览jason的简历"
+                                                   href="resumeView.html?deliverId=1686182">
+                                                  ${resume.name}
+                                                </a>
+                                                <em></em>
+                                            </h3>
+                                            <span class="fr">投递时间：${resume.datetime}</span>
+                                            <div>
+                                                ${resume.name} / ${resume.sex} / ${resume.education} / ${resume.year} / ${resume.city} <br>
+                                                ${resume.major} | ${resume.school}
+                                            </div>
+
+                                        </div>
+                                        <div class="links">
+                                            <a data-deliverid="1686182" data-name="jason" data-positionid="149594"
+                                               data-email="888888888@qq.com" class="resume_notice"
+                                               href="javascript:void(0)">通知面试</a>
+                                            <a data-deliverid="1686182" class="resume_refuse"
+                                               href="javascript:void(0)">不合适</a>
+                                            <a data-deliverid="1686182" class="resume_caninterview"
+                                               href="javascript:void(0)">待定</a>
+                                            <a data-resumename="jason的简历" data-positionname="随便写" data-deliverid="1686182"
+                                               data-positionid="149594" data-resumekey="1ccca806e13637f7b1a4560f80f08057"
+                                               data-forwardcount="1" class="resume_forward" href="javascript:void(0)">
+                                                转发
+                                                <span>(1人)</span>
                                             </a>
-                                            <em></em>
-                                        </h3>
-                                        <span class="fr">投递时间：2014-07-01 17:08</span>
-                                        <div>
-                                            jason / 男 / 大专 / 3年 / 广州 <br>
-                                            高级产品经理 · 上海辉硕科技有限公司 | 本科 · 北京大学
                                         </div>
-                                        <div class="jdpublisher">
-				                                        <span>
-				                                        	应聘职位：<a title="随便写" target="_blank"
-                                                                    href="http://www.lagou.com/jobs/149594.html">随便写</a>
-				                                       						                                        </span>
-                                        </div>
-                                    </div>
-                                    <div class="links">
-                                        <a data-deliverid="1686182" data-name="jason" data-positionid="149594"
-                                           data-email="888888888@qq.com" class="resume_notice"
-                                           href="javascript:void(0)">通知面试</a>
-                                        <a data-deliverid="1686182" class="resume_refuse"
-                                           href="javascript:void(0)">不合适</a>
-                                        <a data-deliverid="1686182" class="resume_caninterview"
-                                           href="javascript:void(0)">待定</a>
-                                        <a data-resumename="jason的简历" data-positionname="随便写" data-deliverid="1686182"
-                                           data-positionid="149594" data-resumekey="1ccca806e13637f7b1a4560f80f08057"
-                                           data-forwardcount="1" class="resume_forward" href="javascript:void(0)">
-                                            转发
-                                            <span>(1人)</span>
-                                        </a>
-                                    </div>
+
+
+
                                 </div>
                             </li>
                         </ul><!-- end .resumeLists -->
+                        </c:forEach>
                     </form>
                 </dd>
             </dl>
@@ -389,8 +393,8 @@
     </div><!-- end #container -->
 </div><!-- end #body -->
 
-<script src="../static/js/core.min.js" type="text/javascript"></script>
-<script src="../static/js/popup.min.js" type="text/javascript"></script>
+<script src="static/js/core.min.js" type="text/javascript"></script>
+<script src="static/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 

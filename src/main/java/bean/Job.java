@@ -3,13 +3,25 @@ package bean;
 import java.util.Date;
 
 public class Job {
+    private int id;
     private int company_id;
     private int position_id;
-    private int technology_id;
     private String area;
-    private double salary;
-    private String require;
-    private Date time;
+    private String time; //工作类型 （全职/兼职）
+    private String contact;
+    private double maxsalary;
+    private double minsalary;
+    private String job_requirements;
+    private String job_require;
+    private String welfare;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCompany_id() {
         return company_id;
@@ -27,14 +39,6 @@ public class Job {
         this.position_id = position_id;
     }
 
-    public int getTechnology_id() {
-        return technology_id;
-    }
-
-    public void setTechnology_id(int technology_id) {
-        this.technology_id = technology_id;
-    }
-
     public String getArea() {
         return area;
     }
@@ -43,40 +47,76 @@ public class Job {
         this.area = area;
     }
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public String getRequire() {
-        return require;
-    }
-
-    public void setRequire(String require) {
-        this.require = require;
-    }
-
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public double getMaxsalary() {
+        return maxsalary;
+    }
+
+    public void setMaxsalary(double maxsalary) {
+        this.maxsalary = maxsalary;
+    }
+
+    public double getMinsalary() {
+        return minsalary;
+    }
+
+    public void setMinsalary(double minsalary) {
+        this.minsalary = minsalary;
+    }
+
+    public String getJob_requirements() {
+        return job_requirements;
+    }
+
+    public void setJob_requirements(String job_requirements) {
+        this.job_requirements = job_requirements;
+    }
+
+    public String getJob_require() {
+        return job_require;
+    }
+
+    public void setJob_require(String job_require) {
+        this.job_require = job_require;
+    }
+
+    public String getWelfare() {
+        return welfare;
+    }
+
+    public void setWelfare(String welfare) {
+        this.welfare = welfare;
     }
 
     @Override
     public String toString() {
         return "Job{" +
-                "company_id=" + company_id +
+                "id=" + id +
+                ", company_id=" + company_id +
                 ", position_id=" + position_id +
-                ", technology_id=" + technology_id +
                 ", area='" + area + '\'' +
-                ", salary=" + salary +
-                ", require='" + require + '\'' +
-                ", time=" + time +
+                ", time='" + time + '\'' +
+                ", contact='" + contact + '\'' +
+                ", maxsalary=" + maxsalary +
+                ", minsalary=" + minsalary +
+                ", job_requirements='" + job_requirements + '\'' +
+                ", job_require='" + job_require + '\'' +
+                ", welfare='" + welfare + '\'' +
                 '}';
     }
 }

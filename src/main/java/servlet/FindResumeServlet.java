@@ -1,28 +1,33 @@
 package servlet;
 
-import bean.Job;
+
+import bean.Resume;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.Impl.JobServiceImpl;
-import service.JobService;
+import service.Impl.ResumeServiceImpl;
+import service.ResumeService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/JobServlet")
-public class JobServlet extends HttpServlet {
+@WebServlet("/findResumeServlet")
+public class FindResumeServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        JobService jobService=new JobServiceImpl();
-        int id= Integer.parseInt(req.getParameter("id"));
-        ArrayList<Job> jobs=jobService.findJob(id);
-        System.out.println(jobs);
-        req.setAttribute("jobs",jobs);
-        req.getRequestDispatcher("pages/findJob.jsp").forward(req,resp);
+        ResumeService resumeService = new ResumeServiceImpl();
+        String status = req.getParameter("status");
+        ArrayList<Resume> resumes = resumeService.FindResume(status);
+        System.out.println(resumes);
+        System.out.println(status);
+        req.setAttribute("resumes", resumes);
+        req.getRequestDispatcher("pages/viewUserResumes.jsp").forward(req, resp);
+
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

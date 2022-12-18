@@ -2,13 +2,40 @@ package bean;
 
 public class Resume {
     private int id;
+
     private String name;
+
     private String phone;
+
     private String email;
-    private int sex;
+
+    private String sex;
+
     private String school;
+
     private String major;
+
     private String education;
+
+    private String year;
+
+    private String city;
+
+    private String datetime;
+
+    private  String status;
+
+    private String picture;
+
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -42,13 +69,7 @@ public class Resume {
         this.email = email;
     }
 
-    public int getSex() {
-        return sex;
-    }
 
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
 
     public String getSchool() {
         return school;
@@ -74,6 +95,46 @@ public class Resume {
         this.education = education;
     }
 
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "Resume{" +
@@ -81,10 +142,16 @@ public class Resume {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", education='" + education + '\'' +
+                ", year='" + year + '\'' +
+                ", city='" + city + '\'' +
+                ", datetime='" + datetime + '\'' +
+                ", status='" + status + '\'' +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 }
+
