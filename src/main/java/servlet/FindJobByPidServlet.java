@@ -12,17 +12,17 @@ import service.JobService;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/JobServlet")
-public class JobServlet extends HttpServlet {
+@WebServlet("/FindJobByPidServlet")
+public class FindJobByPidServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        JobService jobService=new JobServiceImpl();
-        int id= Integer.parseInt(req.getParameter("id"));
-        ArrayList<Job> jobs=jobService.findJob(id);
-        System.out.println(jobs);
-        req.setAttribute("jobs",jobs);
-        req.getRequestDispatcher("pages/findJob.jsp").forward(req,resp);
-    }
+            JobService jobService = new JobServiceImpl();
+            int position_id = Integer.parseInt(req.getParameter("position_id"));
+            ArrayList<Job> jobs = jobService.findByPid(position_id);
+            System.out.println(jobs);
+            req.setAttribute("jobs", jobs);
+            req.getRequestDispatcher("pages/findJob.jsp").forward(req, resp);
+        }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

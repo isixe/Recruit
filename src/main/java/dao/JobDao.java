@@ -4,6 +4,7 @@ import bean.Job;
 import bean.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface JobDao {
     public int add(Job job) throws Exception;;
@@ -15,6 +16,10 @@ public interface JobDao {
     public User findById(int id) throws Exception;
 
     public User findByName(String name) throws Exception;
-    //查询职位信息
-    public ArrayList<Job> findJob(int id);
+    //根据公司id查询job
+    public ArrayList<Job> findByCid(int company_id);
+    //根据职业id查询job
+    public ArrayList<Job> findByPid(int position_id);
+    //查询所有job
+    //public List<Job> findAllJob(Job job);
 }

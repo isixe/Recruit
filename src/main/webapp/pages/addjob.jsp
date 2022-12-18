@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/servlet/JobServlet?type=charu" method="post">
+<form action="${pageContext.request.contextPath}/addJobServlet" method="post">
     发布id：<input type="text" name="id" required="required"><br>
     企业id：<input type="text" name="company_id"><br>
     职位id： <input type="text" name="position_id"><br>

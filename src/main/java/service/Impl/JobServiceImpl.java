@@ -11,7 +11,7 @@ public class JobServiceImpl implements JobService {
     private JobDao jobDao = new JobDaoImpl();
 
     @Override
-    public ArrayList<Job> findJob(int id) {
-        return jobDao.findJob(id);
+    public ArrayList<Job> findByCid(int company_id) {
+        return jobDao.findByCid(company_id);
     }
 }

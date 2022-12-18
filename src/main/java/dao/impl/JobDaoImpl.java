@@ -47,18 +47,18 @@ public class JobDaoImpl implements JobDao {
         return null;
     }
 
-    //工作查询
+    //根据公司id查询job
     @Override
-    public ArrayList<Job> findJob(int id) {
+    public ArrayList<Job> findByCid(int company_id) {
         ConnectionUtils utils = new ConnectionUtils();
 
         try {
             conn = utils.getConn(); //获取数据库连接
 
-            //查询job 根据id
-            sql = "select * from job where id = ?";
+            //查询job 根据公司id
+            sql = "select * from job where company_id = ?";
             pstmt = conn.prepareStatement(sql);   //定义预编译sql语句
-            pstmt.setInt(1, id); //设置sql语句的值
+            pstmt.setInt(1, company_id); //设置sql语句的值
             rs = pstmt.executeQuery();//执行查询
             jobs.clear();//清楚上一次查询
 
@@ -85,4 +85,41 @@ public class JobDaoImpl implements JobDao {
         return jobs;
     }
 
+    //根据职位id查询job
+    @Override
+    public ArrayList<Job> findByPid(int position_id) {
+        ConnectionUtils utils = new ConnectionUtils();
+
+        try {
+            conn = utils.getConn(); //获取数据库连接
+
+            //查询job 根据职位id
+            sql = "select * from job where position_id = ?";
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句
+            pstmt.setInt(1, position_id); //设置sql语句的值
+            rs = pstmt.executeQuery();//执行查询
+            jobs.clear();//清楚上一次查询
+
+            while (rs.next()) {
+                Job job = new Job();
+                job.setId(rs.getInt("id"));
+                job.setCompany_id(rs.getInt("company_id"));
+                job.setPosition_id(rs.getInt("position_id"));
+                job.setArea(rs.getString("area"));
+                job.setTime(rs.getString("time"));
+                job.setContact(rs.getString("contact"));
+                job.setMaxsalary(rs.getDouble("maxsalary"));
+                job.setMinsalary(rs.getDouble("minsalary"));
+                job.setJob_requirements(rs.getString("job_requirements"));
+                job.setJob_require(rs.getString("job_require"));
+                job.setWelfare(rs.getString("welfare"));
+                jobs.add(job);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();          //错误抓取异常
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return jobs;
+    }
 }
