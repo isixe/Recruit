@@ -33,12 +33,9 @@ public class addJobServlet extends HttpServlet {
         JobService jobService = new JobServiceImpl();
         Integer count =jobService.addJob(job);
         if(count > 0){
-// 表示操作成功。重新查询所有的用户信息，那么来一次重定向操作
             System.out.println("添加用户成功");
         }else{
-// 操作失败
             System.out.println("添加用户失败...");
-// 同时给出错误提示信息
         }
 
 

@@ -16,7 +16,7 @@
     发布id：<input type="text" name="id" required="required"><br>
     企业id：<input type="text" name="company_id"><br>
     职位id： <input type="text" name="position_id"><br>
-    工作地区：<input type="text" name="area">格式如：2017-10-01<br>
+    工作地区：<input type="text" name="area"><br>
     发布时间：<input type="text" name="time"><br>
     联系方式：<input type="text" name="contact"><br>
     最高薪资：<input type="text" name="maxsalary"><br>

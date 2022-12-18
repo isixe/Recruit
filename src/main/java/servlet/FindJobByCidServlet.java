@@ -17,8 +17,8 @@ public class FindJobByCidServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             JobService jobService = new JobServiceImpl();
-            int id = Integer.parseInt(req.getParameter("id"));
-            ArrayList<Job> jobs = jobService.findJob(id);
+            int company_id = Integer.parseInt(req.getParameter("company_id"));
+            ArrayList<Job> jobs = jobService.findByCid(company_id);
             System.out.println(jobs);
             req.setAttribute("jobs", jobs);
             req.getRequestDispatcher("pages/findJob.jsp").forward(req, resp);

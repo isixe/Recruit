@@ -23,33 +23,35 @@ public class JobDaoImpl implements JobDao {
     // TODO: 2022/12/15 工作招聘增删改
 
     @Override
-    public Integer add(Job job){
+    public Integer add(Job job) {
         ConnectionUtils utils = new ConnectionUtils();
-        sql = "insert into job(id,company_id,position_id,area,time,contact,maxsalary,minsalary,job_requirements,job_require,welfare)values(?,?,?,?,?,?,?,?,?,?,?)";
-        int result=0;
+        int rs = 0;
         try {
             conn = utils.getConn(); //获取数据库连接
             sql = "insert into job(id,company_id,position_id,area,time,contact,maxsalary,minsalary,job_requirements,job_require,welfare)values(?,?,?,?,?,?,?,?,?,?,?)";
-            
-            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
 
-            rs = pstmt.executeQuery();//执行查询
-            pstmt.setInt(1,job.getId());
-            pstmt.setInt(2,job.getCompany_id());
-            pstmt.setInt(3,job.getPosition_id());
-            pstmt.setString(4,job.getArea());
-            pstmt.setString(5,job.getTime());
-            pstmt.setString(6,job.getContact());
-            pstmt.setDouble(7,job.getMaxsalary());
-            pstmt.setDouble(8,job.getMinsalary());
-            pstmt.setString(9,job.getJob_requirements());
-            pstmt.setString(10,job.getJob_require());
-            pstmt.setString(11,job.getWelfare());
-            result=pstmt.executeUpdate();
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+            pstmt.setInt(1, job.getId());
+            pstmt.setInt(2, job.getCompany_id());
+            pstmt.setInt(3, job.getPosition_id());
+            pstmt.setString(4, job.getArea());
+            pstmt.setString(5, job.getTime());
+            pstmt.setString(6, job.getContact());
+            pstmt.setDouble(7, job.getMaxsalary());
+            pstmt.setDouble(8, job.getMinsalary());
+            pstmt.setString(9, job.getJob_requirements());
+            pstmt.setString(10, job.getJob_require());
+            pstmt.setString(11, job.getWelfare());
+            rs = pstmt.executeUpdate();//执行查询
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        if (rs > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
