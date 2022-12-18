@@ -87,13 +87,12 @@
                     <c:if test="${requestScope.role=='user'}">
                         <li>
                             <!-- 一级导航 -->
-                            <div class="first"><a href="./pages/user.html">个人中心</a></div>
+                            <div class="first"><a href="./pages/user.jsp">个人中心</a></div>
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <li>我的简历</li>
+                                    <a href="${pageContext.request.contextPath}/pages/preview.jsp"><li>我的简历</li></a>
                                     <li>我的求职</li>
-                                    <li>个人资料</li>
                                 </ul>
                             </div>
                         </li>
