@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 17/12/2022 23:33:55
+ Date: 19/12/2022 16:12:24
 */
 
 SET NAMES utf8mb4;
@@ -104,7 +104,7 @@ CREATE TABLE `resume`  (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系电话',
   `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `sex` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '性别',
+  `sex` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '男' COMMENT '性别',
   `school` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '毕业学校',
   `major` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '专业',
   `education` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '学历',
@@ -147,23 +147,23 @@ CREATE TABLE `user`  (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '帐号',
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
   `avatars` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户头像',
-  `sex` int NULL DEFAULT NULL COMMENT '性别',
+  `sex` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '男' COMMENT '性别',
   `age` int NULL DEFAULT NULL COMMENT '年龄',
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系电话',
   `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
   `register_date` datetime NULL DEFAULT NULL COMMENT '注册时间',
   `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'user',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', '123456', NULL, NULL, NULL, NULL, NULL, NULL, 'admin');
-INSERT INTO `user` VALUES (2, 'user', '123456', NULL, 1, 21, NULL, NULL, '2022-12-06 19:58:28', 'user');
-INSERT INTO `user` VALUES (3, 'zhangsan', '123', NULL, 2, 32, '12345678901', '12345678901@qq.com', '2022-12-07 19:59:51', 'user');
-INSERT INTO `user` VALUES (4, 'wa', '111', NULL, 1, 33, '11111111111', '123@gmail.com', '2022-12-06 20:07:00', 'company');
-INSERT INTO `user` VALUES (9, 'sdf', '123', NULL, NULL, NULL, NULL, NULL, '2022-12-15 00:00:00', 'company');
-INSERT INTO `user` VALUES (12, 'a', 'a', NULL, NULL, NULL, NULL, NULL, '2022-12-17 00:00:00', 'company');
+INSERT INTO `user` VALUES (1, 'admin', '123456', NULL, '男', NULL, '', '', NULL, 'admin');
+INSERT INTO `user` VALUES (2, 'user', '123456', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-06 19:58:28', 'user');
+INSERT INTO `user` VALUES (3, 'qwe', '123', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-07 19:59:51', 'user');
+INSERT INTO `user` VALUES (4, 'q', '111', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-06 20:07:00', 'company');
+INSERT INTO `user` VALUES (9, 'aa', '123', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-15 00:00:00', 'company');
+INSERT INTO `user` VALUES (12, 'wqe', 'a', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-17 00:00:00', 'company');
 
 SET FOREIGN_KEY_CHECKS = 1;
