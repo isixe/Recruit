@@ -15,8 +15,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "UserServlet", value = "/user")
-public class UserServlet extends HttpServlet{
-    public UserServlet() {}
+public class UserServlet extends HttpServlet {
+    public UserServlet() {
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
@@ -24,7 +25,7 @@ public class UserServlet extends HttpServlet{
         UserService service = new UserServiceImpl();
         int result = 0;
         String action = request.getParameter("action");
-        if (action.equals("update")){
+        if (action.equals("update")) {
             User user = new User();
             user.setName(request.getParameter("name"));
             user.setAge(Integer.parseInt(request.getParameter("age")));
@@ -37,10 +38,10 @@ public class UserServlet extends HttpServlet{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (result>0){
+            if (result > 0) {
                 response.getWriter().write("修改成功，正在跳转主页！");
                 response.setHeader("refresh", "1;url=index.jsp");
-            }else {
+            } else {
                 PrintWriter out = response.getWriter();
                 out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/userCenter.jsp' ;</script>");
             }
