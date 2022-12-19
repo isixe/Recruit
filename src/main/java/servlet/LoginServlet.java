@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.UserService;
+import service.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             out.print("<script>alert('验证码输入错误，请重新输入...'); window.history.go(-1);</script>");
         } else {
             boolean flag = false;
-            UserService service = new UserService();
+            UserService service = new UserServiceImpl();
 
             String action = request.getParameter("action");
             String username = request.getParameter("name");
@@ -39,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             //登录验证
             if (action.equals("login")) {
                 int id = 0;
-                UserService userService = new UserService();
+                UserService userService = new UserServiceImpl();
                 id = userService.login(username, password);
                 if (id > 0) {
                     request.getSession().setAttribute("userid", Integer.toString(id));
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
             //用户注册
             if (action.equals("register")) {
-                UserService userService = new UserService();
+                UserService userService = new UserServiceImpl();
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String local_date = format.format(date);

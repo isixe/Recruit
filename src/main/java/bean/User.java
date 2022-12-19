@@ -6,7 +6,7 @@ public class User {
     private String name;
     private String password;
     private String avatars;
-    private int sex;
+    private String sex;
     private int age;
     private String phone;
     private String email;
@@ -37,11 +37,11 @@ public class User {
         this.avatars = avatars;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

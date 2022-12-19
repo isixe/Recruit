@@ -1,4 +1,4 @@
-package service.Impl;
+package service.impl;
 
 import bean.Resume;
 import dao.ResumeDao;
@@ -11,7 +11,6 @@ public class ResumeServiceImpl implements ResumeService {
     private ResumeDao resumeDao = new ResumeDaoImpl();
 
 
-
     @Override
     public ArrayList<Resume> FindResume(String status) {
         return resumeDao.FindResume(status);
@@ -19,5 +18,5 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
 
-    }
+}
 

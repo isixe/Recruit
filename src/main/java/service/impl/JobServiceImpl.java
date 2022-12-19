@@ -1,4 +1,4 @@
-package service.Impl;
+package service.impl;
 
 import bean.Job;
 import dao.JobDao;
@@ -8,7 +8,7 @@ import service.JobService;
 import java.util.ArrayList;
 
 public class JobServiceImpl implements JobService {
-    private JobDao jobDao = new JobDaoImpl();
+    private JobDao jobDao = (JobDao) new JobDaoImpl();
 
     @Override
     public ArrayList<Job> findByCid(int company_id) {

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.UserService;
+import service.impl.UserServiceImpl;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ public class UserServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        UserService service = new UserService();
+        UserService service = new UserServiceImpl();
         int result = 0;
         String path = "error.jsp";
         String action = request.getParameter("action");

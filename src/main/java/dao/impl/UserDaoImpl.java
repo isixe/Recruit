@@ -84,7 +84,7 @@ public class UserDaoImpl implements UserDao {
             Date date = new Date();
             pstmt.setString(1, user.getName());
             pstmt.setString(2,user.getAvatars());
-            pstmt.setInt(3,user.getSex());
+            pstmt.setString(3,user.getSex());
             pstmt.setInt(4,user.getAge());
             pstmt.setString(5,user.getPhone());
             pstmt.setString(6,user.getEmail());
@@ -119,7 +119,7 @@ public class UserDaoImpl implements UserDao {
                 user.setName(rs.getString(2));
                 user.setPassword(rs.getString(3));
                 user.setAvatars(rs.getString(4));
-                user.setSex(rs.getInt(5));
+                user.setSex(rs.getString(5));
                 user.setAge(rs.getInt(6));
                 user.setPhone(rs.getString(7));
                 user.setEmail(rs.getString(8));

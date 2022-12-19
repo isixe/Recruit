@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.Impl.JobServiceImpl;
+import service.impl.JobServiceImpl;
 import service.JobService;
 
 import java.io.IOException;
