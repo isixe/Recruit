@@ -5,11 +5,13 @@ import bean.User;
 import java.util.List;
 
 public interface UserDao {
-    public int add(User user) throws Exception;;
+    public Integer add(User user) throws Exception;;
 
-    public int delete(int id) throws Exception;;
+    public Integer delete(int id) throws Exception;;
 
-    public int update(User user) throws Exception;
+    public Integer update(User user) throws Exception;
+
+    public Integer setPassword(int id, String passwoed) throws Exception;
 
     public User findById(int id) throws Exception;
 

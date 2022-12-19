@@ -103,8 +103,8 @@
                     <h3>帐号设置</h3>
                     <br>
                 </dt>
-                <dd><a class="hover" href="#">资料修改</a></dd>
-                <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/updatePassword.jsp">密码修改</a></dd>
+                <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/userCenter.jsp">资料修改</a></dd>
+                <dd><a class="hover" href="#">密码修改</a></dd>
                 <dd><a class="hover-active" href="#">用户注销</a></dd>
             </dl>
         </div>
@@ -112,48 +112,28 @@
         <div class="content user_modifyContent">
             <dl class="c_section">
                 <dt>
-                    <h2><em></em>信息修改</h2>
+                    <h2><em></em>密码修改</h2>
                 </dt>
                 <dd>
-                    <form id="updatePswForm" method="post" action="${pageContext.request.contextPath}/user?action=update">
+                    <form id="updatePswForm" method="post" action="${pageContext.request.contextPath}/user?action=updatePsd">
                         <table class="savePassword">
                             <tr>
-                                <td class="label">用户名</td>
+                                <td class="label">旧密码</td>
                                 <td>
-                                    <input type="text" maxlength="16" id="input-name" name="name" value="${requestScope.user.name}">
+                                    <input type="password" maxlength="16" class="input-password" name="oldPassword">
                                 </td>
                             </tr>
                             <tr>
-                                <td class="label">性别</td>
+                                <td class="label">新密码</td>
                                 <td>
-                                    <select name="sex">
-                                        <c:if test="${requestScope.user.sex =='男'}">
-                                            <option value="男" selected>男</option>
-                                        </c:if>
-                                        <c:if test="${requestScope.user.sex =='女'}">
-                                            <option value="女" selected>女</option>
-                                        </c:if>
-                                        <c:if test="${requestScope.user.sex !='男'}">
-                                            <option value="男">男</option>
-                                        </c:if>
-                                        <c:if test="${requestScope.user.sex !='女'}">
-                                            <option value="女">女</option>
-                                        </c:if>
-                                    </select>
+                                    <input type="password" maxlength="16" class="input-password" name="newPassword1">
                                 </td>
                             </tr>
                             <tr>
-                                <td class="label">年龄</td>
-                                <td><input type="number" maxlength="16" id="input-age" name="age" value="${requestScope.user.age}"></td>
-                            </tr>
-                            <tr>
-                                <td class="label">电话</td>
-                                <td><input type="tel" maxlength="16" id="input-tel" name="phone" value="${requestScope.user.phone}">
+                                <td class="label">再次输入密码</td>
+                                <td>
+                                    <input type="password" maxlength="16" class="input-password" name="newPassword2">
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="label">邮箱</td>
-                                <td><input type="email" maxlength="16" id="input-email" name="email" value="${requestScope.user.email}"></td>
                             </tr>
                             <tr>
                                 <td><input type="submit" value="修 改"></td>

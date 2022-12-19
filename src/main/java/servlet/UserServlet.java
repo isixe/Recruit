@@ -22,17 +22,23 @@ public class UserServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        UserService service = new UserServiceImpl();
         int result = 0;
+        String sid = null;
+        User user = new User();
+        UserDao userDao = new UserDaoImpl();
+        UserService service = new UserServiceImpl();
+
         String action = request.getParameter("action");
+        sid = (String) request.getSession().getAttribute("userid");
+        int id = Integer.parseInt(sid);
+
         if (action.equals("update")) {
-            User user = new User();
             user.setName(request.getParameter("name"));
             user.setAge(Integer.parseInt(request.getParameter("age")));
             user.setEmail(request.getParameter("email"));
             user.setPhone(request.getParameter("phone"));
             user.setSex(request.getParameter("sex"));
-            UserDao userDao = new UserDaoImpl();
+            user.setId(id);
             try {
                 result = userDao.update(user);
             } catch (Exception e) {
@@ -45,6 +51,43 @@ public class UserServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/userCenter.jsp' ;</script>");
             }
+        }
+
+        if (action.equals("updatePsd")) {
+            try {
+                user = userDao.findById(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String password = user.getPassword();
+            String oldPassword = request.getParameter("oldPassword");
+            String newPassword1 = request.getParameter("newPassword1");
+            String newPassword2 = request.getParameter("newPassword2");
+
+            if (oldPassword.equals("") || newPassword1.equals("") || newPassword2.equals("")) {
+                PrintWriter out = response.getWriter();
+                out.print("<script>alert('密码不能为空，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+            } else {
+                if (!newPassword1.equals(newPassword2) || !password.equals(oldPassword)) {
+                    PrintWriter out = response.getWriter();
+                    out.print("<script>alert('密码错误，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                } else {
+                    try {
+                        result = userDao.setPassword(id, newPassword1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result > 0) {
+                        response.getWriter().write("修改成功，正在跳转主页！");
+                        response.setHeader("refresh", "1;url=index.jsp");
+                    } else {
+                        PrintWriter out = response.getWriter();
+                        out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                    }
+                }
+            }
+
         }
     }
 

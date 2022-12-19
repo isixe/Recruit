@@ -8,8 +8,9 @@
     String sid = null;
     //获取登录传递的Session变量（用户id, 用户名）
     username = (String) request.getSession().getAttribute("username");
-    sid = (String) request.getSession().getAttribute("userid");
     request.setAttribute("username", username);
+
+    sid = (String) request.getSession().getAttribute("userid");
     //System.out.println("用户id："+sid);
 
     //通过id获取用户用户角色，根据用户角色，跳转相应界面
@@ -23,13 +24,8 @@
             request.getSession().setAttribute("role", role);
             request.setAttribute("role", role);
             String path = request.getContextPath();
-            switch (role) {
-                case "admin":
-                    response.sendRedirect(path + "/admin.jsp");
-                    break;
-//                case "company":
-//                    response.sendRedirect(path+"/company.jsp");
-//                    break;
+            if ("admin".equals(role)) {
+                response.sendRedirect(path + "/admin.jsp");
             }
         } catch (Exception e) {
             System.out.println(e);

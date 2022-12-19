@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
      * @throws Exception
      */
     @Override
-    public int add(User user) throws Exception {
+    public Integer add(User user) throws Exception {
         int result = 0;
         ConnectionUtils utils = new ConnectionUtils();
         conn = utils.getConn();
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
     // TODO: 2022/12/15 用户删除
 
     @Override
-    public int delete(int id) throws Exception {
+    public Integer delete(int id) throws Exception {
         int result = 0;
         ConnectionUtils utils = new ConnectionUtils();
         conn = utils.getConn();
@@ -71,23 +71,59 @@ public class UserDaoImpl implements UserDao {
         return result;
     }
 
-    // TODO: 2022/12/15 用户添加
-
+    /**
+     * 用户资料的修改
+     * ===================================================================
+     *
+     * @param user
+     * @return Ineger
+     * @throws Exception
+     */
     @Override
-    public int update(User user) throws Exception {
+    public Integer update(User user) throws Exception {
         int result = 0;
         ConnectionUtils utils = new ConnectionUtils();
         conn = utils.getConn();
-        sql = "update user set name = ?,sex = ?,age = ?,phone =?,email = ?";
+        sql = "update user set name = ?,sex = ?,age = ?,phone =?,email = ? where id =?";
         try {
             pstmt = conn.prepareStatement(sql);
             Date date = new Date();
             pstmt.setString(1, user.getName());
-            pstmt.setString(2,user.getSex());
-            pstmt.setInt(3,user.getAge());
-            pstmt.setString(4,user.getPhone());
-            pstmt.setString(5,user.getEmail());
+            pstmt.setString(2, user.getSex());
+            pstmt.setInt(3, user.getAge());
+            pstmt.setString(4, user.getPhone());
+            pstmt.setString(5, user.getEmail());
+            pstmt.setInt(6, user.getId());
             result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
+    }
+
+    /**
+     * 用户密码修改
+     * ===================================================================
+     *
+     * @param id
+     * @param password
+     * @return Integer
+     * @throws Exception
+     */
+    @Override
+    public Integer setPassword(int id, String password) throws Exception {
+        int result = 0;
+        ConnectionUtils utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "update user set password = ? where id = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, password);
+            pstmt.setInt(2, id);
+            result = pstmt.executeUpdate();
+            System.out.println(pstmt.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
