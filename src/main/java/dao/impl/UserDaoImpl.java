@@ -78,16 +78,15 @@ public class UserDaoImpl implements UserDao {
         int result = 0;
         ConnectionUtils utils = new ConnectionUtils();
         conn = utils.getConn();
-        sql = "update user set name = ?, avatars = ?,sex = ?,age = ?,phone =?,email = ?";
+        sql = "update user set name = ?,sex = ?,age = ?,phone =?,email = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             Date date = new Date();
             pstmt.setString(1, user.getName());
-            pstmt.setString(2,user.getAvatars());
-            pstmt.setString(3,user.getSex());
-            pstmt.setInt(4,user.getAge());
-            pstmt.setString(5,user.getPhone());
-            pstmt.setString(6,user.getEmail());
+            pstmt.setString(2,user.getSex());
+            pstmt.setInt(3,user.getAge());
+            pstmt.setString(4,user.getPhone());
+            pstmt.setString(5,user.getEmail());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

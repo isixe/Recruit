@@ -37,11 +37,14 @@ h5 {
 	font-weight: normal;
 }
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="email"]{
 	border: 2px solid #f1f1f1;
 	outline: none;
 	font: 20px/32px "微软雅黑", "宋体", Arial;
-	width: 600px;
+	width: 400px;
 	height: 30px;
 	padding: 6px 10px;
 	margin-top: 20px;
@@ -9675,6 +9678,9 @@ ul.my_collections li i {
 	margin-top: 15px;
 }
 .user_bindLogin input[type="text"],
+.user_bindLogin input[type="tel"],
+.user_bindLogin input[type="email"],
+.user_bindLogin input[type="number"],
 .user_bindLogin input[type="password"] {
 	display: block;
 	width: 398px;
@@ -9697,12 +9703,8 @@ ul.my_collections li i {
 	display: block;
 	height: 30px;
 	width: 400px;
-	background: url(img/radio.png) no-repeat 0 3px;
 	cursor: pointer;
 	font-size: 18px;
-}
-.user_bindLogin label.checked {
-	background: url(img/radioSel.png) no-repeat 0 3px;
 }
 .user_hasLagouAccountForm {
 	padding-top: 15px;
@@ -9747,7 +9749,6 @@ ul.my_collections li i {
 	border: 2px solid #91cebe;
 }
 .user_registerRadio li em {
-	background: url(img/user_choose.png) no-repeat;
 	width: 17px;
 	height: 18px;
 }
@@ -9762,7 +9763,6 @@ ul.my_collections li i {
 }
 .user_firstBinWarn em {
 	display: inline-block;
-	background: url(img/user_warn.png) no-repeat;
 	width: 18px;
 	height: 17px;
 }

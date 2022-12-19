@@ -45,8 +45,8 @@ public class LoginServlet extends HttpServlet {
                 if (id > 0) {
                     request.getSession().setAttribute("userid", Integer.toString(id));
                     request.getSession().setAttribute("username", username);
-                    response.getWriter().write("登录成功，3秒后跳转主页！");
-                    response.setHeader("refresh", "3;url=index.jsp");
+                    response.getWriter().write("登录成功，正在跳转主页！");
+                    response.setHeader("refresh", "1;url=index.jsp");
                 } else {
                     PrintWriter out = response.getWriter();
                     out.print("<script>alert('帐号或密码错误，请重新登录...'); window.location='pages/login.jsp' </script>");
@@ -66,8 +66,8 @@ public class LoginServlet extends HttpServlet {
                 user.setRole(role);
                 flag = userService.register(user);
                 if (flag) {
-                    response.getWriter().write("注册成功，3秒后跳转登录界面！");
-                    response.setHeader("refresh", "3;url=pages/login.jsp");
+                    response.getWriter().write("注册成功，正在跳转登录界面！");
+                    response.setHeader("refresh", "1;url=pages/login.jsp");
                 } else {
                     PrintWriter out = response.getWriter();
                     out.print("<script>alert('注册失败，请重新注册...'); window.location='pages/register.jsp' </script>");
