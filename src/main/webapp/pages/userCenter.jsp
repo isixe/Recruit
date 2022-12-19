@@ -105,7 +105,7 @@
                 </dt>
                 <dd><a class="hover" href="#">资料修改</a></dd>
                 <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/updatePassword.jsp">密码修改</a></dd>
-                <dd><a class="hover-active" href="#">用户注销</a></dd>
+                <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/deleteUserAccount.jsp">用户注销</a></dd>
             </dl>
         </div>
         <input type="hidden" id="hasSidebar" value="1">

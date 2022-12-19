@@ -104,39 +104,21 @@
                     <br>
                 </dt>
                 <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/userCenter.jsp">资料修改</a></dd>
-                <dd><a class="hover" href="#">密码修改</a></dd>
-                <dd><a class="hover-active" href="${pageContext.request.contextPath}/pages/deleteUserAccount.jsp">用户注销</a></dd>
+                <dd><a class="hover" href="${pageContext.request.contextPath}/pages/updatePassword.jsp">密码修改</a></dd>
+                <dd><a class="hover-active" href="#">用户注销</a></dd>
             </dl>
         </div>
         <input type="hidden" id="hasSidebar" value="1">
         <div class="content user_modifyContent">
             <dl class="c_section">
                 <dt>
-                    <h2><em></em>密码修改</h2>
+                    <h2><em></em>账户注销</h2>
                 </dt>
                 <dd>
-                    <form id="updatePswForm" method="post" action="${pageContext.request.contextPath}/user?action=updatePsd">
+                    <form id="updatePswForm" method="post" action="${pageContext.request.contextPath}/user?action=delete">
                         <table class="savePassword">
                             <tr>
-                                <td class="label">旧密码</td>
-                                <td>
-                                    <input type="password" maxlength="16" class="input-password" name="oldPassword">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label">新密码</td>
-                                <td>
-                                    <input type="password" maxlength="16" class="input-password" name="newPassword1">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label">再次输入密码</td>
-                                <td>
-                                    <input type="password" maxlength="16" class="input-password" name="newPassword2">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" value="修 改"></td>
+                                <td><input type="submit" value="注销"></td>
                             </tr>
                             </tbody>
                         </table>

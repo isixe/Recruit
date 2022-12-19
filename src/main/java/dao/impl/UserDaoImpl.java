@@ -49,9 +49,14 @@ public class UserDaoImpl implements UserDao {
         return result;
     }
 
-
-    // TODO: 2022/12/15 用户删除
-
+    /**
+     * 用户账户删除
+     * ===================================================================
+     *
+     * @param id
+     * @return Integer
+     * @throws Exception
+     */
     @Override
     public Integer delete(int id) throws Exception {
         int result = 0;

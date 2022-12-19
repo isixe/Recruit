@@ -83,11 +83,14 @@
                     <c:if test="${requestScope.role=='user'}">
                         <li>
                             <!-- 一级导航 -->
-                            <div class="first"><a href="${pageContext.request.contextPath}/pages/userCenter.jsp">个人中心</a></div>
+                            <div class="first"><a
+                                    href="${pageContext.request.contextPath}/pages/userCenter.jsp">个人中心</a></div>
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/preview.jsp"><li>我的简历</li></a>
+                                    <a href="${pageContext.request.contextPath}/pages/preview.jsp">
+                                        <li>我的简历</li>
+                                    </a>
                                     <li>我的求职</li>
                                 </ul>
                             </div>
@@ -96,7 +99,9 @@
                     <c:if test="${requestScope.role=='company'}">
                         <li>
                             <!-- 一级导航 -->
-                            <a href="${pageContext.request.contextPath}/pages/myCompany.jsp"><div class="first">企业中心</div></a>
+                            <a href="${pageContext.request.contextPath}/pages/myCompany.jsp">
+                                <div class="first">企业中心</div>
+                            </a>
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>

@@ -32,62 +32,78 @@ public class UserServlet extends HttpServlet {
         sid = (String) request.getSession().getAttribute("userid");
         int id = Integer.parseInt(sid);
 
-        if (action.equals("update")) {
-            user.setName(request.getParameter("name"));
-            user.setAge(Integer.parseInt(request.getParameter("age")));
-            user.setEmail(request.getParameter("email"));
-            user.setPhone(request.getParameter("phone"));
-            user.setSex(request.getParameter("sex"));
-            user.setId(id);
-            try {
-                result = userDao.update(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (result > 0) {
-                response.getWriter().write("修改成功，正在跳转主页！");
-                response.setHeader("refresh", "1;url=index.jsp");
-            } else {
-                PrintWriter out = response.getWriter();
-                out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/userCenter.jsp' ;</script>");
-            }
-        }
-
-        if (action.equals("updatePsd")) {
-            try {
-                user = userDao.findById(id);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            String password = user.getPassword();
-            String oldPassword = request.getParameter("oldPassword");
-            String newPassword1 = request.getParameter("newPassword1");
-            String newPassword2 = request.getParameter("newPassword2");
-
-            if (oldPassword.equals("") || newPassword1.equals("") || newPassword2.equals("")) {
-                PrintWriter out = response.getWriter();
-                out.print("<script>alert('密码不能为空，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
-            } else {
-                if (!newPassword1.equals(newPassword2) || !password.equals(oldPassword)) {
-                    PrintWriter out = response.getWriter();
-                    out.print("<script>alert('密码错误，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+        switch (action) {
+            case "update": //用户资料更新
+                user.setName(request.getParameter("name"));
+                user.setAge(Integer.parseInt(request.getParameter("age")));
+                user.setEmail(request.getParameter("email"));
+                user.setPhone(request.getParameter("phone"));
+                user.setSex(request.getParameter("sex"));
+                user.setId(id);
+                try {
+                    result = userDao.update(user);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (result > 0) {
+                    response.getWriter().write("修改成功，正在跳转主页！");
+                    response.setHeader("refresh", "1;url=index.jsp");
                 } else {
-                    try {
-                        result = userDao.setPassword(id, newPassword1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (result > 0) {
-                        response.getWriter().write("修改成功，正在跳转主页！");
-                        response.setHeader("refresh", "1;url=index.jsp");
-                    } else {
+                    PrintWriter out = response.getWriter();
+                    out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/userCenter.jsp' ;</script>");
+                }
+                break;
+            case "updatePsd": //密码修改
+                try {
+                    user = userDao.findById(id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                String password = user.getPassword();
+                String oldPassword = request.getParameter("oldPassword");
+                String newPassword1 = request.getParameter("newPassword1");
+                String newPassword2 = request.getParameter("newPassword2");
+
+                if (oldPassword.equals("") || newPassword1.equals("") || newPassword2.equals("")) {
+                    PrintWriter out = response.getWriter();
+                    out.print("<script>alert('密码不能为空，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                } else {
+                    if (!newPassword1.equals(newPassword2) || !password.equals(oldPassword)) {
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                        out.print("<script>alert('密码错误，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                    } else {
+                        try {
+                            result = userDao.setPassword(id, newPassword1);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (result > 0) {
+                            response.getWriter().write("修改成功，正在跳转主页！");
+                            response.setHeader("refresh", "1;url=index.jsp");
+                        } else {
+                            PrintWriter out = response.getWriter();
+                            out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                        }
                     }
                 }
-            }
-
+                break;
+            case "delete": //用户删除
+                try {
+                    result = userDao.delete(id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (result > 0) {
+                    request.getSession().removeAttribute("username");
+                    request.getSession().removeAttribute("userid");
+                    response.getWriter().write("账户注销成功，正在跳转登录界面！");
+                    response.setHeader("refresh", "1;url=pages/login.jsp");
+                } else {
+                    PrintWriter out = response.getWriter();
+                    out.print("<script>alert('账户注销失败！'); window.location='pages/deleteUserAccount.jsp' ;</script>");
+                }
+                break;
         }
     }
 
