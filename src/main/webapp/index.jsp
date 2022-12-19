@@ -25,7 +25,7 @@
             request.setAttribute("role", role);
             String path = request.getContextPath();
             if ("admin".equals(role)) {
-                response.sendRedirect(path + "/admin.jsp");
+                response.sendRedirect(path + "/pages/admin.jsp");
             }
         } catch (Exception e) {
             System.out.println(e);

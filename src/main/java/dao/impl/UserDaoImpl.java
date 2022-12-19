@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -166,8 +167,8 @@ public class UserDaoImpl implements UserDao {
                 user.setRegisterTime(rs.getString(9));
                 user.setRole(rs.getString(10));
             }
-            System.out.println("======================");
-            System.out.println(user.toString());
+//            System.out.println("======================");
+//            System.out.println(user.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -176,10 +177,42 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    /**
+     * 用户查询
+     * ===================================================================
+     *
+     * @param name
+     * @return List
+     * @throws Exception
+     */
     @Override
     public List<User> findByName(String name) throws Exception {
         utils = new ConnectionUtils();
-        return null;
+        conn = utils.getConn();
+        List<User> list = new ArrayList<User>();
+        String str = "'%" + name + "%'";
+        sql = "select * from user where name like " + str;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                if (!rs.getString(10).equals("admin")) {
+                    user.setId(rs.getInt(1));
+                    user.setName(rs.getString(2));
+                    user.setSex(rs.getString(5));
+                    user.setAge(rs.getInt(6));
+                    user.setPhone(rs.getString(7));
+                    user.setEmail(rs.getString(8));
+                    list.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return list;
     }
 
     /**
