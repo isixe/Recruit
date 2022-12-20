@@ -16,6 +16,21 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeDao.FindResume(status);
 
     }
+    public Integer add(Resume resume) {
+        return resumeDao.add(resume);
+    }
+    public Integer update(Resume resume){
+        return  resumeDao.update((resume));
+    }
+    public  Integer delete(int id){
+        return  resumeDao.delete((id));
+    }
+    public ArrayList<Resume> findById(int id) {
+        return resumeDao.findById((id));
+
+    }
+
+
 
 
 }
