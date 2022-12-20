@@ -21,7 +21,7 @@ public class FindJobByPidServlet extends HttpServlet {
             ArrayList<Job> jobs = jobService.findByPid(position_id);
             System.out.println(jobs);
             req.setAttribute("jobs", jobs);
-            req.getRequestDispatcher("pages/findJob.jsp").forward(req, resp);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
 
     @Override
