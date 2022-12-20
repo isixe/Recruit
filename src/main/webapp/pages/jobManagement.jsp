@@ -32,6 +32,19 @@
     }
   }
 %>
+<script type="text/javascript">
+  function deleteJob(id) {
+    if (window.confirm("确定要删除这条记录吗?"+id)){
+      location.href="${pageContext.request.contextPath}/deleteJobServlet?id="+id;
+    }
+  }
+  function FindJobByCid(company_id) {
+
+    if (window.confirm("确定要查询这条记录吗?"+company_id)){
+      location.href="/FindJobByCidServlet?company_id="+company_id;
+    }
+  }
+</script>
 <html>
 <head>
 
@@ -44,7 +57,7 @@
     <link rel="stylesheet" href="./static/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <!-- JS -->
-    <script src="./static/vendor/bootstrap.min.js"></script>
+<%--    <script src="./static/vendor/bootstrap.min.js"></script>--%>
   </head>
 
 <body>
@@ -204,22 +217,11 @@
   </div>
   <!-- ==============已选============== -->
 
-  <a href=${pageContext.request.contextPath}/FindJobByPidServlet?position_id=1>position_id=1的公司招聘的职业</a>
+  <a href=${pageContext.request.contextPath}/FindJobByCidServlet?company_id=1>position_id=1的公司招聘的职业</a>
   <!-- ==============工作============== -->
   <div class="recruit">
     <div class="wrapper">
       <%--打印表单信息--%>
-      <c:forEach items="${jobs }" var="job">
-        ${job.id}--
-        ${job.company_id}--
-        ${job.position_id}--
-        ${job.job_requirements}--
-        ${job.job_require}--
-        <a href="{pageContext.request.contextPath}/updateJobServlet?id=${job.id})">更新</a>
-        <a href="JavaScript:deleteJob(${job.id})">删除</a>
-        <br/>
-        <hr/>
-      </c:forEach>
       <c:forEach items="${jobs }" var="job">
         <!-- 信息 -->
         <div class="information">
@@ -227,23 +229,24 @@
             <p>190/天上一休一连锁超市急招营业员</p>
             <p> ${job.minsalary}-${job.maxsalary}元/月</p>
             <p>
-              <span>${job.welfare}--</span>
-              <span class="bg-info text-light">五险一金</span>
-              <span class="bg-danger text-light">保吃</span>
-              <span class="bg-success text-light">包住</span>
+              <span class="bg-info text-light">${job.welfare}</span>
+<%--              <span class="bg-danger text-light">保吃</span>--%>
+<%--              <span class="bg-success text-light">包住</span>--%>
             </p>
           </div>
           <div class="center">
             <div class="top">
-              <span>工作时间：${job.time}&emsp;&emsp;&emsp;工作类型：收银员</span>
+              <span>工作时间：${job.time}&emsp;&emsp;&emsp;工作类型：${job.position_id}</span><br/>
+              <span>联系人：${job.contact}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;工作地点：${job.area}</span>
             </div>
             <div class="buttom">
-              <span>招聘人数：10人&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;工作地点：${job.area}</span><br/>
-              <span>联系人：${job.contact}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;联系方式：${job.area}</span>
+              <span>岗位职责：${job.job_requirements}</span><br/>
+              <span>任职要求：${job.job_require}</span>
             </div>
           </div>
           <div class="right">
-            <button class="btn btn-primary">报名参加</button>
+<%--            <button class="btn btn-primary"><a href="{pageContext.request.contextPath}/updateJobServlet?id=${job.id})">更新</a></button><br>--%>
+            <button class="btn btn-primary"><a href="JavaScript:deleteJob(${job.id})">删除</a></button>
           </div>
         </div>
       </c:forEach>
