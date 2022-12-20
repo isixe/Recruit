@@ -23,25 +23,24 @@ public class ResumeDaoImpl implements ResumeDao {
     //简历添加功能
     public Integer add(Resume resume) {
         ConnectionUtils utils = new ConnectionUtils();
-        int rs = 0;
+        int result = 0;
         try {
             conn = utils.getConn();
             sql = "insert into resume (id,name,phone,email) values(?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, resume.getId());
-            pstmt.setString(1, resume.getName());
-            pstmt.setString(2, resume.getPhone());
-            pstmt.setString(3, resume.getEmail());
-            rs = pstmt.executeUpdate();
+            pstmt.setString(2, resume.getName());
+            pstmt.setString(3, resume.getPhone());
+            pstmt.setString(4, resume.getEmail());
+            result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt, rs);
         }
-        if (rs > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return result;
+
     }
 //简历查询功能(通过状态)
 
