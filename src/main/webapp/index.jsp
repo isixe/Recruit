@@ -106,7 +106,7 @@
                             <div class="second">
                                 <ul>
                                     <li>我的发布</li>
-                                    <li>企业信息</li>
+                                    <li>信息更改</li>
                                 </ul>
                             </div>
                         </li>

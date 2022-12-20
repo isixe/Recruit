@@ -36,68 +36,18 @@
     <link href="../static/css/external.min.css" type="text/css" rel="stylesheet">
     <!-- JS -->
     <script src="../static/vendor/bootstrap.min.js"></script>
-
 </head>
 <body>
-<div id="box">
-    <div class="header">
-        <div class="wrapper">
 
-            <!-- 右边导航栏 -->
-            <div class="right">
-                <ul>
-                    <li>
-                        <c:if test="${requestScope.username==null}">
-                            <a href="${pageContext.request.contextPath}/pages/login.jsp">登录/注册</a>
-                        </c:if>
-                        <c:if test="${requestScope.username!=null}">
-                            <div class="first">欢迎，&nbsp;${requestScope.username}</div>
-                            <div class="second">
-                                <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/exit.jsp">
-                                        <li>退出</li>
-                                    </a>
-                                </ul>
-                            </div>
-                        </c:if>
-                    </li>
-                    <c:if test="${requestScope.role=='company'}">
-                        <li>
-                            <!-- 一级导航 -->
-                            <div class="first">企业中心</div>
-                            <!-- 二级导航 -->
-                            <div class="second">
-                                <ul>
-                                    <li>我的发布</li>
-                                    <li>企业信息</li>
-                                </ul>
-                            </div>
-                        </li>
-                    </c:if>
-                </ul>
-            </div>
-            <!-- 右边导航栏 -->
-        </div>
-    </div>
+<div id="box">
     <!-- ==============顶栏============== -->
     <div id="container">
-        <!-- <script src="style/js/swfobject_modified.js" type="text/javascript"></script> -->
         <div class="clearfix">
 
             <div class="content_l">
                 <div class="c_detail">
-                    <div style="background-color:#fff;" class="c_logo">
-                        <a title="上传公司LOGO" id="logoShow" class="inline cboxElement" href="#logoUploader">
-                            <img width="190" height="190" alt="公司logo" src="../static/images/logo_default.png">
-
-                            <span>更换公司图片<br>190px*190px 小于5M</span>
-                        </a>
-                    </div>
                     <div class="c_box companyName">
                         <h2 title="平潭协创进出口贸易有限公司">平潭协创贸易有限公司</h2>
-
-                        <h1 title="福建平潭协创进出口贸易有限公司" class="fullname">福建平潭协创进出口贸易有限公司</h1>
-
                         <form class="clear editDetail dn" id="editDetailForm">
                             <input type="text" placeholder="请输入公司简称" maxlength="15" value="平潭协创进出口贸易有限公司"
                                    name="companyShortName" id="companyShortName">
@@ -108,8 +58,9 @@
                             <a id="cancelDetail" class="btn_cancel_s">取消</a>
                         </form>
 
-                        <div class="clear oneword"><img width="17" height="15" src="style/images/quote_l.png">&nbsp;
-                            <span>平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)</span> &nbsp;<img width="17" height="15" src="style/images/quote_r.png">
+                        <div class="clear oneword">
+                            <span>平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)</span>
+                            &nbsp;
                         </div>
                         <h3 class="dn">已选择标签</h3>
                         <ul style="overflow:auto" id="hasLabels" class="reset clearfix">
@@ -172,7 +123,9 @@
                                 <h2><em></em>公司介绍</h2>
                             </dt>
                             <dd>
-                                <div class="c_intro">平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)</div>
+                                <div class="c_intro">
+                                    平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)
+                                </div>
                                 <a title="编辑公司介绍" id="editIntro" class="c_edit" href="javascript:void(0)"></a>
                             </dd>
                         </dl>
@@ -180,31 +133,8 @@
 
                 </div><!-- end #Profile -->
 
-                <!--[if IE 7]> <br/> <![endif]-->
 
-                <!--无招聘职位-->
-                <dl id="noJobs" class="c_section">
-                    <dt>
-                        <h2><em></em>招聘职位</h2>
-                    </dt>
-                    <dd>
-                        <div class="addnew">
-                            发布需要的人才信息，让伯乐和千里马尽快相遇……<br>
-                            <a href=${pageContext.request.contextPath}/JobServlet?id=1">+添加招聘职位</a>
-                        </div>
-                        <div>
-                            <a href="${pageContext.request.contextPath}JobServlet?id=1">查询id1</a>
-                            <a href="${pageContext.request.contextPath}/JobServlet?id=*" >查询id*</a>
-                            <a href="${pageContext.request.contextPath}/JobServlet?id=%" >查询id%</a>
-                        </div>
-                    </dd>
-                </dl>
-
-                <input type="hidden" value="" name="hasNextPage" id="hasNextPage">
-                <input type="hidden" value="" name="pageNo" id="pageNo">
-                <input type="hidden" value="" name="pageSize" id="pageSize">
-                <div id="flag"></div>
-            </div>    <!-- end .content_l -->
+            </div>
 
             <div class="content_r">
                 <div id="Tags">
@@ -281,15 +211,9 @@
                                 <!-- 显示创始人 -->
                                 <div class="member_info">
                                     <a title="编辑创始人" class="c_edit member_edit" href="javascript:void(0)"></a>
-                                    <div class="m_portrait">
-                                        <div></div>
-                                        <img width="120" height="120" alt="孙泰英" src="style/images/leader_default.png">
-                                    </div>
                                     <div class="m_name">
                                         孙泰英
-                                        <a target="_blank" class="weibo" href="http://weimob.weibo.com"></a>
                                     </div>
-                                    <div class="m_position">ceo</div>
                                     <div class="m_intro">孙泰英，平潭协创贸易有限公司，从事贸易行业。</div>
                                 </div>
 
@@ -300,21 +224,7 @@
 
             </div>
         </div>
-
-        <script src="style/js/company.min.js" type="text/javascript"></script>
-        <script>
-            var avatar = {};
-            avatar.uploadComplate = function (data) {
-                var result = eval('(' + data + ')');
-                if (result.success) {
-                    jQuery('#logoShow img').attr("src", ctx + '/' + result.content);
-                    jQuery.colorbox.close();
-                }
-            };
-        </script>
         <div class="clear"></div>
-        <input type="hidden" value="d1035b6caa514d869727cff29a1c2e0c" id="resubmitToken">
-        <a rel="nofollow" title="回到顶部" id="backtop" style="display: inline;"></a>
     </div><!-- end #container -->
 </div><!-- end #body -->
 
