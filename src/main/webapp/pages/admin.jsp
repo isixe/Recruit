@@ -104,11 +104,11 @@
                                 <td>${user.phone}</td>
                                 <td>${user.email}</td>
                                 <td class="text-center">
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin?action=delete&id=${user.id}" data-toggle="modal"
                                        data-target="#delete_patient">修改</a>
                                 </td>
                                 <td class="text-center">
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin?action=delete&id=${user.id}" data-toggle="modal"
                                        data-target="#delete_patient">删除</a>
                                 </td>
                             </tr>
