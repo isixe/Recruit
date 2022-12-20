@@ -26,12 +26,17 @@ public class ResumeDaoImpl implements ResumeDao {
         int rs = 0;
         try {
             conn = utils.getConn();
-            sql = "insert into resume (id,name,phone,email) values(?,?,?,?)";
+            sql = "insert into resume (name,phone,email,sex,school,major,education,datetime,userid) values(?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, resume.getId());
             pstmt.setString(1, resume.getName());
             pstmt.setString(2, resume.getPhone());
             pstmt.setString(3, resume.getEmail());
+            pstmt.setString(4,resume.getSex());
+            pstmt.setString(5,resume.getSchool());
+            pstmt.setString(6,resume.getSchool());
+            pstmt.setString(7,resume.getSchool());
+            pstmt.setString(8,resume.getSchool());
+            pstmt.setInt(9,resume.getUserid());
             rs = pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -69,6 +74,7 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setStatus(rs.getString("status"));
                 resume.setPhone(rs.getString("phone"));
                 resume.setPicture(rs.getString("picture"));
+                resume.setUserid(rs.getInt("userid"));
                 resumes.add(resume);
             }
         } catch (SQLException e) {
@@ -87,14 +93,14 @@ public class ResumeDaoImpl implements ResumeDao {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
-            sql = "update resume set name = ?,email = ?,age = ?,phone =?,school = ?,education = ?, where id =?";
+            sql = "update resume set name = ?,email = ?,age = ?,phone =?,school = ?,education = ?, where userid =?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, resume.getName());
             pstmt.setString(2, resume.getEmail());
             pstmt.setString(3, resume.getSchool());
             pstmt.setString(4, resume.getPhone());
             pstmt.setString(5, resume.getEducation());
-            pstmt.setInt(6, resume.getId());
+            pstmt.setInt(6, resume.getUserid());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +116,7 @@ public class ResumeDaoImpl implements ResumeDao {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
-            sql = "delete from resume where id = ?";
+            sql = "delete from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             result = pstmt.executeUpdate();
@@ -122,12 +128,12 @@ public class ResumeDaoImpl implements ResumeDao {
         return result;
     }
     //根据ID查找简历
-    public ArrayList<Resume> findById(int id)  {
+    public Resume findByUserId(int id)  {
         Resume resume = new Resume();
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
-            sql = "select * from resume where id = ?";
+            sql = "select * from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, Integer.toString(id));
             rs = pstmt.executeQuery();
@@ -146,7 +152,7 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setStatus(rs.getString("status"));
                 resume.setPhone(rs.getString("phone"));
                 resume.setPicture(rs.getString("picture"));
-                resumes.add(resume);
+                resume.setUserid(id);
             }
             System.out.println(resume.toString());
         } catch (SQLException e) {
@@ -154,7 +160,7 @@ public class ResumeDaoImpl implements ResumeDao {
         } finally {
             utils.closeAll(pstmt, rs);
         }
-        return resumes;
+        return resume;
     }
 }
 

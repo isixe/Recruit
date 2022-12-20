@@ -27,6 +27,7 @@ public class Resume {
 
     private String picture;
 
+    private int userid;
 
 
     public String getStatus() {
@@ -135,6 +136,14 @@ public class Resume {
         this.picture = picture;
     }
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
     @Override
     public String toString() {
         return "Resume{" +
@@ -151,6 +160,7 @@ public class Resume {
                 ", datetime='" + datetime + '\'' +
                 ", status='" + status + '\'' +
                 ", picture='" + picture + '\'' +
+                ", userid=" + userid +
                 '}';
     }
 }
