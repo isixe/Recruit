@@ -16,7 +16,7 @@ public interface ResumeService {
 
     public  Integer delete(int id);
 
-    public ArrayList<Resume> findById(int id);
+    public Resume findByUserId(int id);
 
 
 

@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 19/12/2022 16:12:24
+ Date: 20/12/2022 19:42:16
 */
 
 SET NAMES utf8mb4;
@@ -113,15 +113,18 @@ CREATE TABLE `resume`  (
   `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '城市',
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '状态',
   `datetime` datetime(6) NULL DEFAULT NULL COMMENT '发布时间',
-  PRIMARY KEY (`id`) USING BTREE
+  `userid` int NOT NULL COMMENT '绑定用户',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `userid`(`userid` ASC) USING BTREE,
+  CONSTRAINT `resume_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of resume
 -- ----------------------------
-INSERT INTO `resume` VALUES (1, 'jakt', '12312312', '202131231@qq.com', '男', '北京科技大学', 'java开发', '本科', '1', NULL, '广州', '待处理', '2016-06-04 00:00:00.000000');
-INSERT INTO `resume` VALUES (2, 'dads', '21312', '123@12e21.com', '女', 'asdsa', 'dsad', 'dasda', '2', NULL, 'ddsa', '待定', '2022-12-21 23:53:03.000000');
-INSERT INTO `resume` VALUES (3, 'dasda', '123', '213@12.com', '女', 'dasda', 'dsadas', 'dasdas', '12', NULL, 'dsada', '待处理', '2022-12-28 23:53:44.000000');
+INSERT INTO `resume` VALUES (1, 'jakt', '12312312', '202131231@qq.com', '男', '北京科技大学', 'java开发', '本科', '1', NULL, '广州', '待处理', '2016-06-04 00:00:00.000000', 2);
+INSERT INTO `resume` VALUES (2, 'dads', '21312', '123@12e21.com', '女', 'asdsa', 'dsad', 'dasda', '2', NULL, 'ddsa', '待定', '2022-12-21 23:53:03.000000', 3);
+INSERT INTO `resume` VALUES (3, 'dasda', '123', '213@12.com', '女', 'dasda', 'dsadas', 'dasdas', '12', NULL, 'dsada', '待处理', '2022-12-28 23:53:44.000000', 4);
 
 -- ----------------------------
 -- Table structure for technology
@@ -132,7 +135,7 @@ CREATE TABLE `technology`  (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '技术名称',
   `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '技术描述',
   INDEX `id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of technology

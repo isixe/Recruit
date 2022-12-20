@@ -25,8 +25,8 @@ public class ResumeServiceImpl implements ResumeService {
     public  Integer delete(int id){
         return  resumeDao.delete((id));
     }
-    public ArrayList<Resume> findById(int id) {
-        return resumeDao.findById((id));
+    public Resume findByUserId(int id) {
+        return resumeDao.findByUserId(id);
 
     }
 
