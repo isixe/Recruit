@@ -108,50 +108,29 @@
             </div><!--end .educationalShow-->
         </div><!--end #educationalBackground-->
 
-        <div class="profile_box" id="selfDescription">
-            <h2>自我描述</h2>
-            <div class="descriptionShow">
-                黑客
-            </div><!--end .descriptionShow-->
-        </div><!--end #selfDescription-->
-
-        <div class="profile_box" id="worksShow">
-            <h2>作品展示</h2>
-            <div class="workShow">
-                <ul class="slist clearfix">
-                    <li class="noborder">
-                        <div class="workList c7">
-                            <div class="f16">网址：<a target="_blank"
-                                                   href="http://www.weimob.com">http://www.weimob.com</a></div>
-                            <p>产品 </p>
-                        </div>
-                    </li>
-                </ul>
-            </div><!--end .workShow-->
-        </div><!--end #worksShow-->
     </div><!--end .preview_content-->
 </div><!--end #previewWrapper-->
 
 <!-------------------------------------弹窗lightbox ----------------------------------------->
-<div style="display:none;">
-    <!-- 下载简历 -->
-    <div class="popup" id="downloadOnlineResume">
-        <table width="100%">
-            <tbody>
-            <tr>
-                <td class="c5 f18">请选择下载简历格式：</td>
-            </tr>
-            <tr>
-                <td>
-                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=1">word格式</a>
-                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=2">html格式</a>
-                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=3">pdf格式</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div><!--/#downloadOnlineResume-->
-</div>
+<%--<div style="display:none;">--%>
+<%--    <!-- 下载简历 -->--%>
+<%--    <div class="popup" id="downloadOnlineResume">--%>
+<%--        <table width="100%">--%>
+<%--            <tbody>--%>
+<%--            <tr>--%>
+<%--                <td class="c5 f18">请选择下载简历格式：</td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>--%>
+<%--                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=1">word格式</a>--%>
+<%--                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=2">html格式</a>--%>
+<%--                    <a class="btn_s" href="h/resume/downloadResume?key=1ccca806e13637f7b1a4560f80f08057&amp;type=3">pdf格式</a>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
+<%--            </tbody>--%>
+<%--        </table>--%>
+<%--    </div><!--/#downloadOnlineResume-->--%>
+<%--</div>--%>
 <!------------------------------------- end ----------------------------------------->
 
 
