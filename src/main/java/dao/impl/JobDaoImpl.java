@@ -55,13 +55,55 @@ public class JobDaoImpl implements JobDao {
     }
 
     @Override
-    public int delete(int id) throws Exception {
-        return 0;
+    public Integer delete(Integer id) {
+        ConnectionUtils utils = new ConnectionUtils();
+        sql = "delete from job where id=?";
+        try{
+            conn=utils.getConn();//获取数据库连接
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+            pstmt.setInt(1, id); //设置sql语句的值
+            pstmt.executeUpdate();//执行查询
+            return 1;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return -1;
     }
 
+
+
     @Override
-    public int update(Job job) throws Exception {
-        return 0;
+    public Integer update(Job job)  {
+        ConnectionUtils utils = new ConnectionUtils();
+        int rs = 0;
+        try {
+            conn = utils.getConn(); //获取数据库连接
+            sql = "update job set company_id=?,position_id=?,area=?,time=?,contact=?,maxsalary=?,minsalary=?,job_requirements=?,job_require=?,welfare=? where id=?";
+
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+
+            pstmt.setInt(1, job.getCompany_id());
+            pstmt.setInt(2, job.getPosition_id());
+            pstmt.setString(3, job.getArea());
+            pstmt.setString(4, job.getTime());
+            pstmt.setString(5, job.getContact());
+            pstmt.setDouble(6, job.getMaxsalary());
+            pstmt.setDouble(7, job.getMinsalary());
+            pstmt.setString(8, job.getJob_requirements());
+            pstmt.setString(9, job.getJob_require());
+            pstmt.setString(10, job.getWelfare());
+            rs = pstmt.executeUpdate();//执行查询
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (rs > 0) {
+            System.out.println("更新成功");
+            return 1;
+        } else {
+            System.out.println("更新失败");
+            return 0;
+        }
     }
 
     @Override

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface JobDao {
-    public Integer add(Job job) ;;
+    public Integer add(Job job) ;
 
-    public int delete(int id) throws Exception;;
+    public Integer delete(Integer id);
 
-    public int update(Job job) throws Exception;
+    public Integer update(Job job) ;
 
     public User findById(int id) throws Exception;
 
