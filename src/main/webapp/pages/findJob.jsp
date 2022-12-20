@@ -6,6 +6,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+<script type="text/javascript">
+    function deleteJob(id){
+        if (window.confirm("确定要删除id为"+id+"的记录吗？")){
+            location.href="/deleteJobServlet?id="+id;
+        }
+    }
+</script>
 <head>
     <title>职位信息</title>
 </head>
@@ -34,6 +41,8 @@
         ${job.job_requirements}--
         ${job.job_require}--
         ${job.welfare}--
+        <a href=${pageContext.request.contextPath}/update>更新</a>
+        <a href="JavaScript:deleteJob(${job.id})">删除</a>
         <hr/>
     </c:forEach>
 </body>

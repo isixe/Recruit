@@ -18,7 +18,14 @@ public class JobServiceImpl implements JobService {
     public ArrayList<Job> findByPid(int position_id) {
         return jobDao.findByPid(position_id);
     }
-
+    @Override
+    public Integer delete(Integer id) {
+        return jobDao.delete(id);
+    }
+    @Override
+    public Integer updateJob(Job job) {
+        return jobDao.update(job);
+    }
     @Override
     public Integer addJob(Job job) {
         return jobDao.add(job);
