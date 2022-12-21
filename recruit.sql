@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 21/12/2022 10:24:36
+ Date: 21/12/2022 12:13:53
 */
 
 SET NAMES utf8mb4;
@@ -52,8 +52,7 @@ CREATE TABLE `job`  (
   `area` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '工作地区',
   `time` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '全职/兼职',
   `contact` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系方式',
-  `maxsalary` int NULL DEFAULT NULL COMMENT '最高薪资',
-  `minsalary` int NULL DEFAULT NULL COMMENT '最低薪资',
+  `salary` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '薪资水平',
   `job_requirements` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '岗位职责',
   `job_require` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '任职要求',
   `welfare` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '福利',
@@ -68,9 +67,9 @@ CREATE TABLE `job`  (
 -- ----------------------------
 -- Records of job
 -- ----------------------------
-INSERT INTO `job` VALUES (1, 1, 1, '江苏省南京市玄武区玄武大道699号', '全职工作', '张小姐', 4000, 3000, '1.本科及以上学历，理工科类专业；\r\n2.具备熟练的英语口语交流及书写能力者优先；\r\n3.具备3年以上通信备电/工商业储能/UPS锂电工作经验；\r\n4.熟知不同应用场景对锂电产品的要求，熟悉锂电池工作原理、关键参数指标数据及BMS功能要求；\r\n5.具备解析锂电池相关国标/行标/企标的能力；\r\n6.具备良好的文案基础；\r\n7.能够适应不定期出差；', '1.锂电池产品的技术咨询、选型、推广方案制定，发布和维护；\r\n2.锂电池产品的投标技术应答；\r\n3.锂电池客户项目的产品生命周期管理；\r\n4.配合锂电研发团队的产品需求管理工作，新产品开发需求的导入和产品开发项目跟进；\r\n5.锂电池产品的内外部客户交流、培训；\r\n6.锂电池市场调研、分析及输出，制定产品路线、产品规划。', '五险一金，保吃，包住', '产品经理');
-INSERT INTO `job` VALUES (2, 2, 2, '高新区鹿山路199号', '全职工作', '李先生', 5000, 4000, '- 负责嵌入式软件相关调试及测试工作；\r\nResponsible for embedded software debugging and testing\r\n- 负责产品软件相关的现场调试工作；\r\nResponsible for product software field debugging\r\n- 负责多国安规的认证和调试工作，并协助测试部门完成认证工作\r\nResponsible for the certification of multi-national security code and debugging job, and assist the testing department to complete the certification work.\r\n- 完成领导交办的其他它工作\r\nOther jobs assigned by leaders', '熟练使用C语言，并对C++有一定了解；\r\nFamiliar with C language, and have a certain understanding of C++.\r\n熟悉DSP, FPGA, ARM等微型处理器的设计；\r\nFamiliar with DSP, FPGA, ARM and other microprocessors design.\r\n具备良好的沟通能力；\r\nGood communication ability.\r\n具有较强的工作责任心和事业心。', '五险一金，保吃，包住', '产品经理');
-INSERT INTO `job` VALUES (3, 2, 1, '福建省厦门市集美区', '兼职', '李先生', 3000, 2000, '负责公司的材料整理', '有相关工作经验，本科优先', '保吃，包住', '会计实习生');
+INSERT INTO `job` VALUES (1, 1, 1, '江苏省南京市玄武区玄武大道699号', '全职工作', '张小姐', '3000-4000', '1.本科及以上学历，理工科类专业；\r\n2.具备熟练的英语口语交流及书写能力者优先；\r\n3.具备3年以上通信备电/工商业储能/UPS锂电工作经验；\r\n4.熟知不同应用场景对锂电产品的要求，熟悉锂电池工作原理、关键参数指标数据及BMS功能要求；\r\n5.具备解析锂电池相关国标/行标/企标的能力；\r\n6.具备良好的文案基础；\r\n7.能够适应不定期出差；', '1.锂电池产品的技术咨询、选型、推广方案制定，发布和维护；\r\n2.锂电池产品的投标技术应答；\r\n3.锂电池客户项目的产品生命周期管理；\r\n4.配合锂电研发团队的产品需求管理工作，新产品开发需求的导入和产品开发项目跟进；\r\n5.锂电池产品的内外部客户交流、培训；\r\n6.锂电池市场调研、分析及输出，制定产品路线、产品规划。', '五险一金，保吃，包住', '产品经理');
+INSERT INTO `job` VALUES (2, 2, 2, '高新区鹿山路199号', '全职工作', '李先生', '4001-5000', '- 负责嵌入式软件相关调试及测试工作；\r\nResponsible for embedded software debugging and testing\r\n- 负责产品软件相关的现场调试工作；\r\nResponsible for product software field debugging\r\n- 负责多国安规的认证和调试工作，并协助测试部门完成认证工作\r\nResponsible for the certification of multi-national security code and debugging job, and assist the testing department to complete the certification work.\r\n- 完成领导交办的其他它工作\r\nOther jobs assigned by leaders', '熟练使用C语言，并对C++有一定了解；\r\nFamiliar with C language, and have a certain understanding of C++.\r\n熟悉DSP, FPGA, ARM等微型处理器的设计；\r\nFamiliar with DSP, FPGA, ARM and other microprocessors design.\r\n具备良好的沟通能力；\r\nGood communication ability.\r\n具有较强的工作责任心和事业心。', '五险一金，保吃，包住', '产品经理');
+INSERT INTO `job` VALUES (3, 2, 1, '福建省厦门市集美区', '兼职', '李先生', '3000-4000', '负责公司的材料整理', '有相关工作经验，本科优先', '保吃，包住', '会计实习生');
 
 -- ----------------------------
 -- Table structure for position
@@ -96,6 +95,29 @@ INSERT INTO `position` VALUES (7, '全栈工程师');
 INSERT INTO `position` VALUES (8, '产品经理/主管');
 INSERT INTO `position` VALUES (9, '软件实施员');
 INSERT INTO `position` VALUES (10, '售前/售后技术支持工程师');
+
+-- ----------------------------
+-- Table structure for record
+-- ----------------------------
+DROP TABLE IF EXISTS `record`;
+CREATE TABLE `record`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '投递id',
+  `uid` int NOT NULL COMMENT '投递用户id',
+  `cid` int NOT NULL COMMENT '投递公司id',
+  `rid` int NULL DEFAULT NULL COMMENT '简历id',
+  `time` datetime NULL DEFAULT NULL COMMENT '投递时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid`(`uid` ASC) USING BTREE,
+  INDEX `cid`(`cid` ASC) USING BTREE,
+  INDEX `rid`(`rid` ASC) USING BTREE,
+  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `record_ibfk_2` FOREIGN KEY (`cid`) REFERENCES `company` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `record_ibfk_3` FOREIGN KEY (`rid`) REFERENCES `resume` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of record
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for resume

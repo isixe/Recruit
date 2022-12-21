@@ -28,7 +28,7 @@ public class JobDaoImpl implements JobDao {
         int rs = 0;
         try {
             conn = utils.getConn(); //获取数据库连接
-            sql = "insert into job(id,company_id,position_id,area,time,contact,maxsalary,minsalary,job_requirements,job_require,welfare)values(?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into job(id,company_id,position_id,area,time,contact,salary,job_requirements,job_require,welfare)values(?,?,?,?,?,?,?,?,?,?)";
 
             pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
             pstmt.setInt(1, job.getId());
@@ -37,11 +37,10 @@ public class JobDaoImpl implements JobDao {
             pstmt.setString(4, job.getArea());
             pstmt.setString(5, job.getTime());
             pstmt.setString(6, job.getContact());
-            pstmt.setDouble(7, job.getMaxsalary());
-            pstmt.setDouble(8, job.getMinsalary());
-            pstmt.setString(9, job.getJob_requirements());
-            pstmt.setString(10, job.getJob_require());
-            pstmt.setString(11, job.getWelfare());
+            pstmt.setString(7, job.getSalary());
+            pstmt.setString(8, job.getJob_requirements());
+            pstmt.setString(9, job.getJob_require());
+            pstmt.setString(10, job.getWelfare());
             rs = pstmt.executeUpdate();//执行查询
 
         } catch (SQLException e) {
@@ -78,7 +77,7 @@ public class JobDaoImpl implements JobDao {
         int rs = 0;
         try {
             conn = utils.getConn(); //获取数据库连接
-            sql = "update job set company_id=?,position_id=?,area=?,time=?,contact=?,maxsalary=?,minsalary=?,job_requirements=?,job_require=?,welfare=? where id=?";
+            sql = "update job set company_id=?,position_id=?,area=?,time=?,contact=?,salary=?,job_requirements=?,job_require=?,welfare=? where id=?";
 
             pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
 
@@ -87,11 +86,10 @@ public class JobDaoImpl implements JobDao {
             pstmt.setString(3, job.getArea());
             pstmt.setString(4, job.getTime());
             pstmt.setString(5, job.getContact());
-            pstmt.setDouble(6, job.getMaxsalary());
-            pstmt.setDouble(7, job.getMinsalary());
-            pstmt.setString(8, job.getJob_requirements());
-            pstmt.setString(9, job.getJob_require());
-            pstmt.setString(10, job.getWelfare());
+            pstmt.setString(6, job.getSalary());
+            pstmt.setString(7, job.getJob_requirements());
+            pstmt.setString(8, job.getJob_require());
+            pstmt.setString(9, job.getWelfare());
             rs = pstmt.executeUpdate();//执行查询
 
         } catch (SQLException e) {
@@ -139,8 +137,7 @@ public class JobDaoImpl implements JobDao {
                 job.setArea(rs.getString("area"));
                 job.setTime(rs.getString("time"));
                 job.setContact(rs.getString("contact"));
-                job.setMaxsalary(rs.getInt("maxsalary"));
-                job.setMinsalary(rs.getInt("minsalary"));
+                job.setSalary(rs.getString("salary"));
                 job.setJob_requirements(rs.getString("job_requirements"));
                 job.setJob_require(rs.getString("job_require"));
                 job.setWelfare(rs.getString("welfare"));
@@ -178,8 +175,7 @@ public class JobDaoImpl implements JobDao {
                 job.setArea(rs.getString("area"));
                 job.setTime(rs.getString("time"));
                 job.setContact(rs.getString("contact"));
-                job.setMaxsalary(rs.getInt("maxsalary"));
-                job.setMinsalary(rs.getInt("minsalary"));
+                job.setSalary(rs.getString("salary"));
                 job.setJob_requirements(rs.getString("job_requirements"));
                 job.setJob_require(rs.getString("job_require"));
                 job.setWelfare(rs.getString("welfare"));

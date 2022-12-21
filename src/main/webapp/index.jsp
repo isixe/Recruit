@@ -131,8 +131,11 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="/pages/jobManagement.jsp">
+                                    <a href="${pageContext.request.contextPath}/pages/companyManagement.jsp">
                                         <li>信息管理</li>
+                                    </a>
+                                    <a href="${pageContext.request.contextPath}/pages/viewUserResumes.jsp">
+                                        <li>求职记录</li>
                                     </a>
                                 </ul>
                             </div>
@@ -197,7 +200,7 @@
                     <div class="information">
                         <div class="left">
                             <p>${job.title}</p>
-                            <p> ${job.minsalary}-${job.maxsalary}元/月</p>
+                            <p> ${job.salary}元/月</p>
                             <p>
                                 <span class="bg-info text-light">${job.welfare}</span>
                                     <%--              <span class="bg-danger text-light">保吃</span>--%>

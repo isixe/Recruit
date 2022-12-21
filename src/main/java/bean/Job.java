@@ -1,7 +1,5 @@
 package bean;
 
-import java.util.Date;
-
 public class Job {
     private int id;
     private int company_id;
@@ -9,8 +7,7 @@ public class Job {
     private String area;
     private String time; //工作类型 （全职/兼职）
     private String contact;
-    private int maxsalary;
-    private int minsalary;
+    private String salary;
     private String job_requirements;
     private String job_require;
     private String welfare;
@@ -64,20 +61,12 @@ public class Job {
         this.contact = contact;
     }
 
-    public int getMaxsalary() {
-        return maxsalary;
+    public String getSalary() {
+        return salary;
     }
 
-    public void setMaxsalary(int maxsalary) {
-        this.maxsalary = maxsalary;
-    }
-
-    public int getMinsalary() {
-        return minsalary;
-    }
-
-    public void setMinsalary(int minsalary) {
-        this.minsalary = minsalary;
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 
     public String getJob_requirements() {
@@ -121,8 +110,7 @@ public class Job {
                 ", area='" + area + '\'' +
                 ", time='" + time + '\'' +
                 ", contact='" + contact + '\'' +
-                ", maxsalary=" + maxsalary +
-                ", minsalary=" + minsalary +
+                ", salary='" + salary + '\'' +
                 ", job_requirements='" + job_requirements + '\'' +
                 ", job_require='" + job_require + '\'' +
                 ", welfare='" + welfare + '\'' +

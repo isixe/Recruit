@@ -67,11 +67,11 @@ public class UserServlet extends HttpServlet {
 
                 if (oldPassword.equals("") || newPassword1.equals("") || newPassword2.equals("")) {
                     PrintWriter out = response.getWriter();
-                    out.print("<script>alert('密码不能为空，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                    out.print("<script>alert('密码不能为空，请重新填写！'); window.location='pages/updateUserPassword.jsp' ;</script>");
                 } else {
                     if (!newPassword1.equals(newPassword2) || !password.equals(oldPassword)) {
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('密码错误，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                        out.print("<script>alert('密码错误，请重新填写！'); window.location='pages/updateUserPassword.jsp' ;</script>");
                     } else {
                         try {
                             result = userDao.setPassword(id, newPassword1);
@@ -83,7 +83,7 @@ public class UserServlet extends HttpServlet {
                             response.setHeader("refresh", "1;url=index.jsp");
                         } else {
                             PrintWriter out = response.getWriter();
-                            out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/updatePassword.jsp' ;</script>");
+                            out.print("<script>alert('修改失败，请重新填写！'); window.location='pages/updateUserPassword.jsp' ;</script>");
                         }
                     }
                 }

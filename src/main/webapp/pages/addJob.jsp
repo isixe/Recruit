@@ -23,43 +23,43 @@
 </head>
 <body>
 <div class="title">
-    <h2>企业信息注册(*为必填项)</h2>
+    <h2>发布招聘</h2>
 </div>
-<form id="fm">
+<form id="fm" action="${pageContext.request.contextPath}/addJobServlet" method="post">
     <div class="main">
-        <p class="short-input ue-clear">
-            <label>*用户名：</label>
-            <input name="username" type="text"/><span id="validate"></span>
-        </p>
-        <p class="short-input ue-clear">
-            <label>*密码：</label>
-            <input name="password" type="password" style="width:258px;height:27px;border:1px solid #C5D6E0"/>
-        </p>
-        <p class="short-input ue-clear">
-            <label>*公司名称：</label>
-            <input name="name" type="text"/>
+\        <p class="short-input ue-clear">
+            <label>标题</label>
+            <input name="title" type="text" style="width:258px;height:27px;border:1px solid #C5D6E0"/>
         </p>
         <p class="long-input ue-clear">
             <label>*公司地址：</label>
-            <input name="location" type="text"/>
+            <input name="area" type="text"/>
         </p>
         <p class="long-input ue-clear">
             <label>*联系方式：</label>
-            <input name="phone" type="text"/>
+            <input name="contact" type="text"/>
         </p>
         <p class="long-input ue-clear">
-            <label>电子邮箱：</label>
-            <input name="email" type="text"/>
+            <label>*岗位职责：</label>
+            <input name="requirement" type="text"/>
+        </p>
+        <p class="long-input ue-clear">
+            <label>*任职要求：</label>
+            <input name="require" type="text"/>
+        </p>
+        <p class="long-input ue-clear">
+            <label>*福利：</label>
+            <input name="welfalre" type="text"/>
         </p>
         <div class="short-input select ue-clear">
             <label>职位需求：</label>
-            <select name="trade" style="width:200px;height:30px;border:1px solid #C5D6E0">
-                <option>软件工程师</option>
-                <option>会计</option>
-                <option>文员</option>
-                <option>客户经理</option>
-                <option>网站策划</option>
-                <option>平面设计师</option>
+            <select name="position" style="width:200px;height:30px;border:1px solid #C5D6E0">
+                <option value="1">软件工程师</option>
+                <option value="2">会计</option>
+                <option value="3">文员</option>
+                <option value="4">客户经理</option>
+                <option value="5">网站策划</option>
+                <option value="6">平面设计师</option>
             </select>
         </div>
         <div class="short-input select ue-clear">
@@ -72,12 +72,6 @@
                 <option>7001-8000</option>
             </select>
         </div>
-        <p class="short-input ue-clear">
-            <label>企业简介：</label>
-            <textarea name="tip" placeholder="请输入内容"></textarea>
-        </p>
-        <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是否想要现在发布招聘信息：</label>
-        <input type="checkbox" name="isAuto" checked>
         <div class="btn ue-clear">
             <input style="height:50px;width:150px;background-color:#68B86C;color:white;border-radius:10px" type="submit" value="提交"/>
             <input style="height:50px;width:150px;background-color:#EFF6FA;color:black;border-radius:5px" type="reset" value="清空"/>
