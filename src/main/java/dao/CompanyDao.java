@@ -3,6 +3,8 @@ package dao;
 import bean.Company;
 import bean.User;
 
+import java.util.List;
+
 public interface CompanyDao {
     public int add(Company company) throws Exception;;
 
@@ -10,7 +12,9 @@ public interface CompanyDao {
 
     public int update(Company company) throws Exception;
 
-    public User findById(int id) throws Exception;
+    public Company findById(int cid) throws Exception;
 
-    public User findByName(String name) throws Exception;
+    public Company findByUserID(int uid) throws Exception;
+
+    public List<Company> findByName(String name) throws Exception;
 }

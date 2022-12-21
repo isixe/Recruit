@@ -22,12 +22,12 @@ public class addJobServlet extends HttpServlet {
         job.setArea(req.getParameter("area"));
         job.setTime(req.getParameter("time"));
         job.setContact(req.getParameter("contact"));
-        job.setMaxsalary(Double.parseDouble(req.getParameter("maxsalary")));
-        job.setMinsalary(Double.parseDouble(req.getParameter("minsalary")));
+        job.setMaxsalary(Integer.parseInt(req.getParameter("maxsalary")));
+        job.setMinsalary(Integer.parseInt(req.getParameter("minsalary")));
         job.setJob_requirements(req.getParameter("job_requirements"));
         job.setJob_require(req.getParameter("job_require"));
         job.setWelfare(req.getParameter("welfare"));
-
+        job.setTitle(req.getParameter("title"));
         System.out.println(job);
         JobService jobService = new JobServiceImpl();
         Integer count =jobService.addJob(job);

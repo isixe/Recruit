@@ -105,8 +105,10 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <li>我的发布</li>
-                                    <li>信息更改</li>
+                                    <a href="./pages/jobManagement.jsp">
+                                        <li>我的发布</li>
+                                        <li>信息更改</li>
+                                    </a>
                                 </ul>
                             </div>
                         </li>
@@ -147,7 +149,10 @@
 
             <!-- 发布职位按钮 -->
             <div class="right">
+                <c:if test="${requestScope.role=='company'}">
+
                 <button class="btn btn-warning shadow-sm"><span class="iconfont icon-jinggao"></span>发布招聘</button>
+                </c:if>
             </div>
             <!-- 发布职位按钮 -->
         </div>

@@ -3,11 +3,20 @@ package bean;
 import java.util.Date;
 
 public class Company {
+    private int id;
     private String name;
     private String area;
     private Date buildTime;
-    private String contact;
+    private int contact;
     private String desc;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -33,11 +42,11 @@ public class Company {
         this.buildTime = buildTime;
     }
 
-    public String getContact() {
+    public int getContact() {
         return contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(int contact) {
         this.contact = contact;
     }
 
@@ -52,10 +61,11 @@ public class Company {
     @Override
     public String toString() {
         return "Company{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", area='" + area + '\'' +
                 ", buildTime=" + buildTime +
-                ", contact='" + contact + '\'' +
+                ", contact=" + contact +
                 ", desc='" + desc + '\'' +
                 '}';
     }

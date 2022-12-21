@@ -9,11 +9,12 @@ public class Job {
     private String area;
     private String time; //工作类型 （全职/兼职）
     private String contact;
-    private double maxsalary;
-    private double minsalary;
+    private int maxsalary;
+    private int minsalary;
     private String job_requirements;
     private String job_require;
     private String welfare;
+    private String title;
 
     public int getId() {
         return id;
@@ -63,19 +64,19 @@ public class Job {
         this.contact = contact;
     }
 
-    public double getMaxsalary() {
+    public int getMaxsalary() {
         return maxsalary;
     }
 
-    public void setMaxsalary(double maxsalary) {
+    public void setMaxsalary(int maxsalary) {
         this.maxsalary = maxsalary;
     }
 
-    public double getMinsalary() {
+    public int getMinsalary() {
         return minsalary;
     }
 
-    public void setMinsalary(double minsalary) {
+    public void setMinsalary(int minsalary) {
         this.minsalary = minsalary;
     }
 
@@ -103,6 +104,14 @@ public class Job {
         this.welfare = welfare;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Job{" +
@@ -117,6 +126,7 @@ public class Job {
                 ", job_requirements='" + job_requirements + '\'' +
                 ", job_require='" + job_require + '\'' +
                 ", welfare='" + welfare + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

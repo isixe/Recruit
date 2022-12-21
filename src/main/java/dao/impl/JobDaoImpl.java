@@ -139,11 +139,12 @@ public class JobDaoImpl implements JobDao {
                 job.setArea(rs.getString("area"));
                 job.setTime(rs.getString("time"));
                 job.setContact(rs.getString("contact"));
-                job.setMaxsalary(rs.getDouble("maxsalary"));
-                job.setMinsalary(rs.getDouble("minsalary"));
+                job.setMaxsalary(rs.getInt("maxsalary"));
+                job.setMinsalary(rs.getInt("minsalary"));
                 job.setJob_requirements(rs.getString("job_requirements"));
                 job.setJob_require(rs.getString("job_require"));
                 job.setWelfare(rs.getString("welfare"));
+                job.setTitle(rs.getString("title"));
                 jobs.add(job);
             }
         } catch (SQLException e) {
@@ -177,11 +178,12 @@ public class JobDaoImpl implements JobDao {
                 job.setArea(rs.getString("area"));
                 job.setTime(rs.getString("time"));
                 job.setContact(rs.getString("contact"));
-                job.setMaxsalary(rs.getDouble("maxsalary"));
-                job.setMinsalary(rs.getDouble("minsalary"));
+                job.setMaxsalary(rs.getInt("maxsalary"));
+                job.setMinsalary(rs.getInt("minsalary"));
                 job.setJob_requirements(rs.getString("job_requirements"));
                 job.setJob_require(rs.getString("job_require"));
                 job.setWelfare(rs.getString("welfare"));
+                job.setTitle(rs.getString("title"));
                 jobs.add(job);
             }
         } catch (SQLException e) {
