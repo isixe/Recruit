@@ -35,7 +35,7 @@
 <br/>
 <a href="JavaScript:FindJobByCid(${job.company_id})">查询company_id=key的公司招聘的职业</a>
 <br/>
-<a href="${pageContext.request.contextPath}/pages/addjob.jsp" >添加job招聘</a>
+<a href="${pageContext.request.contextPath}/pages/addjobs.jsp" >添加job招聘</a>
 <br/>
 <a href=${pageContext.request.contextPath}/FindJobByCidServlet?company_id=1>company_id=1的公司招聘的职业</a>
 <br/>
