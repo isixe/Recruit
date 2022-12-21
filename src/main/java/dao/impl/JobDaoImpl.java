@@ -11,6 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: tiantong007
+ * Status: 已完成
+ */
 public class JobDaoImpl implements JobDao {
     private ResultSet rs;
     private Connection conn = null;
@@ -156,9 +160,45 @@ public class JobDaoImpl implements JobDao {
         return job;
     }
 
+    /**
+     * 工作的查询
+     * ===================================================================
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Job> findByName(String name) throws Exception {
-        return null;
+        utils = new ConnectionUtils();
+        conn = utils.getConn();
+        String s = "'%"+name+"%'";
+        List<Job> list = new ArrayList<>();
+        sql = "select * from job where title like "+s;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Job job =new Job();
+                job.setId(rs.getInt("id"));
+                job.setJob_require(rs.getString("job_require"));
+                job.setJob_requirements(rs.getString("job_requirements"));
+                job.setCompany_id(rs.getInt("company_id"));
+                job.setPosition_id(rs.getInt("position_id"));
+                job.setContact(rs.getString("contact"));
+                job.setSalary(rs.getString("salary"));
+                job.setArea(rs.getString("area"));
+                job.setTime(rs.getString("time"));
+                job.setWelfare(rs.getString("welfare"));
+                job.setTitle(rs.getString("title"));
+                jobs.add(job);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return jobs;
     }
 
     /**

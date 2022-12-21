@@ -14,6 +14,9 @@
 <%
     String username = null;
     String sid = null;
+    String keyword = null;
+    keyword = request.getParameter("search");
+    request.setAttribute("keyword",keyword);
     //获取登录传递的Session变量（用户id, 用户名）
     username = (String) request.getSession().getAttribute("username");
     request.setAttribute("username", username);
@@ -36,22 +39,29 @@
                     response.sendRedirect(path + "/pages/admin.jsp");
                     break;
                 case "company": //获取公司的工作
-                    //根据用户id获取公司id
-                    int cid = 0;
-                    CompanyDao companyDao = new CompanyDaoImpl();
-                    Company company = null;
-                    try {
-                        company = companyDao.findByUserID(id);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //获取工作列表
                     List<Job> jobs = new ArrayList<>();
                     JobService service = new JobServiceImpl();
-                    assert company != null;
-                    cid = company.getId();
-                    request.getSession().setAttribute("cid",cid);
-                    jobs = service.findByCid(cid);
+
+                    if (keyword == null) {
+                        //根据用户id获取公司id
+                        int cid = 0;
+                        CompanyDao companyDao = new CompanyDaoImpl();
+                        Company company = null;
+                        try {
+                            company = companyDao.findByUserID(id);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        //获取工作列表
+                        assert company != null;
+                        cid = company.getId();
+                        request.getSession().setAttribute("cid", cid);
+                        jobs = service.findByCid(cid);
+                    } else {
+                        jobs = service.findByName(keyword);
+                        System.out.println(jobs.size());
+                    }
+
                     request.setAttribute("jobs", jobs);
                     break;
             }
@@ -164,9 +174,9 @@
             <div class="center">
                 <div class="search">
                     <div class="input">
-                        <input type="text">
+                        <input type="text" id="input-search" value="${requestScope.keyword}">
                     </div>
-                    <p>搜职位</p>
+                    <p><a href="JavaScript:search();" style="color: #fff;text-decoration: none">搜职位</a></p>
                 </div>
                 <div class="job">
                     <span>收营员</span>
@@ -366,6 +376,16 @@
     function deleteJob(id) {
         if (window.confirm("确定要删除这个工作吗?")) {
             location.href = "${pageContext.request.contextPath}/job?action=delete&jobid=" + id;
+        }
+    }
+
+    function search() {
+        let search = document.getElementById("input-search");
+        let keyword = search.value;
+        if (keyword !== '') {
+            location.href = "${pageContext.request.contextPath}/index.jsp?search=" + keyword;
+        }else {
+            location.href = "${pageContext.request.contextPath}/index.jsp";
         }
     }
 </script>

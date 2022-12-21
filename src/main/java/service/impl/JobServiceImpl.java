@@ -6,6 +6,7 @@ import dao.impl.JobDaoImpl;
 import service.JobService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class JobServiceImpl implements JobService {
     private JobDao jobDao = (JobDao) new JobDaoImpl();
@@ -31,6 +32,12 @@ public class JobServiceImpl implements JobService {
     public Integer updateJob(Job job) {
         return jobDao.update(job);
     }
+
+    @Override
+    public List<Job> findByName(String keyword) throws Exception {
+        return jobDao.findByName(keyword);
+    }
+
     @Override
     public Integer addJob(Job job) {
         return jobDao.add(job);
