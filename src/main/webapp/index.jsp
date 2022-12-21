@@ -16,7 +16,7 @@
     String sid = null;
     String keyword = null;
     keyword = request.getParameter("search");
-    request.setAttribute("keyword",keyword);
+    request.setAttribute("keyword", keyword);
     //获取登录传递的Session变量（用户id, 用户名）
     username = (String) request.getSession().getAttribute("username");
     request.setAttribute("username", username);
@@ -34,41 +34,60 @@
             request.getSession().setAttribute("role", role);
             request.setAttribute("role", role);
             String path = request.getContextPath();
+            JobService service = new JobServiceImpl();
+            List<Job> jobs = new ArrayList<>();
             switch (role) {
                 case "admin":  //后台管理
                     response.sendRedirect(path + "/pages/admin.jsp");
                     break;
                 case "company": //获取公司的工作
-                    List<Job> jobs = new ArrayList<>();
-                    JobService service = new JobServiceImpl();
+                    int cid = 0;
+                    //根据用户id获取公司id
+                    CompanyDao companyDao = new CompanyDaoImpl();
+                    Company company = null;
+                    try {
+                        company = companyDao.findByUserID(id);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //获取工作列表
+                    assert company != null;
+                    cid = company.getId();
+                    request.getSession().setAttribute("cid", cid);
 
                     if (keyword == null) {
-                        //根据用户id获取公司id
-                        int cid = 0;
-                        CompanyDao companyDao = new CompanyDaoImpl();
-                        Company company = null;
-                        try {
-                            company = companyDao.findByUserID(id);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        //获取工作列表
-                        assert company != null;
-                        cid = company.getId();
-                        request.getSession().setAttribute("cid", cid);
                         jobs = service.findByCid(cid);
                     } else {
-                        jobs = service.findByName(keyword);
-                        System.out.println(jobs.size());
+                        jobs = service.findByNameAndCid(keyword, cid);
                     }
-
+                    request.setAttribute("jobs", jobs);
+                    break;
+                case "user":
+                    if (keyword == null) {
+                        keyword = "";
+                    }
+                    jobs = service.findByName(keyword);
                     request.setAttribute("jobs", jobs);
                     break;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+    }else {
+        if (keyword == null) {
+            keyword = "";
+        }
+        JobService service = new JobServiceImpl();
+        List<Job> jobs = null;
+        try {
+            jobs = service.findByName(keyword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("jobs", jobs);
     }
+
+
 %>
 <html>
 <head>
@@ -303,29 +322,38 @@
         <div class="recruit">
             <div class="wrapper">
                 <!-- 信息 -->
-                <div class="information">
-                    <div class="left">
-                        <p>190/天上一休一连锁超市急招营业员</p>
-                        <p>4000-5000 元/月</p>
-                        <p>
-                            <span class="bg-info text-light">五险一金</span>
-                            <span class="bg-danger text-light">保吃</span>
-                            <span class="bg-success text-light">包住</span>
-                        </p>
-                    </div>
-                    <div class="center">
-                        <div class="top">
-                            <span>工作时间：全职工作&emsp;&emsp;&emsp;工作类型：收银员</span>
+                <c:forEach items="${requestScope.jobs }" var="job">
+                    <!-- 信息 -->
+                    <div class="information">
+                        <div class="left">
+                            <p>${job.title}</p>
+                            <p> ${job.salary}元/月</p>
+                            <p>
+                                <span class="bg-info text-light">${job.welfare}</span>
+                                    <%--              <span class="bg-danger text-light">保吃</span>--%>
+                                    <%--              <span class="bg-success text-light">包住</span>--%>
+                            </p>
                         </div>
-                        <div class="buttom">
-                            <span>招聘人数：10人&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;工作地点：海淀和春路</span>
+                        <div class="center">
+                            <div class="top">
+                                <span>工作时间：${job.time}&emsp;&emsp;&emsp;工作类型：${job.position_id}</span><br/>
+                                <span>联系人：${job.contact}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;工作地点：${job.area}</span>
+                            </div>
+                            <div class="buttom">
+                                    <%--                            <span>岗位职责：${job.job_requirements}</span><br/>--%>
+                                    <%--                            <span>任职要求：${job.job_require}</span>--%>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <a href="${pageContext.request.contextPath}/pages/updateJob.jsp?jobid=${job.id}">
+                                <button class="btn btn-primary">修改</button>
+                            </a>
+                            <a href="JavaScript:deleteJob(${job.id})">
+                                <button class="btn btn-primary">删除</button>
+                            </a>
                         </div>
                     </div>
-                    <div class="right">
-                        <button class="btn btn-primary">报名参加</button>
-                    </div>
-                </div>
-                <!-- 信息 -->
+                </c:forEach>
 
                 <!-- 分页符 -->
                 <div class="pagination">
@@ -384,7 +412,7 @@
         let keyword = search.value;
         if (keyword !== '') {
             location.href = "${pageContext.request.contextPath}/index.jsp?search=" + keyword;
-        }else {
+        } else {
             location.href = "${pageContext.request.contextPath}/index.jsp";
         }
     }

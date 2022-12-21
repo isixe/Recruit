@@ -17,25 +17,33 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public ArrayList<Job> findByCid(int company_id) {
+    public ArrayList<Job> findByCid(int company_id) throws Exception {
         return jobDao.findByCid(company_id);
     }
+
     @Override
-    public ArrayList<Job> findByPid(int position_id) {
+    public ArrayList<Job> findByPid(int position_id) throws Exception {
         return jobDao.findByPid(position_id);
     }
+
     @Override
     public Integer delete(Integer id) {
         return jobDao.delete(id);
     }
+
     @Override
     public Integer updateJob(Job job) {
         return jobDao.update(job);
     }
 
     @Override
-    public List<Job> findByName(String keyword) throws Exception {
-        return jobDao.findByName(keyword);
+    public List<Job> findByNameAndCid(String keyword, int cid) throws Exception {
+        return jobDao.findByNameAndCompanyId(keyword, cid);
+    }
+
+    @Override
+    public List<Job> findByName(String title) throws Exception {
+        return jobDao.findByName(title);
     }
 
     @Override

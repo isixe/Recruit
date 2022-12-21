@@ -16,10 +16,10 @@ public interface JobDao {
     public Job findById(int id) throws Exception;
 
     public List<Job> findByName(String name) throws Exception;
-    //根据公司id查询job
-    public ArrayList<Job> findByCid(int company_id);
-    //根据职业id查询job
-    public ArrayList<Job> findByPid(int position_id);
-    //查询所有job
-    //public List<Job> findAllJob(Job job);
+
+    public ArrayList<Job> findByCid(int company_id) throws Exception;
+
+    public ArrayList<Job> findByPid(int position_id) throws Exception;
+
+    public List<Job> findByNameAndCompanyId(String name,int cid) throws Exception;
 }

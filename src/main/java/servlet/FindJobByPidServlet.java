@@ -16,13 +16,18 @@ import java.util.ArrayList;
 public class FindJobByPidServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            JobService jobService = new JobServiceImpl();
-            int position_id = Integer.parseInt(req.getParameter("position_id"));
-            ArrayList<Job> jobs = jobService.findByPid(position_id);
-            System.out.println(jobs);
-            req.setAttribute("jobs", jobs);
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        JobService jobService = new JobServiceImpl();
+        int position_id = Integer.parseInt(req.getParameter("position_id"));
+        ArrayList<Job> jobs = null;
+        try {
+            jobs = jobService.findByPid(position_id);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        System.out.println(jobs);
+        req.setAttribute("jobs", jobs);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
