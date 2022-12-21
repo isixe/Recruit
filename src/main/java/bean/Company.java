@@ -6,9 +6,8 @@ public class Company {
     private int id;
     private String name;
     private String area;
-    private Date buildTime;
-    private int contact;
     private String desc;
+    private int uid;
 
     public int getId() {
         return id;
@@ -34,22 +33,6 @@ public class Company {
         this.area = area;
     }
 
-    public Date getBuildTime() {
-        return buildTime;
-    }
-
-    public void setBuildTime(Date buildTime) {
-        this.buildTime = buildTime;
-    }
-
-    public int getContact() {
-        return contact;
-    }
-
-    public void setContact(int contact) {
-        this.contact = contact;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -58,15 +41,22 @@ public class Company {
         this.desc = desc;
     }
 
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", area='" + area + '\'' +
-                ", buildTime=" + buildTime +
-                ", contact=" + contact +
                 ", desc='" + desc + '\'' +
+                ", uid=" + uid +
                 '}';
     }
 }

@@ -60,9 +60,8 @@ public class CompanyDaoImpl implements CompanyDao {
                 company.setId(rs.getInt("id"));
                 company.setName(rs.getString("name"));
                 company.setArea(rs.getString("area"));
-                company.setContact(rs.getInt("contact"));
                 company.setDesc(rs.getString("desc"));
-                company.setBuildTime(rs.getDate("buildTime"));
+                company.setUid(rs.getInt("uid"));
             }
 //            System.out.println("======================");
 //            System.out.println(user.toString());

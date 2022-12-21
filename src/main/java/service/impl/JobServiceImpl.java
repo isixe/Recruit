@@ -11,6 +11,11 @@ public class JobServiceImpl implements JobService {
     private JobDao jobDao = (JobDao) new JobDaoImpl();
 
     @Override
+    public Job findById(int jobid) throws Exception {
+        return jobDao.findById(jobid);
+    }
+
+    @Override
     public ArrayList<Job> findByCid(int company_id) {
         return jobDao.findByCid(company_id);
     }

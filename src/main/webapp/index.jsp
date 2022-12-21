@@ -49,7 +49,9 @@
                     List<Job> jobs = new ArrayList<>();
                     JobService service = new JobServiceImpl();
                     assert company != null;
-                    jobs = service.findByCid(company.getId());
+                    cid = company.getId();
+                    request.getSession().setAttribute("cid",cid);
+                    jobs = service.findByCid(cid);
                     request.setAttribute("jobs", jobs);
                     break;
             }
@@ -218,7 +220,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <a href="{pageContext.request.contextPath}/updateJobServlet?id=${job.id})">
+                            <a href="${pageContext.request.contextPath}/pages/updateJob.jsp?jobid=${job.id}">
                                 <button class="btn btn-primary">修改</button>
                             </a>
                             <a href="JavaScript:deleteJob(${job.id})">
@@ -362,8 +364,8 @@
 </div>
 <script type="text/javascript">
     function deleteJob(id) {
-        if (window.confirm("确定要删除这条记录吗?" + id)) {
-            location.href = "${pageContext.request.contextPath}/deleteJobServlet?id=" + id;
+        if (window.confirm("确定要删除这个工作吗?")) {
+            location.href = "${pageContext.request.contextPath}/job?action=delete&jobid=" + id;
         }
     }
 </script>

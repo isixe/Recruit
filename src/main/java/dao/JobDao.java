@@ -13,9 +13,9 @@ public interface JobDao {
 
     public Integer update(Job job) ;
 
-    public User findById(int id) throws Exception;
+    public Job findById(int id) throws Exception;
 
-    public User findByName(String name) throws Exception;
+    public List<Job> findByName(String name) throws Exception;
     //根据公司id查询job
     public ArrayList<Job> findByCid(int company_id);
     //根据职业id查询job

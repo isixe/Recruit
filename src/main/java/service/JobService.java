@@ -5,6 +5,7 @@ import bean.Job;
 import java.util.ArrayList;
 
 public interface JobService {
+    public Job findById(int jobid) throws Exception;
     public ArrayList<Job> findByCid(int company_id);
     public ArrayList<Job> findByPid(int position_id);
     public Integer delete(Integer id);

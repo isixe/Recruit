@@ -1,7 +1,6 @@
 package dao.impl;
 
 import bean.Job;
-import bean.User;
 import dao.JobDao;
 import utils.ConnectionUtils;
 
@@ -17,70 +16,25 @@ public class JobDaoImpl implements JobDao {
     private Connection conn = null;
     private String sql;
     private PreparedStatement pstmt;
-
+    private ConnectionUtils utils;
     private ArrayList<Job> jobs = new ArrayList<>();
 
-    // TODO: 2022/12/15 工作招聘增删改
-
+    /**
+     * 工作的增加
+     * ===================================================================
+     *
+     * @param job
+     * @return Integer
+     */
     @Override
     public Integer add(Job job) {
-        ConnectionUtils utils = new ConnectionUtils();
-        int rs = 0;
+        utils = new ConnectionUtils();
+        int result = 0;
         try {
             conn = utils.getConn(); //获取数据库连接
-            sql = "insert into job(id,company_id,position_id,area,time,contact,salary,job_requirements,job_require,welfare)values(?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into job(company_id,position_id,area,time,contact,salary,job_requirements,job_require,welfare,title)values(?,?,?,?,?,?,?,?,?,?)";
 
             pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
-            pstmt.setInt(1, job.getId());
-            pstmt.setInt(2, job.getCompany_id());
-            pstmt.setInt(3, job.getPosition_id());
-            pstmt.setString(4, job.getArea());
-            pstmt.setString(5, job.getTime());
-            pstmt.setString(6, job.getContact());
-            pstmt.setString(7, job.getSalary());
-            pstmt.setString(8, job.getJob_requirements());
-            pstmt.setString(9, job.getJob_require());
-            pstmt.setString(10, job.getWelfare());
-            rs = pstmt.executeUpdate();//执行查询
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        if (rs > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public Integer delete(Integer id) {
-        ConnectionUtils utils = new ConnectionUtils();
-        sql = "delete from job where id=?";
-        try{
-            conn=utils.getConn();//获取数据库连接
-            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
-            pstmt.setInt(1, id); //设置sql语句的值
-            pstmt.executeUpdate();//执行查询
-            return 1;
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-
-
-    @Override
-    public Integer update(Job job)  {
-        ConnectionUtils utils = new ConnectionUtils();
-        int rs = 0;
-        try {
-            conn = utils.getConn(); //获取数据库连接
-            sql = "update job set company_id=?,position_id=?,area=?,time=?,contact=?,salary=?,job_requirements=?,job_require=?,welfare=? where id=?";
-
-            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
-
             pstmt.setInt(1, job.getCompany_id());
             pstmt.setInt(2, job.getPosition_id());
             pstmt.setString(3, job.getArea());
@@ -90,31 +44,130 @@ public class JobDaoImpl implements JobDao {
             pstmt.setString(7, job.getJob_requirements());
             pstmt.setString(8, job.getJob_require());
             pstmt.setString(9, job.getWelfare());
-            rs = pstmt.executeUpdate();//执行查询
+            pstmt.setString(10,job.getTitle());
+            result = pstmt.executeUpdate();//执行查询
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt, rs);
         }
-        if (rs > 0) {
-            System.out.println("更新成功");
+        if (result > 0) {
             return 1;
         } else {
-            System.out.println("更新失败");
             return 0;
         }
     }
 
+    /**
+     * 工作的删除
+     * ===================================================================
+     *
+     * @param id
+     * @return Integer
+     */
     @Override
-    public User findById(int id) throws Exception {
-        return null;
+    public Integer delete(Integer id) {
+        int result = 0;
+        utils = new ConnectionUtils();
+        sql = "delete from job where id=?";
+        try{
+            conn=utils.getConn();//获取数据库连接
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+            pstmt.setInt(1, id); //设置sql语句的值
+            result = pstmt.executeUpdate();//执行查询
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
+    }
+
+    /**
+     * 工作的更新
+     * ===================================================================
+     *
+     * @param job
+     * @return Integer
+     */
+    @Override
+    public Integer update(Job job)  {
+        utils = new ConnectionUtils();
+        int result = 0; 
+        try {
+            conn = utils.getConn(); //获取数据库连接
+            sql = "update job set area=?,contact=?,salary=?,job_requirements=?,job_require=?,welfare=?,title=? where id=?";
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+
+            pstmt.setString(1, job.getArea());
+            pstmt.setString(2, job.getContact());
+            pstmt.setString(3, job.getSalary());
+            pstmt.setString(4, job.getJob_requirements());
+            pstmt.setString(5, job.getJob_require());
+            pstmt.setString(6, job.getWelfare());
+            pstmt.setString(7, job.getTitle());
+            pstmt.setInt(8,job.getId());
+            result = pstmt.executeUpdate();//执行查询
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
+    }
+
+    /**
+     * 根据id查询工作
+     * ===================================================================
+     *
+     * @param id
+     * @return Job
+     * @throws Exception
+     */
+    @Override
+    public Job findById(int id) throws Exception {
+        Job job =new Job();
+        utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "select * from job where id = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, Integer.toString(id));
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                job.setId(rs.getInt("id"));
+                job.setJob_require(rs.getString("job_require"));
+                job.setJob_requirements(rs.getString("job_requirements"));
+                job.setCompany_id(rs.getInt("company_id"));
+                job.setPosition_id(rs.getInt("position_id"));
+                job.setContact(rs.getString("contact"));
+                job.setSalary(rs.getString("salary"));
+                job.setArea(rs.getString("area"));
+                job.setTime(rs.getString("time"));
+                job.setWelfare(rs.getString("welfare"));
+                job.setTitle(rs.getString("title"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return job;
     }
 
     @Override
-    public User findByName(String name) throws Exception {
+    public List<Job> findByName(String name) throws Exception {
         return null;
     }
 
-    //根据公司id查询job
+    /**
+     * 根据公司id查找所有工作
+     * ===================================================================
+     *
+      * @param company_id
+     * @return ArrayList
+     */
     @Override
     public ArrayList<Job> findByCid(int company_id) {
         ConnectionUtils utils = new ConnectionUtils();
