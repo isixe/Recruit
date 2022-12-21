@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 21/12/2022 12:13:53
+ Date: 21/12/2022 17:45:22
 */
 
 SET NAMES utf8mb4;
@@ -62,7 +62,7 @@ CREATE TABLE `job`  (
   INDEX `position_id`(`position_id` ASC) USING BTREE,
   CONSTRAINT `job_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `job_ibfk_2` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of job
@@ -70,6 +70,7 @@ CREATE TABLE `job`  (
 INSERT INTO `job` VALUES (1, 1, 1, '江苏省南京市玄武区玄武大道699号', '全职工作', '张小姐', '3000-4000', '1.本科及以上学历，理工科类专业；\r\n2.具备熟练的英语口语交流及书写能力者优先；\r\n3.具备3年以上通信备电/工商业储能/UPS锂电工作经验；\r\n4.熟知不同应用场景对锂电产品的要求，熟悉锂电池工作原理、关键参数指标数据及BMS功能要求；\r\n5.具备解析锂电池相关国标/行标/企标的能力；\r\n6.具备良好的文案基础；\r\n7.能够适应不定期出差；', '1.锂电池产品的技术咨询、选型、推广方案制定，发布和维护；\r\n2.锂电池产品的投标技术应答；\r\n3.锂电池客户项目的产品生命周期管理；\r\n4.配合锂电研发团队的产品需求管理工作，新产品开发需求的导入和产品开发项目跟进；\r\n5.锂电池产品的内外部客户交流、培训；\r\n6.锂电池市场调研、分析及输出，制定产品路线、产品规划。', '五险一金，保吃，包住', '产品经理');
 INSERT INTO `job` VALUES (2, 2, 2, '高新区鹿山路199号', '全职工作', '李先生', '4001-5000', '- 负责嵌入式软件相关调试及测试工作；\r\nResponsible for embedded software debugging and testing\r\n- 负责产品软件相关的现场调试工作；\r\nResponsible for product software field debugging\r\n- 负责多国安规的认证和调试工作，并协助测试部门完成认证工作\r\nResponsible for the certification of multi-national security code and debugging job, and assist the testing department to complete the certification work.\r\n- 完成领导交办的其他它工作\r\nOther jobs assigned by leaders', '熟练使用C语言，并对C++有一定了解；\r\nFamiliar with C language, and have a certain understanding of C++.\r\n熟悉DSP, FPGA, ARM等微型处理器的设计；\r\nFamiliar with DSP, FPGA, ARM and other microprocessors design.\r\n具备良好的沟通能力；\r\nGood communication ability.\r\n具有较强的工作责任心和事业心。', '五险一金，保吃，包住', '产品经理');
 INSERT INTO `job` VALUES (3, 2, 1, '福建省厦门市集美区', '兼职', '李先生', '3000-4000', '负责公司的材料整理', '有相关工作经验，本科优先', '保吃，包住', '会计实习生');
+INSERT INTO `job` VALUES (11, 2, 1, 'asa', '兼职', '李先生', '4001-5000', 'aa', 'aa', '五险一金', 'Java 实习生');
 
 -- ----------------------------
 -- Table structure for position
@@ -183,13 +184,13 @@ CREATE TABLE `user`  (
   `register_date` datetime NULL DEFAULT NULL COMMENT '注册时间',
   `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'user',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, 'admin', '123456', NULL, '男', NULL, '', '', NULL, 'admin');
-INSERT INTO `user` VALUES (2, 'user', '123456', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-06 19:58:28', 'user');
+INSERT INTO `user` VALUES (2, 'user', '123456', NULL, '女', 21, '11151111114', '127317456@qq.com', '2022-12-06 19:58:28', 'user');
 INSERT INTO `user` VALUES (3, 'qwe', '123', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-07 19:59:51', 'user');
 INSERT INTO `user` VALUES (4, 'q', '111', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-06 20:07:00', 'company');
 INSERT INTO `user` VALUES (9, 'aa', '123', NULL, '男', 21, '11111111113', '122313456@qq.com', '2022-12-15 00:00:00', 'company');
