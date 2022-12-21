@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Author: Exixi
+ * Status: 已完成
+ */
 public class UserDaoImpl implements UserDao {
     private ConnectionUtils utils;
     private ResultSet rs;

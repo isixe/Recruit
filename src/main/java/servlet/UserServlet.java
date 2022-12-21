@@ -8,43 +8,29 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.UserService;
-import service.impl.UserServiceImpl;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "UserServlet", value = "/user")
 public class UserServlet extends HttpServlet {
+    private User user = new User();
+    private int result = 0;
+    private int id;
+    private final UserDao userDao = new UserDaoImpl();
+
     public UserServlet() {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        int result = 0;
-        String sid = null;
-        User user = new User();
-        UserDao userDao = new UserDaoImpl();
-        UserService service = new UserServiceImpl();
-
         String action = request.getParameter("action");
-        sid = (String) request.getSession().getAttribute("userid");
-        int id = Integer.parseInt(sid);
+        String sid = (String) request.getSession().getAttribute("userid");
+        id = Integer.parseInt(sid);
 
         switch (action) {
             case "update": //用户资料更新
-                user.setName(request.getParameter("name"));
-                user.setAge(Integer.parseInt(request.getParameter("age")));
-                user.setEmail(request.getParameter("email"));
-                user.setPhone(request.getParameter("phone"));
-                user.setSex(request.getParameter("sex"));
-                user.setId(id);
-                try {
-                    result = userDao.update(user);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                result = updateUserData(request);
                 if (result > 0) {
                     response.getWriter().write("修改成功，正在跳转主页！");
                     response.setHeader("refresh", "1;url=index.jsp");
@@ -110,5 +96,20 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
+    }
+
+    public int updateUserData(HttpServletRequest request) {
+        user.setName(request.getParameter("name"));
+        user.setAge(Integer.parseInt(request.getParameter("age")));
+        user.setEmail(request.getParameter("email"));
+        user.setPhone(request.getParameter("phone"));
+        user.setSex(request.getParameter("sex"));
+        user.setId(id);
+        try {
+            result = userDao.update(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
