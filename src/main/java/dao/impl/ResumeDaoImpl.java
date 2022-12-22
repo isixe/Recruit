@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResumeDaoImpl implements ResumeDao {
     private ResultSet rs;
@@ -161,6 +162,64 @@ public class ResumeDaoImpl implements ResumeDao {
             utils.closeAll(pstmt, rs);
         }
         return resume;
+    }
+
+    @Override
+    public int findTotalCount(String status) {
+        ConnectionUtils utils = new ConnectionUtils();
+        try {
+            conn = utils.getConn();
+            sql = "select count(*) from resume where status = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, status);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            return count;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return -1;
+    }
+
+    @Override
+    public List<Resume> findByPage(int start, int rows, String status) {
+        ConnectionUtils utils = new ConnectionUtils();
+        try {
+            conn = utils.getConn();
+            sql = "select * from resume where status = ? limit ?, ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, status);
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, rows);
+            rs = pstmt.executeQuery();
+            resumes.clear();
+            while (rs.next()) {
+                Resume resume = new Resume();
+                resume.setId(rs.getInt("id"));
+                resume.setName(rs.getString("name"));
+                resume.setCity(rs.getString("city"));
+                resume.setYear(rs.getString("year"));
+                resume.setDatetime(rs.getString("datetime"));
+                resume.setEducation(rs.getString("education"));
+                resume.setEmail(rs.getString("email"));
+                resume.setSchool(rs.getString("school"));
+                resume.setSex(rs.getString("sex"));
+                resume.setStatus(rs.getString("status"));
+                resume.setPhone(rs.getString("phone"));
+                resume.setPicture(rs.getString("picture"));
+                resume.setUserid(rs.getInt("userid"));
+                resumes.add(resume);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return resumes;
     }
 }
 

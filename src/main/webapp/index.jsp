@@ -165,7 +165,7 @@
                                     <a href="${pageContext.request.contextPath}/pages/companyManagement.jsp">
                                         <li>信息管理</li>
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/pages/viewUserResumes.jsp">
+                                    <a href="${pageContext.request.contextPath}/findResumeByPageServlet?status=待处理">
                                         <li>求职记录</li>
                                     </a>
                                 </ul>

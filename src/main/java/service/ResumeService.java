@@ -1,5 +1,6 @@
 package service;
 
+import bean.Page;
 import bean.Resume;
 
 import java.util.ArrayList;
@@ -18,4 +19,5 @@ public interface ResumeService {
 
     public Resume findByUserId(int id);
 
+    Page<Resume> findResumeByPage(int currentPage, int rows, String status);
 }
