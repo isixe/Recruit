@@ -7,12 +7,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
+    String keyword = null;
+    List<User> users = new ArrayList<>();
     UserDao userDao = new UserDaoImpl();
-    List<User> users = new ArrayList<User>();
-    try {
-        users = userDao.findByName("");
-    } catch (Exception e) {
-        e.printStackTrace();
+
+    keyword = request.getParameter("search");
+    if (keyword == null) {
+        keyword = "";
+    }
+    request.setAttribute("keyword", keyword);
+
+    if (keyword.equals("")) {
+        try {
+            users = userDao.findByName("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } else {
+        try {
+            users = userDao.findByName(keyword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     request.setAttribute("users", users);
 %>
@@ -47,7 +63,7 @@
                     <span>Admin</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/pages/login.jsp">退出</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/pages/exit.jsp">退出</a>
                 </div>
             </li>
         </ul>
@@ -75,6 +91,16 @@
                 <a href="#" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
             </div>
         </div>
+        <div class="search">
+            <div class="input">
+                <input style="width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
+                       value="${requestScope.keyword}">
+                <a href="JavaScript:search();"
+                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜
+                    索</a>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -87,6 +113,7 @@
                             <th>年龄</th>
                             <th>电话</th>
                             <th>邮箱</th>
+                            <th>角色</th>
                             <th class="text-center" colspan="2">操作</th>
                         </tr>
                         </thead>
@@ -97,18 +124,23 @@
                             <tr>
                                 <td>${user.id}</td>
                                 <td><img width="28" height="28" src="../static/images/user.jpg"
-                                         class="rounded-circle m-r-5" alt="">${requestScope.user.name}
+                                         class="rounded-circle m-r-5" alt="">${user.name}
                                 </td>
                                 <td>${user.sex}</td>
                                 <td>${user.age}</td>
                                 <td>${user.phone}</td>
                                 <td>${user.email}</td>
+                                <td>${user.role}</td>
                                 <td class="text-center">
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin?action=delete&id=${user.id}" data-toggle="modal"
+                                    <a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/pages/adminUpdateUser.jsp?userid=${user.id}"
+                                       data-toggle="modal"
                                        data-target="#delete_patient">修改</a>
                                 </td>
                                 <td class="text-center">
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin?action=delete&id=${user.id}" data-toggle="modal"
+                                    <a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/admin?action=delete&function=user&id=${user.id}"
+                                       data-toggle="modal"
                                        data-target="#delete_patient">删除</a>
                                 </td>
                             </tr>
@@ -138,6 +170,17 @@
 </div>
 
 <div class="sidebar-overlay" data-reff=""></div>
+<script>
+    function search() {
+        let search = document.getElementById("input-search");
+        let keyword = search.value;
+        if (keyword !== '') {
+            location.href = "${pageContext.request.contextPath}/pages/admin.jsp?search=" + keyword;
+        } else {
+            location.href = "${pageContext.request.contextPath}/pages/admin.jsp";
+        }
+    }
+</script>
 <script src="../static/vendor/jquery.3.4.1.js"></script>
 <script src="../static/js/popper.min.js"></script>
 <script src="../static/vendor/bootstrap.min.js"></script>

@@ -197,13 +197,6 @@
                     </div>
                     <p><a href="JavaScript:search();" style="color: #fff;text-decoration: none">搜职位</a></p>
                 </div>
-                <div class="job">
-                    <span>收营员</span>
-                    <span>理货员</span>
-                    <span>服务员</span>
-                    <span>店员</span>
-                    <span>营业员</span>
-                </div>
             </div>
             <!-- 中间搜索框，以及职业 -->
 

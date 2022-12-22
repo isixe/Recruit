@@ -208,6 +208,7 @@ public class UserDaoImpl implements UserDao {
                     user.setAge(rs.getInt(6));
                     user.setPhone(rs.getString(7));
                     user.setEmail(rs.getString(8));
+                    user.setRole(rs.getString("role"));
                     list.add(user);
                 }
             }
