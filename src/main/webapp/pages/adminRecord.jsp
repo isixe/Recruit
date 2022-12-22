@@ -3,13 +3,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="bean.User" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.Record" %>
+<%@ page import="dao.RecordDao" %>
+<%@ page import="dao.impl.RecordDaoImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
     String keyword = null;
-    List<User> users = new ArrayList<>();
-    UserDao userDao = new UserDaoImpl();
+    List<Record> records = new ArrayList<>();
+    RecordDao recordDao = new RecordDaoImpl();
 
     keyword = request.getParameter("search");
     if (keyword == null) {
@@ -19,18 +22,18 @@
 
     if (keyword.equals("")) {
         try {
-            users = userDao.findByName("");
+            records = recordDao.findByName("");
         } catch (Exception e) {
             e.printStackTrace();
         }
     } else {
         try {
-            users = userDao.findByName(keyword);
+            records = recordDao.findByName(keyword);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    request.setAttribute("users", users);
+    request.setAttribute("posts", records);
 %>
 <html>
 
@@ -94,6 +97,14 @@
                 <h4 class="page-title">求职记录管理</h4>
             </div>
         </div>
+        <div class="search">
+            <div class="input">
+                <input style="padding:0 10px;;width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
+                       value="${requestScope.keyword}">
+                <a href="JavaScript:search();"
+                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜 索</a>
+            </div>
+        </div>
         <br>
         <a href="JavaScript:selectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">全选</a>
         <a href="JavaScript:notSelectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">反选</a>
@@ -107,40 +118,33 @@
                             <th><input name="checkAll" type="checkbox" id="selAll" onclick="selectAll();"></th>
 
                             <th>ID</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>电话</th>
-                            <th>邮箱</th>
-                            <th>角色</th>
-                            <th class="text-center" colspan="2">操作</th>
+                            <th>用户id</th>
+                            <th>公司id</th>
+                            <th>简历id</th>
+                            <th>投递时间</th>
+                            <th class="text-center">操作</th>
                         </tr>
                         </thead>
                         <tbody>
 
 
-                        <c:forEach items="${requestScope.users}" var="user">
+                        <c:forEach items="${requestScope.posts}" var="record">
                             <tr>
                                 <td><input name="checkAll" id="checkAll" onclick="setSelectAll();" type="checkbox"></td>
-
-                                <td>${user.id}</td>
-                                <td><img width="28" height="28" src="../static/images/user.jpg"
-                                         class="rounded-circle m-r-5" alt="">${user.name}
-                                </td>
-                                <td>${user.sex}</td>
-                                <td>${user.age}</td>
-                                <td>${user.phone}</td>
-                                <td>${user.email}</td>
-                                <td>${user.role}</td>
+                                <td>${record.id}</td>
+                                <td>${record.uid}</td>
+                                <td>${record.cid}</td>
+                                <td>${record.rid}</td>
+                                <td>${record.time}</td>
+<%--                                <td class="text-center">--%>
+<%--                                    <a class="dropdown-item"--%>
+<%--                                       href="${pageContext.request.contextPath}/pages/adminUpdatepost.jsp?userid=${record.id}"--%>
+<%--                                       data-toggle="modal"--%>
+<%--                                       data-target="#delete_patient">修改</a>--%>
+<%--                                </td>--%>
                                 <td class="text-center">
                                     <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/pages/adminUpdateUser.jsp?userid=${user.id}"
-                                       data-toggle="modal"
-                                       data-target="#delete_patient">修改</a>
-                                </td>
-                                <td class="text-center">
-                                    <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/admin?action=delete&function=user&id=${user.id}"
+                                       href="${pageContext.request.contextPath}/admin?action=delete&function=record&id=${record.id}"
                                        data-toggle="modal"
                                        data-target="#delete_patient">删除</a>
                                 </td>
@@ -176,9 +180,9 @@
         let search = document.getElementById("input-search");
         let keyword = search.value;
         if (keyword !== '') {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp?search=" + keyword;
+            location.href = "${pageContext.request.contextPath}/pages/adminRecord.jsp?search=" + keyword;
         } else {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp";
+            location.href = "${pageContext.request.contextPath}/pages/adminRecord.jsp";
         }
     }
 
@@ -4413,26 +4417,26 @@
         margin-right: 5px;
     }
 
-    .post-left {
+    .record-left {
         float: left;
     }
 
-    .post-right {
+    .record-right {
         float: right;
     }
 
-    .post-left ul {
+    .record-left ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 
-    .post-left ul li {
+    .record-left ul li {
         float: left;
         margin-right: 20px;
     }
 
-    .post-left ul li:last-child {
+    .record-left ul li:last-child {
         margin-right: 0;
     }
 
@@ -4505,13 +4509,13 @@
         border-bottom: none;
     }
 
-    .post-thumb {
+    .record-thumb {
         width: 80px;
         float: left;
         overflow: hidden;
     }
 
-    .post-thumb a img {
+    .record-thumb a img {
         -moz-transform: scale(1);
         -webkit-transform: scale(1);
         -o-transform: scale(1);
@@ -4524,7 +4528,7 @@
         transition: all 0.3s ease-in-out 0s;
     }
 
-    .post-thumb a:hover img {
+    .record-thumb a:hover img {
         -moz-transform: scale(1.2);
         -webkit-transform: scale(1.2);
         -o-transform: scale(1.2);
@@ -4532,28 +4536,28 @@
         transform: scale(1.2);
     }
 
-    .post-info {
+    .record-info {
         margin-left: 95px;
     }
 
-    .post-info h4 {
+    .record-info h4 {
         font-size: 14px;
         font-weight: normal;
         line-height: 18px;
         margin: 0 0 10px;
     }
 
-    .post-info h4 a {
+    .record-info h4 a {
         color: #333;
     }
 
-    .post-info p {
+    .record-info p {
         color: #909090;
         font-size: 12px;
         margin: 0;
     }
 
-    .post-info p i {
+    .record-info p i {
         color: #009efb;
         font-size: 16px;
         margin-right: 4px;

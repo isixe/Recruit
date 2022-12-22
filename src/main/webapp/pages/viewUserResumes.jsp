@@ -62,7 +62,7 @@
                         自动过滤简历 <span>（共1份）</span></h1>
                 </dt>
                 <dd>
-                    <form action="autoFilterResumes.html" method="get" id="filterForm">
+                    <form action="autoFilterResumes.html" method="post" id="filterForm">
                         <div class="filter_tip">
                             系统将自动过滤学历、城市、工作年限 <span>不符合</span> 要求的简历，自动过滤的简历若 <span>15</span> 日内未作处理，拉勾将自动发送拒绝邮件至用户邮箱。
                         </div>

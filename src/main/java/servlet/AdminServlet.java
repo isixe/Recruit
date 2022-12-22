@@ -1,10 +1,13 @@
 package servlet;
 
 import bean.Job;
+import bean.Record;
 import bean.User;
 import dao.JobDao;
+import dao.RecordDao;
 import dao.UserDao;
 import dao.impl.JobDaoImpl;
+import dao.impl.RecordDaoImpl;
 import dao.impl.UserDaoImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,6 +52,15 @@ public class AdminServlet extends HttpServlet {
                 }
                 break;
             case "delete":
+                if (function.equals("record")) {
+                    RecordDao recordDao = new RecordDaoImpl();
+                    try {
+                        result = recordDao.delete(id);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
                 if (function.equals("user")) {
                     UserDao userDao = new UserDaoImpl();
                     try {

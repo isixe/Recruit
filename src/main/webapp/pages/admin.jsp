@@ -4423,26 +4423,26 @@
         margin-right: 5px;
     }
 
-    .post-left {
+    .record-left {
         float: left;
     }
 
-    .post-right {
+    .record-right {
         float: right;
     }
 
-    .post-left ul {
+    .record-left ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 
-    .post-left ul li {
+    .record-left ul li {
         float: left;
         margin-right: 20px;
     }
 
-    .post-left ul li:last-child {
+    .record-left ul li:last-child {
         margin-right: 0;
     }
 
@@ -4496,12 +4496,12 @@
         border-radius: 0;
     }
 
-    .latest-posts {
+    .latest-records {
         margin: 0;
         padding: 0;
     }
 
-    .latest-posts li {
+    .latest-records li {
         display: table;
         width: 100%;
         padding-bottom: 15px;
@@ -4509,19 +4509,19 @@
         border-bottom: 1px solid #eee;
     }
 
-    .latest-posts li:last-child {
+    .latest-records li:last-child {
         padding-bottom: 0px;
         margin-bottom: 0px;
         border-bottom: none;
     }
 
-    .post-thumb {
+    .record-thumb {
         width: 80px;
         float: left;
         overflow: hidden;
     }
 
-    .post-thumb a img {
+    .record-thumb a img {
         -moz-transform: scale(1);
         -webkit-transform: scale(1);
         -o-transform: scale(1);
@@ -4534,7 +4534,7 @@
         transition: all 0.3s ease-in-out 0s;
     }
 
-    .post-thumb a:hover img {
+    .record-thumb a:hover img {
         -moz-transform: scale(1.2);
         -webkit-transform: scale(1.2);
         -o-transform: scale(1.2);
@@ -4542,28 +4542,28 @@
         transform: scale(1.2);
     }
 
-    .post-info {
+    .record-info {
         margin-left: 95px;
     }
 
-    .post-info h4 {
+    .record-info h4 {
         font-size: 14px;
         font-weight: normal;
         line-height: 18px;
         margin: 0 0 10px;
     }
 
-    .post-info h4 a {
+    .record-info h4 a {
         color: #333;
     }
 
-    .post-info p {
+    .record-info p {
         color: #909090;
         font-size: 12px;
         margin: 0;
     }
 
-    .post-info p i {
+    .record-info p i {
         color: #009efb;
         font-size: 16px;
         margin-right: 4px;
