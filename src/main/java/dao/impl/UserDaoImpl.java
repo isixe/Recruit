@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,43 @@ public class UserDaoImpl implements UserDao {
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getRegisterTime());
             pstmt.setString(4, user.getRole());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
+    }
+
+
+    /**
+     * 后台用户的增加
+     * ===================================================================
+     *
+     * @param user 用户实体类
+     * @return int 影响的行数
+     * @throws Exception
+     */
+    @Override
+    public Integer addUser(User user) throws Exception {
+        int result = 0;
+        ConnectionUtils utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "insert into user (name,password,sex,age,email,phone,register_date,role) values(?,?,?,?,?,?,?,?)";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3,user.getSex());
+            pstmt.setInt(4,user.getAge());
+            pstmt.setString(5,user.getEmail());
+            pstmt.setString(6, user.getPhone());
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String local_date = format.format(date);
+            pstmt.setString(7,local_date);
+            pstmt.setString(8, user.getRole());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -29,8 +29,21 @@ public class AdminServlet extends HttpServlet {
         int result = 0;
         String function = request.getParameter("function");
         String action = request.getParameter("action");
-        id = Integer.parseInt(request.getParameter("id"));
+        String uid = request.getParameter("id");
+        if (uid != null) {
+            id = Integer.parseInt(uid);
+        }
         switch (action) {
+            case "add":
+                result = addUserDate(request);
+                if (result > 0) {
+                    response.getWriter().write("添加成功，正在跳转管理主页！");
+                    response.setHeader("refresh", "1;url=pages/admin.jsp");
+                } else {
+                    PrintWriter out = response.getWriter();
+                    out.print("<script>alert('添加失败！请重新填写');window.history.go(-1); </script>");
+                }
+                break;
             case "delete":
                 if (function.equals("user")) {
                     UserDao userDao = new UserDaoImpl();
@@ -42,7 +55,7 @@ public class AdminServlet extends HttpServlet {
 
                 }
                 if (function.equals("job")) {
-                    JobDao jobDao =new JobDaoImpl();
+                    JobDao jobDao = new JobDaoImpl();
                     try {
                         result = jobDao.delete(id);
                     } catch (Exception e) {
@@ -67,10 +80,10 @@ public class AdminServlet extends HttpServlet {
                 }
                 break;
             case "update":
-                if (function.equals("user")){
+                if (function.equals("user")) {
                     result = updateUserData(request);
                 }
-                if (function.equals("job")){
+                if (function.equals("job")) {
 //                    result =
                 }
                 if (result > 0) {
@@ -89,6 +102,21 @@ public class AdminServlet extends HttpServlet {
         doGet(req, resp);
     }
 
+    public int addUserDate(HttpServletRequest request) {
+        user.setName(request.getParameter("name"));
+        user.setAge(Integer.parseInt(request.getParameter("age")));
+        user.setEmail(request.getParameter("email"));
+        user.setPhone(request.getParameter("phone"));
+        user.setSex(request.getParameter("sex"));
+        user.setRole(request.getParameter("role"));
+        user.setPassword(request.getParameter("password"));
+        try {
+            result = userDao.addUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public int updateUserData(HttpServletRequest request) {
         user.setName(request.getParameter("name"));
@@ -106,7 +134,7 @@ public class AdminServlet extends HttpServlet {
     }
 
     public int updateJobData(HttpServletRequest request) {
-        return  0;
+        return 0;
     }
 }
 

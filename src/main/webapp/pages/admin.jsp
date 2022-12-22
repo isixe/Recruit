@@ -88,12 +88,12 @@
                 <h4 class="page-title">用户管理</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="#" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
+                <a href="${pageContext.request.contextPath}/pages/adminAddUser.jsp" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
             </div>
         </div>
         <div class="search">
             <div class="input">
-                <input style="width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
+                <input style="padding:0 10px;;width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
                        value="${requestScope.keyword}">
                 <a href="JavaScript:search();"
                    style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜
