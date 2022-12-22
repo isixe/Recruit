@@ -112,21 +112,20 @@ public class ResumeDaoImpl implements ResumeDao {
     }
 
     //简历删除功能
-    public Integer delete(int id) {
-        int result = 0;
+    public boolean delete(int id) {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
             sql = "delete from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
-            result = pstmt.executeUpdate();
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             utils.closeAll(pstmt, rs);
         }
-        return result;
+        return false;
     }
     //根据ID查找简历
     public Resume findByUserId(int id)  {

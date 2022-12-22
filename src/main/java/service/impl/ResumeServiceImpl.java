@@ -22,7 +22,7 @@ public class ResumeServiceImpl implements ResumeService {
     public boolean update(Resume resume){
         return  resumeDao.update((resume));
     }
-    public  Integer delete(int id){
+    public boolean delete(int id){
         return  resumeDao.delete((id));
     }
     public Resume findByUserId(int id) {

@@ -14,7 +14,7 @@ public interface ResumeService {
 
     public  boolean update(Resume resume);
 
-    public  Integer delete(int id);
+    public  boolean delete(int id);
 
     public Resume findByUserId(int id);
 

@@ -31,7 +31,7 @@
         <h1 title="${resume.name}的简历">${resume.name}的简历</h1>
         <a title="修改简历" href="${pageContext.request.contextPath}/findResumeByIdServlet?uid=${resume.userid}&type=edit">修改简历</a>
         &nbsp;
-        <a title="下载简历" class="inline cboxElement" href="#downloadOnlineResume">下载该简历</a>
+        <a title="下载简历" href="${pageContext.request.contextPath}/deleteResumeServlet">删除简历</a>
     </div><!--end .preview_header-->
 
     <div class="preview_content">
