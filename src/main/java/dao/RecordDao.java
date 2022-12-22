@@ -13,7 +13,7 @@ public interface RecordDao {
 
     public Integer update(Record record) ;
 
-    public Job findById(int id) throws Exception;
+    public List<Record> findById(int id) throws Exception;
 
     public List<Record> findByName(String name) throws Exception;
 }

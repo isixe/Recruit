@@ -148,7 +148,9 @@
                                     <a href="${pageContext.request.contextPath}/findResumeByIdServlet?uid=${sessionScope.userid}&type=preview">
                                         <li>我的简历</li>
                                     </a>
+                                    <a href="${pageContext.request.contextPath}/pages/myRecord.jsp?uid=${sessionScope.userid}&type=preview">
                                     <li>我的求职</li>
+                                    </a>
                                 </ul>
                             </div>
                         </li>

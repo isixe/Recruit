@@ -50,8 +50,32 @@ public class RecordDaoImpl implements RecordDao {
     }
 
     @Override
-    public Job findById(int id) throws Exception {
-        return null;
+    public List<Record> findById(int id) throws Exception {
+        int result = 0;
+        ConnectionUtils utils = new ConnectionUtils();
+        conn = utils.getConn();
+        sql = "select * from record where uid = ?";
+        List<Record> records = new ArrayList<>();
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if (rs.next()){
+                Record record = new Record();
+                record.setId(rs.getInt("id"));
+                record.setCid(rs.getInt("cid"));
+                record.setRid(rs.getInt("rid"));
+                record.setUid(id);
+                record.setTime(rs.getDate("time"));
+                System.out.println(record.toString());
+                records.add(record);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return records;
     }
 
     @Override
