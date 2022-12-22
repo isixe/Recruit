@@ -22,6 +22,7 @@ public class AddResumeServlet extends HttpServlet {
         resume.setYear(req.getParameter("year"));
         resume.setDatetime(req.getParameter("datetime"));
         resume.setEducation(req.getParameter("education"));
+        resume.setMajor(req.getParameter("major"));
         resume.setEmail(req.getParameter("email"));
         resume.setSchool(req.getParameter("school"));
         resume.setSex(req.getParameter("sex"));

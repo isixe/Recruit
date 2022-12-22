@@ -10,15 +10,16 @@ import service.impl.ResumeServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet("/deleteResumeServlet")
+@WebServlet("/DeleteResumeServlet")
 public class DeleteResumeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int uid = Integer.parseInt((String) req.getSession().getAttribute("userid"));
         ResumeService resumeService = new ResumeServiceImpl();
-        resumeService.delete(uid);
-        resp.sendRedirect("index.jsp");
+        int id = Integer.parseInt(req.getParameter("id"));
+         resumeService.delete(Integer.parseInt("id"));
+         resp.sendRedirect("");
+        req.getRequestDispatcher("").forward(req, resp);
     }
 
     @Override

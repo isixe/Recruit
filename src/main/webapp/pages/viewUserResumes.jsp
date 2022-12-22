@@ -8,10 +8,7 @@
 
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>查看用户简历</title>
-    <link rel="stylesheet" href="./static/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/css/index.css">
-    <!-- JS -->
-    <script src="./static/vendor/bootstrap.min.js"></script>
+
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
     <link href="static/css/external.min.css" type="text/css" rel="stylesheet">
     <link href="static/css/popup.css" type="text/css" rel="stylesheet">
@@ -31,103 +28,156 @@
             <dl class="company_center_aside">
                 <dt>我收到的简历</dt>
                 <dd>
-                    <a href="${pageContext.request.contextPath}/findResumeByPageServlet?status=待处理">待处理简历</a>
+                    <a href="${pageContext.request.contextPath}/findResumeServlet?status=待处理">待处理简历</a>
                 </dd>
                 <dd>
-                    <a href="findResumeByPageServlet?status=待定">待定简历</a>
+                    <a href="findResumeServlet?status=待定">待定简历</a>
                 </dd>
                 <dd>
-                    <a href="findResumeByPageServlet?status=已通知面试">已通知面试简历</a>
+                    <a href="findResumeServlet?status=已通知面试">已通知面试简历</a>
                 </dd>
                 <dd>
-                    <a href="findResumeByPageServlet?status=不合适">不合适简历</a>
+                    <a href="findResumeServlet?status=不合适">不合适简历</a>
+                </dd>
+                <dd class="current btm">
+                    <a href="findResumeServlet?status=自动过滤">自动过滤简历</a>
+                    <span>1</span>
+                </dd>
+            </dl>
+            <dl class="company_center_aside">
+                <dt>我发布的职位</dt>
+                <dd>
+                    <a href="positions.html">有效职位</a>
+                </dd>
+                <dd>
+                    <a href="positions.html">已下线职位</a>
                 </dd>
             </dl>
         </div><!-- end .sidebar -->
         <div class="content">
             <dl class="company_center_content">
                 <dt>
-                    <h1>${status}简历</h1>
+                    <h1>
+                        <em></em>
+                        自动过滤简历 <span>（共1份）</span></h1>
                 </dt>
                 <dd>
-                    <form action="autoFilterResumes.html" method="get" id="filterForm">
-                        <c:forEach items="${page.list}" var="resume">
-                            <ul class="reset resumeLists">
-                                <li data-id="1686182" class="onlineResume">
-                                    <label class="checkbox">
-                                        <input type="checkbox">
-                                        <i></i>
-                                    </label>
+                    <form action="autoFilterResumes.html" method="post" id="filterForm">
+                        <div class="filter_tip">
+                            系统将自动过滤学历、城市、工作年限 <span>不符合</span> 要求的简历，自动过滤的简历若 <span>15</span> 日内未作处理，拉勾将自动发送拒绝邮件至用户邮箱。
+                        </div>
+                        <div class="filter_actions ">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <i></i>
+                            </label>
+                            <span>全选</span>
+                            <a id="resumeInterviewAll" href="javascript:;">待定</a>
+                            <a id="resumeRefuseAll" href="javascript:;">不合适</a>
+                            <div id="filter_btn">筛选简历 <em></em></div>
+                        </div><!-- end .filter_actions -->
+                        <div class="filter_options  dn ">
+                            <dl>
+                                <dt>简历状态：</dt>
+                                <dd>
+                                    <a rel="-1" class="current" href="javascript:;">不限</a>
+                                    <a rel="1" href="javascript:;">未阅读</a>
+                                    <a rel="2" href="javascript:;">已阅读</a>
+                                    <a rel="3" href="javascript:;">已转发</a>
+                                    <input type="hidden" value="-1" name="resumeStatus">
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>简历形式：</dt>
+                                <dd>
+                                    <a rel="-1" class="current" href="javascript:;">不限</a>
+                                    <a rel="0" href="javascript:;">附件简历</a>
+                                    <a rel="1" href="javascript:;">在线简历</a>
+                                    <input type="hidden" value="-1" name="resumeType">
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>工作经验：</dt>
+                                <dd>
+                                    <a rel="-1" class="current" href="javascript:;">不限</a>
+                                    <a rel="1" href="javascript:;">应届毕业生</a>
+                                    <a rel="2" href="javascript:;">一年以下</a>
+                                    <a rel="3" href="javascript:;">1-3年</a>
+                                    <a rel="4" href="javascript:;">3-5年</a>
+                                    <a rel="5" href="javascript:;">5-10年</a>
+                                    <a rel="6" href="javascript:;">10年以上</a>
+                                    <input type="hidden" value="-1" name="workExp">
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>最低学历：</dt>
+                                <dd>
+                                    <a rel="-1" class="current" href="javascript:;">不限</a>
+                                    <a rel="1" href="javascript:;">大专及以上</a>
+                                    <a rel="2" href="javascript:;">本科及以上</a>
+                                    <a rel="3" href="javascript:;">硕士及以上</a>
+                                    <a rel="4" href="javascript:;">博士及以上</a>
+                                    <input type="hidden" value="-1" name="eduExp">
+                                </dd>
+                            </dl>
+                            <input type="hidden" value="0" name="filterStatus" id="filterStatus">
+                            <input type="hidden" value="" name="positionId" id="positionId">
+                        </div><!-- end .filter_options -->
+                        <c:forEach items = "${resumes}" var="resume">
+                        <ul class="reset resumeLists">
+                            <li data-id="1686182" class="onlineResume">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    <i></i>
+                                </label>
 
-                                    <div class="resumeShow">
-                                        <a title="预览在线简历" target="_blank" class="resumeImg"
-                                           href="resumeView.html?deliverId=1686182">
-                                            <img src="${resume.picture}">
-                                        </a>
+                                <div class="resumeShow">
+                                    <a title="预览在线简历" target="_blank" class="resumeImg"
+                                       href="resumeView.html?deliverId=1686182">
+                                        <img src="${resume.picture}">
+                                    </a>
 
                                         <div class="resumeIntro">
                                             <h3 class="unread">
                                                 <a target="_blank" title="预览jason的简历"
                                                    href="resumeView.html?deliverId=1686182">
-                                                        ${resume.name}
+                                                  ${resume.name}
                                                 </a>
                                                 <em></em>
                                             </h3>
                                             <span class="fr">投递时间：${resume.datetime}</span>
                                             <div>
-                                                    ${resume.name} / ${resume.sex} / ${resume.education}
-                                                / ${resume.year} / ${resume.city} <br>
-                                                    ${resume.school}
+                                                ${resume.name} / ${resume.sex} / ${resume.education} / ${resume.year} / ${resume.city} <br>
+                                                ${resume.major} | ${resume.school}
                                             </div>
 
                                         </div>
                                         <div class="links">
-                                            <a href="javascript:void(0)" onclick="deleteResume(${resume.id})">删除</a>
+                                            <a data-deliverid="1686182" data-name="jason" data-positionid="149594"
+                                               data-email="888888888@qq.com" class="resume_notice"
+                                               href="javascript:void(0)">通知面试</a>
+                                            <a data-deliverid="1686182" class="resume_refuse"
+                                               href="javascript:void(0)">不合适</a>
+                                            <a data-deliverid="1686182" class="resume_caninterview"
+                                               href="javascript:void(0)">待定</a>
+                                            <a data-resumename="jason的简历" data-positionname="随便写" data-deliverid="1686182"
+                                               data-positionid="149594" data-resumekey="1ccca806e13637f7b1a4560f80f08057"
+                                               data-forwardcount="1" class="resume_forward" href="javascript:void(0)">
+                                                转发
+                                                <span>(1人)</span>
+                                            </a>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- end .resumeLists -->
+
+
+
+                                </div>
+                            </li>
+                        </ul><!-- end .resumeLists -->
                         </c:forEach>
                     </form>
-                    <div class="pagination">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-lg justify-content-center">
-                                <c:if test="${page.currentPage>1}">
-                                    <li class="page-item">
-                                        <a class="page-link" href="findResumeByPageServlet?status=${status}&currentPage=${page.currentPage-1}&rows=5" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                </c:if>
-                                <c:forEach begin="1" end="${page.totalPage}" var="i">
-                                <c:choose>
-                                    <c:when test="${page.currentPage == i}">
-                                        <li class="page-item active"><a class="page-link"
-                                                                        href="findResumeByPageServlet?status=${status}&currentPage=${i}&rows=5">${i}</a>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <li class="page-item"><a class="page-link"
-                                                             href="findResumeByPageServlet?status=${status}&currentPage=${i}&rows=5">${i}</a>
-                                    </li>
-                                    </c:otherwise>
-                                </c:choose>
-                                </c:forEach>
-                                <c:if test="${page.currentPage<page.totalPage}">
-                                <li class="page-item">
-                                    <a class="page-link" href="findResumeByPageServlet?status=${status}&currentPage=${page.currentPage+1}&rows=5" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                                </c:if>
-                            </ul>
-                        </nav>
-                    </div>
                 </dd>
             </dl>
         </div><!-- end .content -->
-
 
         <!------------------------------------- 弹窗lightbox ----------------------------------------->
         <div style="display:none;">
@@ -231,8 +281,7 @@
                         <tr>
                             <td width="20%" align="right">收件人</td>
                             <td width="80%">
-                                <input type="text" placeholder="最多可添加两个邮箱，用“；”隔开" id="recipients"
-                                       name="recipients">
+                                <input type="text" placeholder="最多可添加两个邮箱，用“；”隔开" id="recipients" name="recipients">
                                 <span id="forwardResumeError" style="display:none" class="beError"></span>
                             </td>
                         </tr>

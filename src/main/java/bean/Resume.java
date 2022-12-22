@@ -2,45 +2,33 @@ package bean;
 
 public class Resume {
     private int id;
+
     private String name;
+
     private String phone;
+
     private String email;
+
     private String sex;
+
     private String school;
+
+    private String major;
+
     private String education;
+
     private String year;
+
     private String city;
+
     private String datetime;
-    private String status;
+
+    private  String status;
+
     private String picture;
+
     private int userid;
-    private String projectexp;
-    private String workexp;
-    private String hope;
 
-    public String getProjectexp() {
-        return projectexp;
-    }
-
-    public void setProjectexp(String projectexp) {
-        this.projectexp = projectexp;
-    }
-
-    public String getWorkexp() {
-        return workexp;
-    }
-
-    public void setWorkexp(String workexp) {
-        this.workexp = workexp;
-    }
-
-    public String getHope() {
-        return hope;
-    }
-
-    public void setHope(String hope) {
-        this.hope = hope;
-    }
 
     public String getStatus() {
         return status;
@@ -83,12 +71,21 @@ public class Resume {
     }
 
 
+
     public String getSchool() {
         return school;
     }
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getEducation() {
@@ -156,6 +153,7 @@ public class Resume {
                 ", email='" + email + '\'' +
                 ", sex='" + sex + '\'' +
                 ", school='" + school + '\'' +
+                ", major='" + major + '\'' +
                 ", education='" + education + '\'' +
                 ", year='" + year + '\'' +
                 ", city='" + city + '\'' +
@@ -163,9 +161,6 @@ public class Resume {
                 ", status='" + status + '\'' +
                 ", picture='" + picture + '\'' +
                 ", userid=" + userid +
-                ", projectexp='" + projectexp + '\'' +
-                ", workexp='" + workexp + '\'' +
-                ", hope='" + hope + '\'' +
                 '}';
     }
 }
