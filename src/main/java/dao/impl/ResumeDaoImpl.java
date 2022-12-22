@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResumeDaoImpl implements ResumeDao {
     private ResultSet rs;
@@ -26,16 +27,15 @@ public class ResumeDaoImpl implements ResumeDao {
         int rs = 0;
         try {
             conn = utils.getConn();
-            sql = "insert into resume (name,phone,email,sex,school,major,education,datetime,userid) values(?,?,?,?,?,?,?,?,?)";
+            sql = "insert into resume (name,phone,email,sex,school,education,datetime,userid) values(?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, resume.getName());
             pstmt.setString(2, resume.getPhone());
             pstmt.setString(3, resume.getEmail());
             pstmt.setString(4,resume.getSex());
             pstmt.setString(5,resume.getSchool());
-            pstmt.setString(6,resume.getSchool());
-            pstmt.setString(7,resume.getSchool());
-            pstmt.setString(8,resume.getSchool());
+            pstmt.setString(6,resume.getEducation());
+            pstmt.setString(7,resume.getDatetime());
             pstmt.setInt(9,resume.getUserid());
             rs = pstmt.executeUpdate();
 
@@ -67,7 +67,6 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setYear(rs.getString("year"));
                 resume.setDatetime(rs.getString("datetime"));
                 resume.setEducation(rs.getString("education"));
-                resume.setMajor(rs.getString("major"));
                 resume.setEmail(rs.getString("email"));
                 resume.setSchool(rs.getString("school"));
                 resume.setSex(rs.getString("sex"));
@@ -88,44 +87,46 @@ public class ResumeDaoImpl implements ResumeDao {
 
 
     //简历修改功能
-    public Integer update(Resume resume) {
-        int result = 0;
+    public boolean update(Resume resume) {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
-            sql = "update resume set name = ?,email = ?,age = ?,phone =?,school = ?,education = ?, where userid =?";
+            sql = "update resume set name = ?, sex = ?, education = ?, school = ?, workexp = ?, email = ?, phone =?, hope = ?, projectexp = ? where userid =?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, resume.getName());
-            pstmt.setString(2, resume.getEmail());
-            pstmt.setString(3, resume.getSchool());
-            pstmt.setString(4, resume.getPhone());
-            pstmt.setString(5, resume.getEducation());
-            pstmt.setInt(6, resume.getUserid());
-            result = pstmt.executeUpdate();
+            pstmt.setString(2, resume.getSex());
+            pstmt.setString(3, resume.getEducation());
+            pstmt.setString(4, resume.getSchool());
+            pstmt.setString(5, resume.getWorkexp());
+            pstmt.setString(6, resume.getEmail());
+            pstmt.setString(7, resume.getPhone());
+            pstmt.setString(8, resume.getHope());
+            pstmt.setString(9, resume.getProjectexp());
+            pstmt.setInt(10, resume.getUserid());
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             utils.closeAll(pstmt, rs);
         }
-        return result;
+        return false;
     }
 
     //简历删除功能
-    public Integer delete(int id) {
-        int result = 0;
+    public boolean delete(int id) {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
             sql = "delete from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
-            result = pstmt.executeUpdate();
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             utils.closeAll(pstmt, rs);
         }
-        return result;
+        return false;
     }
     //根据ID查找简历
     public Resume findByUserId(int id)  {
@@ -135,9 +136,8 @@ public class ResumeDaoImpl implements ResumeDao {
             conn = utils.getConn();
             sql = "select * from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, Integer.toString(id));
+            pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            resumes.clear();
             while (rs.next()) {
                 resume.setId(rs.getInt("id"));
                 resume.setName(rs.getString("name"));
@@ -145,22 +145,81 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setYear(rs.getString("year"));
                 resume.setDatetime(rs.getString("datetime"));
                 resume.setEducation(rs.getString("education"));
-                resume.setMajor(rs.getString("major"));
                 resume.setEmail(rs.getString("email"));
                 resume.setSchool(rs.getString("school"));
                 resume.setSex(rs.getString("sex"));
                 resume.setStatus(rs.getString("status"));
                 resume.setPhone(rs.getString("phone"));
                 resume.setPicture(rs.getString("picture"));
+                resume.setHope(rs.getString("hope"));
+                resume.setWorkexp(rs.getString("workexp"));
+                resume.setProjectexp(rs.getString("projectexp"));
                 resume.setUserid(id);
             }
-            System.out.println(resume.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             utils.closeAll(pstmt, rs);
         }
         return resume;
+    }
+
+    @Override
+    public int findTotalCount(String status) {
+        ConnectionUtils utils = new ConnectionUtils();
+        try {
+            conn = utils.getConn();
+            sql = "select count(*) from resume where status = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, status);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            return count;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return -1;
+    }
+
+    @Override
+    public List<Resume> findByPage(int start, int rows, String status) {
+        ConnectionUtils utils = new ConnectionUtils();
+        try {
+            conn = utils.getConn();
+            sql = "select * from resume where status = ? limit ?, ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, status);
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, rows);
+            rs = pstmt.executeQuery();
+            resumes.clear();
+            while (rs.next()) {
+                Resume resume = new Resume();
+                resume.setId(rs.getInt("id"));
+                resume.setName(rs.getString("name"));
+                resume.setCity(rs.getString("city"));
+                resume.setYear(rs.getString("year"));
+                resume.setDatetime(rs.getString("datetime"));
+                resume.setEducation(rs.getString("education"));
+                resume.setEmail(rs.getString("email"));
+                resume.setSchool(rs.getString("school"));
+                resume.setSex(rs.getString("sex"));
+                resume.setStatus(rs.getString("status"));
+                resume.setPhone(rs.getString("phone"));
+                resume.setPicture(rs.getString("picture"));
+                resume.setUserid(rs.getInt("userid"));
+                resumes.add(resume);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return resumes;
     }
 }
 

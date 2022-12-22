@@ -19,5 +19,4 @@ public interface UserDao {
 
     public Integer findUserId(String username, String password) throws Exception;
 
-    public Integer addUser(User user) throws Exception;
 }

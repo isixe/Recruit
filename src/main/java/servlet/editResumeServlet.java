@@ -11,33 +11,25 @@ import service.impl.ResumeServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet("/AddResumeServlet")
-public class AddResumeServlet extends HttpServlet {
+@WebServlet("/editResumeServlet")
+public class editResumeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int uid = Integer.parseInt(req.getParameter("uid"));
         Resume resume=new Resume();
-        resume.setId(Integer.parseInt(req.getParameter("id")));
+        resume.setUserid(uid);
         resume.setName(req.getParameter("name"));
-        resume.setCity(req.getParameter("city"));
-        resume.setYear(req.getParameter("year"));
-        resume.setDatetime(req.getParameter("datetime"));
-        resume.setEducation(req.getParameter("education"));
-        resume.setEmail(req.getParameter("email"));
-        resume.setSchool(req.getParameter("school"));
         resume.setSex(req.getParameter("sex"));
-        resume.setStatus(req.getParameter("status"));
-        resume.setPicture(req.getParameter("picture"));
+        resume.setEducation(req.getParameter("education"));
+        resume.setSchool(req.getParameter("school"));
+        resume.setWorkexp(req.getParameter("workexp"));
+        resume.setEmail(req.getParameter("email"));
         resume.setPhone(req.getParameter("phone"));
-        System.out.println(resume);
+        resume.setHope(req.getParameter("hope"));
+        resume.setProjectexp(req.getParameter("projectexp"));
         ResumeService resumeService = new ResumeServiceImpl();
-        Integer count =resumeService.add(resume);
-        if(count > 0){
-            System.out.println("添加简历成功！");
-        }else{
-            System.out.println("添加简历失败...");
-        }
-
-
+        resumeService.update(resume);
+        req.getRequestDispatcher("findResumeByIdServlet?uid="+uid+"&type=preview").forward(req, resp);
     }
 
     @Override

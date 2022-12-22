@@ -10,22 +10,24 @@ import service.ResumeService;
 import service.impl.ResumeServiceImpl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet("/FindByIdResumeServlet")
-public class FindByIdResumeServlet extends HttpServlet {
+@WebServlet("/findResumeByIdServlet")
+public class FindResumeByIdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int uid = Integer.parseInt(req.getParameter("uid"));
+        String type = req.getParameter("type");
         ResumeService resumeService = new ResumeServiceImpl();
-        int id = Integer.parseInt(req.getParameter("id"));
-        Resume resumes = resumeService.findByUserId(id);
-        System.out.println(resumes);
-        req.setAttribute("resumes", resumes);
-        req.getRequestDispatcher("").forward(req, resp);
+        Resume resume = resumeService.findByUserId(uid);
+        req.setAttribute("resume", resume);
+        if ("preview".equals(type)) {
+            req.getRequestDispatcher("pages/preview.jsp").forward(req, resp);
+        } else if ("edit".equals(type)) {
+            req.getRequestDispatcher("pages/editResume.jsp").forward(req, resp);
+        }
 
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
