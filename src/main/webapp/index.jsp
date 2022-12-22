@@ -338,11 +338,8 @@
                             </div>
                         </div>
                         <div class="right">
-                            <a href="${pageContext.request.contextPath}/pages/updateJob.jsp?jobid=${job.id}">
-                                <button class="btn btn-primary">修改</button>
-                            </a>
-                            <a href="JavaScript:deleteJob(${job.id})">
-                                <button class="btn btn-primary">删除</button>
+                            <a href="${pageContext.request.contextPath}/pages/success.jsp">
+                                <button class="btn btn-primary">报名参加</button>
                             </a>
                         </div>
                     </div>

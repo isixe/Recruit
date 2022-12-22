@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Job;
 import bean.User;
 import dao.JobDao;
 import dao.UserDao;
@@ -10,6 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.JobService;
+import service.impl.JobServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +20,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "AdminServlet", value = "/admin")
 public class AdminServlet extends HttpServlet {
     private User user = new User();
+    private Job job = new Job();
     private int result = 0;
     private int id;
     private final UserDao userDao = new UserDaoImpl();
@@ -82,16 +86,23 @@ public class AdminServlet extends HttpServlet {
             case "update":
                 if (function.equals("user")) {
                     result = updateUserData(request);
+                    if (result > 0) {
+                        response.getWriter().write("修改成功，正在跳转管理主页！");
+                        response.setHeader("refresh", "1;url=pages/admin.jsp");
+                    } else {
+                        PrintWriter out = response.getWriter();
+                        out.print("<script>alert('修改失败！'); window.location='pages/admin.jsp' </script>");
+                    }
                 }
                 if (function.equals("job")) {
-//                    result =
-                }
-                if (result > 0) {
-                    response.getWriter().write("修改成功，正在跳转管理主页！");
-                    response.setHeader("refresh", "1;url=pages/admin.jsp");
-                } else {
-                    PrintWriter out = response.getWriter();
-                    out.print("<script>alert('修改失败！'); window.location='pages/admin.jsp' </script>");
+                    result = updateJobData(request);
+                    if (result > 0) {
+                        response.getWriter().write("修改成功，正在跳转管理主页！");
+                        response.setHeader("refresh", "1;url=pages/adminJob.jsp");
+                    } else {
+                        PrintWriter out = response.getWriter();
+                        out.print("<script>alert('修改失败！'); window.history.go(-1);' </script>");
+                    }
                 }
                 break;
         }
@@ -133,8 +144,20 @@ public class AdminServlet extends HttpServlet {
         return result;
     }
 
-    public int updateJobData(HttpServletRequest request) {
-        return 0;
+    public Integer updateJobData(HttpServletRequest req){
+        job.setId(Integer.parseInt(req.getParameter("jobid")));
+        job.setArea(req.getParameter("area"));
+        job.setContact(req.getParameter("contact"));
+        job.setSalary(req.getParameter("salary"));
+        job.setJob_requirements(req.getParameter("requirement"));
+        job.setJob_require(req.getParameter("require"));
+        job.setWelfare(req.getParameter("welfalre"));
+        job.setTitle(req.getParameter("title"));
+        job.setTime(req.getParameter("time"));
+        JobService jobService = new JobServiceImpl();
+        result = jobService.updateJob(job);
+        return result;
     }
+
 }
 

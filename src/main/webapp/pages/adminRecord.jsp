@@ -74,14 +74,14 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">管理后台</li>
-                <li class="active">
-                    <a href="#"> <span>用户管理</span></a>
+                <li class="">
+                    <a href="${pageContext.request.contextPath}/pages/admin.jsp"> <span>用户管理</span></a>
                 </li>
                 <li class="">
                     <a href="${pageContext.request.contextPath}/pages/adminJob.jsp"> <span>工作管理</span></a>
                 </li>
-                <li class="">
-                    <a href="${pageContext.request.contextPath}/pages/adminRecord.jsp"> <span>投递记录</span></a>
+                <li class="active">
+                    <a href="#"> <span>投递记录</span></a>
                 </li>
             </ul>
         </div>
@@ -91,24 +91,13 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">用户管理</h4>
-            </div>
-            <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="${pageContext.request.contextPath}/pages/adminAddUser.jsp" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
-            </div>
-        </div>
-        <div class="search">
-            <div class="input">
-                <input style="padding:0 10px;;width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
-                       value="${requestScope.keyword}">
-                <a href="JavaScript:search();"
-                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜
-                    索</a>
+                <h4 class="page-title">求职记录管理</h4>
             </div>
         </div>
         <br>
         <a href="JavaScript:selectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">全选</a>
         <a href="JavaScript:notSelectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">反选</a>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -116,6 +105,7 @@
                         <thead>
                         <tr>
                             <th><input name="checkAll" type="checkbox" id="selAll" onclick="selectAll();"></th>
+
                             <th>ID</th>
                             <th>用户名</th>
                             <th>性别</th>
@@ -123,7 +113,6 @@
                             <th>电话</th>
                             <th>邮箱</th>
                             <th>角色</th>
-                            <th>注册时间</th>
                             <th class="text-center" colspan="2">操作</th>
                         </tr>
                         </thead>
@@ -133,6 +122,7 @@
                         <c:forEach items="${requestScope.users}" var="user">
                             <tr>
                                 <td><input name="checkAll" id="checkAll" onclick="setSelectAll();" type="checkbox"></td>
+
                                 <td>${user.id}</td>
                                 <td><img width="28" height="28" src="../static/images/user.jpg"
                                          class="rounded-circle m-r-5" alt="">${user.name}
@@ -142,7 +132,6 @@
                                 <td>${user.phone}</td>
                                 <td>${user.email}</td>
                                 <td>${user.role}</td>
-                                <td>${user.registerTime}</td>
                                 <td class="text-center">
                                     <a class="dropdown-item"
                                        href="${pageContext.request.contextPath}/pages/adminUpdateUser.jsp?userid=${user.id}"
@@ -194,6 +183,7 @@
     }
 
 
+
     var selAll = document.getElementById("setAll");
 
     function selectAll() {
@@ -243,13 +233,13 @@
     var count = 0;
     function selectAll() {
         var checkboxs = document.getElementsByName("checkAll");
-        if (count==0){
+        if (count == 0) {
             for (var i = 0; i < checkboxs.length; i++) {
                 var e = checkboxs[i];
                 e.checked = true;
             }
             count = 1;
-        }else {
+        } else {
             for (var i = 0; i < checkboxs.length; i++) {
                 var e = checkboxs[i];
                 e.checked = false;

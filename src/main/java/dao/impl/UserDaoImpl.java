@@ -247,6 +247,7 @@ public class UserDaoImpl implements UserDao {
                     user.setPhone(rs.getString(7));
                     user.setEmail(rs.getString(8));
                     user.setRole(rs.getString("role"));
+                    user.setRegisterTime(rs.getString("register_date"));
                     list.add(user);
                 }
             }
