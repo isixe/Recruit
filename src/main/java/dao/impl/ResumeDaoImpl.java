@@ -26,16 +26,15 @@ public class ResumeDaoImpl implements ResumeDao {
         int rs = 0;
         try {
             conn = utils.getConn();
-            sql = "insert into resume (name,phone,email,sex,school,major,education,datetime,userid) values(?,?,?,?,?,?,?,?,?)";
+            sql = "insert into resume (name,phone,email,sex,school,education,datetime,userid) values(?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, resume.getName());
             pstmt.setString(2, resume.getPhone());
             pstmt.setString(3, resume.getEmail());
             pstmt.setString(4,resume.getSex());
             pstmt.setString(5,resume.getSchool());
-            pstmt.setString(6,resume.getSchool());
-            pstmt.setString(7,resume.getSchool());
-            pstmt.setString(8,resume.getSchool());
+            pstmt.setString(6,resume.getEducation());
+            pstmt.setString(7,resume.getDatetime());
             pstmt.setInt(9,resume.getUserid());
             rs = pstmt.executeUpdate();
 
@@ -67,7 +66,6 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setYear(rs.getString("year"));
                 resume.setDatetime(rs.getString("datetime"));
                 resume.setEducation(rs.getString("education"));
-                resume.setMajor(rs.getString("major"));
                 resume.setEmail(rs.getString("email"));
                 resume.setSchool(rs.getString("school"));
                 resume.setSex(rs.getString("sex"));
@@ -135,7 +133,7 @@ public class ResumeDaoImpl implements ResumeDao {
             conn = utils.getConn();
             sql = "select * from resume where userid = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, Integer.toString(id));
+            pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             resumes.clear();
             while (rs.next()) {
@@ -145,16 +143,17 @@ public class ResumeDaoImpl implements ResumeDao {
                 resume.setYear(rs.getString("year"));
                 resume.setDatetime(rs.getString("datetime"));
                 resume.setEducation(rs.getString("education"));
-                resume.setMajor(rs.getString("major"));
                 resume.setEmail(rs.getString("email"));
                 resume.setSchool(rs.getString("school"));
                 resume.setSex(rs.getString("sex"));
                 resume.setStatus(rs.getString("status"));
                 resume.setPhone(rs.getString("phone"));
                 resume.setPicture(rs.getString("picture"));
+                resume.setHope(rs.getString("hope"));
+                resume.setWorkexp(rs.getString("workexp"));
+                resume.setProjectexp(rs.getString("projectexp"));
                 resume.setUserid(id);
             }
-            System.out.println(resume.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

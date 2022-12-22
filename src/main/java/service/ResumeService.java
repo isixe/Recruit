@@ -18,6 +18,4 @@ public interface ResumeService {
 
     public Resume findByUserId(int id);
 
-
-
 }

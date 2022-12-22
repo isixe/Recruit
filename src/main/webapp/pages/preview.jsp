@@ -5,12 +5,12 @@
     <title>简历预览-我的简历</title>
 
     <!-- CSS -->
-    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
-    <link href="../static/css/colorbox.min.css" type="text/css" rel="stylesheet">
-    <link href="../static/css/popup.css" type="text/css" rel="stylesheet">
+    <link href="static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="static/css/colorbox.min.css" type="text/css" rel="stylesheet">
+    <link href="static/css/popup.css" type="text/css" rel="stylesheet">
     <!-- JS -->
-    <script src="../static/vendor/jquery.1.10.1.min.js" type="text/javascript"></script>
-    <script src="../static/js/jquery.colorbox-min.js" type="text/javascript"></script>
+    <script src="static/vendor/jquery.1.10.1.min.js" type="text/javascript"></script>
+    <script src="static/js/jquery.colorbox-min.js" type="text/javascript"></script>
     <script>
         $(function () {
             $("body").on("click", "a.btn_s", function () {
@@ -22,14 +22,14 @@
             });
         });
     </script>
-    <script src="../static/js/ajaxCross.json" charset="UTF-8"></script>
+    <script src="static/js/ajaxCross.json" charset="UTF-8"></script>
 </head>
 
 <body>
 <div id="previewWrapper">
     <div class="preview_header">
-        <h1 title="jason的简历">jason的简历</h1>
-        <a title="修改简历"  href="#">修改简历</a>
+        <h1 title="${resume.name}的简历">${resume.name}的简历</h1>
+        <a title="修改简历" href="#">修改简历</a>
         &nbsp;
         <a title="下载简历" class="inline cboxElement" href="#downloadOnlineResume">下载该简历</a>
     </div><!--end .preview_header-->
@@ -38,16 +38,13 @@
         <div class="profile_box" id="basicInfo">
             <h2>基本信息</h2>
             <div class="basicShow">
-                   <span>jason |
-                    男 |                     大专 |                                       		3年工作经验
-            		            			| 广州<br>
-            			            				高级产品经理 · 上海辉硕科技有限公司 | 本科 · 北京大学<br>
-            			            			18644444444 | jason@qq.com<br>
-
+                   <span>${resume.name} | ${resume.sex} | ${resume.education} | ${resume.year} | ${resume.city}<br>
+                       ${resume.workexp} | ${resume.school}<br>
+                       ${resume.phone} | ${resume.email}<br>
             		</span>
                 <div class="m_portrait">
                     <div></div>
-                    <img width="120" height="120" alt="jason" src="../static/images/default_headpic.png">
+                    <img width="120" height="120" alt="jason" src="static/images/default_headpic.png">
                 </div>
             </div><!--end .basicShow-->
         </div><!--end #basicInfo-->
@@ -55,7 +52,7 @@
         <div class="profile_box" id="expectJob">
             <h2>期望工作</h2>
             <div class="expectShow">
-                广州，全职，月薪5k-10k，产品经理
+               ${resume.hope}
             </div><!--end .expectShow-->
         </div><!--end #expectJob-->
 
@@ -64,11 +61,10 @@
             <div class="experienceShow">
                 <ul class="wlist clearfix">
                     <li class="clear">
-                        <span class="c9">2013.06-至今</span>
+                        <span class="c9">${resume.datetime}</span>
                         <div>
-                            <img width="56" height="56" alt="上海辉硕科技有限公司" src="../static/images/logo_default.png">
-                            <h3>高级产品经理 </h3>
-                            <h4>上海辉硕科技有限公司</h4>
+                            <img width="56" height="56" alt="上海辉硕科技有限公司" src="static/images/logo_default.png">
+                            <h3>${resume.workexp} </h3>
                         </div>
                     </li>
                 </ul>
@@ -81,10 +77,8 @@
                 <ul class="plist clearfix">
                     <li class="noborder">
                         <div class="projectList">
-                            <div class="f16 mb10">微盟，jason
-                                <span class="c9">
-		            									            								（2013.06-至今）
-		            									            						</span>
+                            <div class="f16 mb10">${resume.projectexp}
+                                <span class="c9">${resume.datetime}</span>
                             </div>
                             <div class="dl1"></div>
                         </div>
@@ -98,10 +92,9 @@
             <div class="educationalShow">
                 <ul class="elist clearfix">
                     <li class="clear">
-                        <span class="c9">2004-2008</span>
                         <div>
-                            <h3>北京大学</h3>
-                            <h4>黑客联盟，本科</h4>
+                            <h3>${resume.school}</h3>
+                            <h4>${resume.education}</h4>
                         </div>
                     </li>
                 </ul>

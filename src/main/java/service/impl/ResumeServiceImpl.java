@@ -27,11 +27,6 @@ public class ResumeServiceImpl implements ResumeService {
     }
     public Resume findByUserId(int id) {
         return resumeDao.findByUserId(id);
-
     }
-
-
-
-
 }
 

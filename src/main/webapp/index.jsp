@@ -145,7 +145,7 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/preview.jsp">
+                                    <a href="${pageContext.request.contextPath}/findResumeByIdServlet?uid=${sessionScope.userid}">
                                         <li>我的简历</li>
                                     </a>
                                     <li>我的求职</li>
