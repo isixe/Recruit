@@ -22,6 +22,62 @@
 
     <script src="static/js/conv.js" type="text/javascript"></script>
     <script src="static/js/ajaxCross.json" charset="UTF-8"></script>
+    <script type="text/javascript">
+        function deleteResume(userid) {
+            if (confirm("您确认删除吗？")) {
+                location.href = "delOneResumeByIdServlet?uid=" + userid + "&status=${status}";
+            }
+        }
+        function selectAll() {
+            var userIds = document.getElementsByName("userId");
+            for (i = 0; i < userIds.length; i++) {
+                var userId = userIds[i];
+                userId.checked = true;
+
+            }
+        }
+
+        function selectNone() {
+            var userIds = document.getElementsByName("userId");
+            for (i = 0; i < userIds.length; i++) {
+                var userId = userIds[i];
+                userId.checked = false;
+
+            }
+        }
+
+        function selectBack() {
+            var userIds = document.getElementsByName("userId");
+            for (a = 0; a < userIds.length; a++) {
+                var userId = userIds[a];
+                if (userId.checked == false) {
+                    userId.checked = true;
+                } else {
+                    userId.checked = false
+                }
+
+            }
+        }
+        function deleteSelected() {
+            if (confirm("您确认删除吗？")) { //如果没有选中就提交表单 会报空指针异常
+                //如果没有选中就不提交表单 , 判断是否有选中
+                var flag = false;
+                var cbs = document.getElementsByName("userId");
+                for (var i = 0; i < cbs.length; i++) {
+                    if (cbs[i].checked) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (flag) {
+                    //提交表单
+                    document.getElementById("form").submit();
+                }
+
+            }
+        }
+    </script>
 </head>
 <body>
 <div id="body">
@@ -50,14 +106,13 @@
                     <h1>${status}简历</h1>
                 </dt>
                 <dd>
-                    <form action="autoFilterResumes.html" method="get" id="filterForm">
+                    <form action="delSelectedResumesServlet" method="get" id="form">
+                        <input hidden name="status" value="${status}">
                         <c:forEach items="${page.list}" var="resume">
                             <ul class="reset resumeLists">
                                 <li data-id="1686182" class="onlineResume">
-                                    <label class="checkbox">
-                                        <input type="checkbox">
-                                        <i></i>
-                                    </label>
+                                    <input class="form-check-input" type="checkbox"
+                                           name="userId" value=${resume.userid}>
 
                                     <div class="resumeShow">
                                         <a title="预览在线简历" target="_blank" class="resumeImg"
@@ -82,13 +137,20 @@
 
                                         </div>
                                         <div class="links">
-                                            <a href="javascript:void(0)" onclick="deleteResume(${resume.id})">删除</a>
+                                            <a href="javascript:void(0)" onclick="deleteResume(${resume.userid})">删除</a>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                             <!-- end .resumeLists -->
                         </c:forEach>
+                        <input type="button" name="all" value="全选" onclick="selectAll()"
+                               class="btn btn-sm btn-primary"/>
+                        <input type="button" name="none" value="全不选" onclick="selectNone()"
+                               class="btn btn-sm btn-primary"/>
+                        <input type="button" name="back" value="反选" onclick="selectBack()"
+                               class="btn btn-sm btn-primary"/>
+                        <a class="btn btn-sm btn-danger" onclick="deleteSelected()">删除选中</a>
                     </form>
                     <div class="pagination">
                         <nav aria-label="Page navigation example">
