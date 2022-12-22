@@ -3,13 +3,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="bean.User" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="dao.JobDao" %>
+<%@ page import="dao.impl.JobDaoImpl" %>
+<%@ page import="bean.Job" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
     String keyword = null;
-    List<User> users = new ArrayList<>();
-    UserDao userDao = new UserDaoImpl();
+    List<Job> jobs = new ArrayList<>();
+    JobDao jobDao =new JobDaoImpl();
 
     keyword = request.getParameter("search");
     if (keyword == null) {
@@ -19,18 +22,20 @@
 
     if (keyword.equals("")) {
         try {
-            users = userDao.findByName("");
+            jobs = jobDao.findByName("");
         } catch (Exception e) {
             e.printStackTrace();
         }
     } else {
         try {
-            users = userDao.findByName(keyword);
+            jobs = jobDao.findByName(keyword);
+            System.out.println(jobs.size());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    request.setAttribute("users", users);
+    request.setAttribute("jobs", jobs);
 %>
 <html>
 
@@ -57,7 +62,7 @@
         <ul class="nav user-menu float-right">
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="../static/images/user.jpg" width="40"
+                        <span class="user-img"><img class="rounded-circle" src="../static/images/job.jpg" width="40"
                                                     alt="Admin">
                             <span class="status online"></span></span>
                     <span>Admin</span>
@@ -74,11 +79,11 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">管理后台</li>
-                <li class="active">
-                    <a href="#"> <span>用户管理</span></a>
-                </li>
                 <li class="">
-                    <a href="${pageContext.request.contextPath}/pages/adminJob.jsp"> <span>工作管理</span></a>
+                    <a href="${pageContext.request.contextPath}/pages/admin.jsp"> <span>用户管理</span></a>
+                </li>
+                <li class="active">
+                    <a href="#"> <span>工作管理</span></a>
                 </li>
                 <li class="">
                     <a href="${pageContext.request.contextPath}/pages/adminRecord.jsp"> <span>投递记录</span></a>
@@ -91,10 +96,7 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">用户管理</h4>
-            </div>
-            <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="${pageContext.request.contextPath}/pages/adminAddUser.jsp" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
+                <h4 class="page-title">工作管理</h4>
             </div>
         </div>
         <div class="search">
@@ -102,13 +104,14 @@
                 <input style="padding:0 10px;;width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
                        value="${requestScope.keyword}">
                 <a href="JavaScript:search();"
-                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜
-                    索</a>
+                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜 索</a>
             </div>
         </div>
+
         <br>
         <a href="JavaScript:selectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">全选</a>
         <a href="JavaScript:notSelectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">反选</a>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -117,41 +120,44 @@
                         <tr>
                             <th><input name="checkAll" type="checkbox" id="selAll" onclick="selectAll();"></th>
                             <th>ID</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>电话</th>
-                            <th>邮箱</th>
-                            <th>角色</th>
-                            <th>注册时间</th>
+                            <th>工作名</th>
+                            <th>联系人</th>
+                            <th>职位id</th>
+                            <th>公司id</th>
+                            <th>地址</th>
+                            <th>时间</th>
+                            <th>薪水</th>
+                            <th>薪水</th>
+                            <th>福利</th>
+
                             <th class="text-center" colspan="2">操作</th>
                         </tr>
                         </thead>
                         <tbody>
 
 
-                        <c:forEach items="${requestScope.users}" var="user">
+                        <c:forEach items="${requestScope.jobs}" var="job">
                             <tr>
                                 <td><input name="checkAll" id="checkAll" onclick="setSelectAll();" type="checkbox"></td>
-                                <td>${user.id}</td>
-                                <td><img width="28" height="28" src="../static/images/user.jpg"
-                                         class="rounded-circle m-r-5" alt="">${user.name}
-                                </td>
-                                <td>${user.sex}</td>
-                                <td>${user.age}</td>
-                                <td>${user.phone}</td>
-                                <td>${user.email}</td>
-                                <td>${user.role}</td>
-                                <td>${user.registerTime}</td>
+                                <td>${job.id}</td>
+                                <td>${job.title}</td>
+                                <td>${job.contact}</td>
+                                <td>${job.position_id}</td>
+                                <td>${job.company_id}</td>
+                                <td>${job.area}</td>
+                                <td>${job.time}</td>
+                                <td>${job.salary}</td>
+                                <td>${job.welfare}</td>
+
                                 <td class="text-center">
                                     <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/pages/adminUpdateUser.jsp?userid=${user.id}"
+                                       href="${pageContext.request.contextPath}/pages/adminUpdatejob.jsp?jobid=${job.id}"
                                        data-toggle="modal"
                                        data-target="#delete_patient">修改</a>
                                 </td>
                                 <td class="text-center">
                                     <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/admin?action=delete&function=user&id=${user.id}"
+                                       href="${pageContext.request.contextPath}/admin?action=delete&function=job&id=${job.id}"
                                        data-toggle="modal"
                                        data-target="#delete_patient">删除</a>
                                 </td>
@@ -187,76 +193,77 @@
         let search = document.getElementById("input-search");
         let keyword = search.value;
         if (keyword !== '') {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp?search=" + keyword;
+            location.href = "${pageContext.request.contextPath}/pages/adminJob.jsp?search=" + keyword;
         } else {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp";
+            location.href = "${pageContext.request.contextPath}/pages/adminJob.jsp";
         }
     }
 
 
-    var selAll = document.getElementById("setAll");
 
-    function selectAll() {
-        var obj = document.getElementsByName("checkAll");
-        if (document.getElementById("setAll").checked = false) {
-            for (var i = 0; i < obj.length; i++) {
-                obj[i].checked = false;
+        var selAll = document.getElementById("setAll");
+
+        function selectAll() {
+            var obj = document.getElementsByName("checkAll");
+            if (document.getElementById("setAll").checked = false) {
+                for (var i = 0; i < obj.length; i++) {
+                    obj[i].checked = false;
+                }
+            } else {
+                for (var i = 0; i < obj.length; i++) {
+                    obj[i].checked = true;
+                }
+                document.getElementById("inverse1").checked === false;
             }
-        } else {
-            for (var i = 0; i < obj.length; i++) {
-                obj[i].checked = true;
+            // notSelectAll();
+        }
+
+        function setSelectAll() {
+            var obj = document.getElementsByName("checkAll");
+            obj[0].checked =true;
+            var count = obj.length;
+            var selectCount = 0;
+
+            for (var i = 0; i < count; i++) {
+                if (obj[i].checked === true) {
+                    selectCount++;
+                }
             }
-            document.getElementById("inverse1").checked === false;
-        }
-        // notSelectAll();
-    }
+            if (count === selectCount) {
+                document.all.selAll.checked = true;
 
-    function setSelectAll() {
-        var obj = document.getElementsByName("checkAll");
-        obj[0].checked =true;
-        var count = obj.length;
-        var selectCount = 0;
-
-        for (var i = 0; i < count; i++) {
-            if (obj[i].checked === true) {
-                selectCount++;
+            } else {
+                document.all.selAll.checked = false;
             }
         }
-        if (count === selectCount) {
-            document.all.selAll.checked = true;
 
-        } else {
-            document.all.selAll.checked = false;
-        }
-    }
-
-    function notSelectAll() {
-        var checkboxs = document.getElementsByName("checkAll");
-        for (var i = 0; i < checkboxs.length; i++) {
-            var e = checkboxs[i];
-            e.checked = !e.checked;
-            setSelectAll();
-        }
-    }
-
-
-    var count = 0;
-    function selectAll() {
-        var checkboxs = document.getElementsByName("checkAll");
-        if (count==0){
+        function notSelectAll() {
+            var checkboxs = document.getElementsByName("checkAll");
             for (var i = 0; i < checkboxs.length; i++) {
                 var e = checkboxs[i];
-                e.checked = true;
+                e.checked = !e.checked;
+                setSelectAll();
             }
-            count = 1;
-        }else {
-            for (var i = 0; i < checkboxs.length; i++) {
-                var e = checkboxs[i];
-                e.checked = false;
-
-            }
-            count = 0;
         }
+
+
+        var count = 0;
+        function selectAll() {
+            var checkboxs = document.getElementsByName("checkAll");
+            if (count==0){
+                for (var i = 0; i < checkboxs.length; i++) {
+                    var e = checkboxs[i];
+                    e.checked = true;
+                }
+                count = 1;
+            }else {
+                for (var i = 0; i < checkboxs.length; i++) {
+                    var e = checkboxs[i];
+                    e.checked = false;
+
+                }
+                count = 0;
+            }
     }
 </script>
 <script src="../static/vendor/jquery.3.4.1.js"></script>

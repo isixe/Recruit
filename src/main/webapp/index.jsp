@@ -162,9 +162,6 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/companyManagement.jsp">
-                                        <li>信息管理</li>
-                                    </a>
                                     <a href="${pageContext.request.contextPath}/findResumeByPageServlet?status=待处理">
                                         <li>求职记录</li>
                                     </a>
@@ -196,13 +193,6 @@
                         <input type="text" id="input-search" value="${requestScope.keyword}">
                     </div>
                     <p><a href="JavaScript:search();" style="color: #fff;text-decoration: none">搜职位</a></p>
-                </div>
-                <div class="job">
-                    <span>收营员</span>
-                    <span>理货员</span>
-                    <span>服务员</span>
-                    <span>店员</span>
-                    <span>营业员</span>
                 </div>
             </div>
             <!-- 中间搜索框，以及职业 -->
@@ -345,11 +335,8 @@
                             </div>
                         </div>
                         <div class="right">
-                            <a href="${pageContext.request.contextPath}/pages/updateJob.jsp?jobid=${job.id}">
-                                <button class="btn btn-primary">修改</button>
-                            </a>
-                            <a href="JavaScript:deleteJob(${job.id})">
-                                <button class="btn btn-primary">删除</button>
+                            <a href="${pageContext.request.contextPath}/pages/success.jsp">
+                                <button class="btn btn-primary">报名参加</button>
                             </a>
                         </div>
                     </div>

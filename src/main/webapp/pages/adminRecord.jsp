@@ -3,13 +3,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="bean.User" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.Record" %>
+<%@ page import="dao.RecordDao" %>
+<%@ page import="dao.impl.RecordDaoImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
     String keyword = null;
-    List<User> users = new ArrayList<>();
-    UserDao userDao = new UserDaoImpl();
+    List<Record> records = new ArrayList<>();
+    RecordDao recordDao = new RecordDaoImpl();
 
     keyword = request.getParameter("search");
     if (keyword == null) {
@@ -19,18 +22,18 @@
 
     if (keyword.equals("")) {
         try {
-            users = userDao.findByName("");
+            records = recordDao.findByName("");
         } catch (Exception e) {
             e.printStackTrace();
         }
     } else {
         try {
-            users = userDao.findByName(keyword);
+            records = recordDao.findByName(keyword);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    request.setAttribute("users", users);
+    request.setAttribute("posts", records);
 %>
 <html>
 
@@ -74,14 +77,14 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">管理后台</li>
-                <li class="active">
-                    <a href="#"> <span>用户管理</span></a>
+                <li class="">
+                    <a href="${pageContext.request.contextPath}/pages/admin.jsp"> <span>用户管理</span></a>
                 </li>
                 <li class="">
                     <a href="${pageContext.request.contextPath}/pages/adminJob.jsp"> <span>工作管理</span></a>
                 </li>
-                <li class="">
-                    <a href="${pageContext.request.contextPath}/pages/adminRecord.jsp"> <span>投递记录</span></a>
+                <li class="active">
+                    <a href="#"> <span>投递记录</span></a>
                 </li>
             </ul>
         </div>
@@ -91,10 +94,7 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">用户管理</h4>
-            </div>
-            <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="${pageContext.request.contextPath}/pages/adminAddUser.jsp" class="btn btn btn-primary btn-rounded float-right">添加用户</a>
+                <h4 class="page-title">求职记录管理</h4>
             </div>
         </div>
         <div class="search">
@@ -102,13 +102,13 @@
                 <input style="padding:0 10px;;width: 600px;height: 40px;border-radius: 50px;" type="text" id="input-search"
                        value="${requestScope.keyword}">
                 <a href="JavaScript:search();"
-                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜
-                    索</a>
+                   style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">搜 索</a>
             </div>
         </div>
         <br>
         <a href="JavaScript:selectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">全选</a>
         <a href="JavaScript:notSelectAll();" style="margin-left:20px ;border-radius: 5px;padding: 10px;text-decoration: none;color: #fff;background: dodgerblue">反选</a>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -116,42 +116,35 @@
                         <thead>
                         <tr>
                             <th><input name="checkAll" type="checkbox" id="selAll" onclick="selectAll();"></th>
+
                             <th>ID</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>电话</th>
-                            <th>邮箱</th>
-                            <th>角色</th>
-                            <th>注册时间</th>
-                            <th class="text-center" colspan="2">操作</th>
+                            <th>用户id</th>
+                            <th>公司id</th>
+                            <th>简历id</th>
+                            <th>投递时间</th>
+                            <th class="text-center">操作</th>
                         </tr>
                         </thead>
                         <tbody>
 
 
-                        <c:forEach items="${requestScope.users}" var="user">
+                        <c:forEach items="${requestScope.posts}" var="record">
                             <tr>
                                 <td><input name="checkAll" id="checkAll" onclick="setSelectAll();" type="checkbox"></td>
-                                <td>${user.id}</td>
-                                <td><img width="28" height="28" src="../static/images/user.jpg"
-                                         class="rounded-circle m-r-5" alt="">${user.name}
-                                </td>
-                                <td>${user.sex}</td>
-                                <td>${user.age}</td>
-                                <td>${user.phone}</td>
-                                <td>${user.email}</td>
-                                <td>${user.role}</td>
-                                <td>${user.registerTime}</td>
+                                <td>${record.id}</td>
+                                <td>${record.uid}</td>
+                                <td>${record.cid}</td>
+                                <td>${record.rid}</td>
+                                <td>${record.time}</td>
+<%--                                <td class="text-center">--%>
+<%--                                    <a class="dropdown-item"--%>
+<%--                                       href="${pageContext.request.contextPath}/pages/adminUpdatepost.jsp?userid=${record.id}"--%>
+<%--                                       data-toggle="modal"--%>
+<%--                                       data-target="#delete_patient">修改</a>--%>
+<%--                                </td>--%>
                                 <td class="text-center">
                                     <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/pages/adminUpdateUser.jsp?userid=${user.id}"
-                                       data-toggle="modal"
-                                       data-target="#delete_patient">修改</a>
-                                </td>
-                                <td class="text-center">
-                                    <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/admin?action=delete&function=user&id=${user.id}"
+                                       href="${pageContext.request.contextPath}/admin?action=delete&function=record&id=${record.id}"
                                        data-toggle="modal"
                                        data-target="#delete_patient">删除</a>
                                 </td>
@@ -187,11 +180,12 @@
         let search = document.getElementById("input-search");
         let keyword = search.value;
         if (keyword !== '') {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp?search=" + keyword;
+            location.href = "${pageContext.request.contextPath}/pages/adminRecord.jsp?search=" + keyword;
         } else {
-            location.href = "${pageContext.request.contextPath}/pages/admin.jsp";
+            location.href = "${pageContext.request.contextPath}/pages/adminRecord.jsp";
         }
     }
+
 
 
     var selAll = document.getElementById("setAll");
@@ -243,13 +237,13 @@
     var count = 0;
     function selectAll() {
         var checkboxs = document.getElementsByName("checkAll");
-        if (count==0){
+        if (count == 0) {
             for (var i = 0; i < checkboxs.length; i++) {
                 var e = checkboxs[i];
                 e.checked = true;
             }
             count = 1;
-        }else {
+        } else {
             for (var i = 0; i < checkboxs.length; i++) {
                 var e = checkboxs[i];
                 e.checked = false;
@@ -4496,12 +4490,12 @@
         border-radius: 0;
     }
 
-    .latest-records {
+    .latest-posts {
         margin: 0;
         padding: 0;
     }
 
-    .latest-records li {
+    .latest-posts li {
         display: table;
         width: 100%;
         padding-bottom: 15px;
@@ -4509,7 +4503,7 @@
         border-bottom: 1px solid #eee;
     }
 
-    .latest-records li:last-child {
+    .latest-posts li:last-child {
         padding-bottom: 0px;
         margin-bottom: 0px;
         border-bottom: none;

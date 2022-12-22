@@ -83,7 +83,7 @@
 <div id="body">
     <div id="container">
         <div class="sidebar">
-            <a class="btn_create" href="createresume1.html">发布新职位</a>
+            <a class="btn_create" href="${pageContext.request.contextPath}/pages/addJob.jsp">发布新职位</a>
             <dl class="company_center_aside">
                 <dt>我收到的简历</dt>
                 <dd>
