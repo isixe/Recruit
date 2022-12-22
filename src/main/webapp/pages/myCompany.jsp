@@ -1,6 +1,9 @@
 <%@ page import="bean.User" %>
 <%@ page import="dao.UserDao" %>
 <%@ page import="dao.impl.UserDaoImpl" %>
+<%@ page import="bean.Company" %>
+<%@ page import="dao.CompanyDao" %>
+<%@ page import="dao.impl.CompanyDaoImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String username = null;
@@ -11,20 +14,19 @@
     request.setAttribute("username", username);
     //System.out.println("用户id："+sid);
 
+    Company company = new Company();
     //通过id获取用户用户角色，根据用户角色，跳转相应界面
     if (sid != null) {
         int id = Integer.parseInt(sid);
-        User user = new User();
-        UserDao userDao = new UserDaoImpl();
+        CompanyDao dao = new CompanyDaoImpl();
         try {
-            user = userDao.findById(id);
-            String role = user.getRole();
-            request.getSession().setAttribute("role", role);
-            request.setAttribute("role", role);
+            company = dao.findByUserID(id);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
+
     }
+    request.setAttribute("company",company);
 %>
 <html>
 <head>
@@ -47,19 +49,10 @@
             <div class="content_l">
                 <div class="c_detail">
                     <div class="c_box companyName">
-                        <h2 title="平潭协创进出口贸易有限公司">平潭协创贸易有限公司</h2>
-                        <form class="clear editDetail dn" id="editDetailForm">
-                            <input type="text" placeholder="请输入公司简称" maxlength="15" value="平潭协创进出口贸易有限公司"
-                                   name="companyShortName" id="companyShortName">
-                            <input type="text" placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="测试的发打发打发大范德萨发"
-                                   name="companyFeatures" id="companyFeatures">
-                            <input type="hidden" value="25927" id="companyId" name="companyId">
-                            <input type="submit" value="保存" id="saveDetail" class="btn_small">
-                            <a id="cancelDetail" class="btn_cancel_s">取消</a>
-                        </form>
+                        <h2 title="${company.name}">${company.name}</h2>
 
                         <div class="clear oneword">
-                            <span>平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)</span>
+                            <span>${company.desc}</span>
                             &nbsp;
                         </div>
                         <h3 class="dn">已选择标签</h3>
@@ -68,54 +61,15 @@
                             <li><span>五险一金</span></li>
                             <li><span>弹性工作</span></li>
                             <li><span>岗位晋升</span></li>
-                            <li class="link">编辑</li>
+                            <a href="${pageContext.request.contextPath}/pages/updateCompany.jsp?id=${company.id}"><li class="link">编辑</li></a>
                         </ul>
-                        <div class="dn" id="addLabels">
-                            <a id="changeLabels" class="change" href="javascript:void(0)">换一换</a>
-                            <input type="hidden" value="1" id="labelPageNo">
-                            <input type="submit" value="贴上" class="fr" id="add_label">
-                            <input type="text" placeholder="添加自定义标签" name="label" id="label" class="label_form fr">
-                            <div class="clear"></div>
-                            <ul class="reset clearfix"></ul>
-                            <a id="saveLabels" class="btn_small" href="javascript:void(0)">保存</a>
-                            <a id="cancelLabels" class="btn_cancel_s" href="javascript:void(0)">取消</a>
-                        </div>
                     </div>
-                    <a title="编辑基本信息" class="c_edit" id="editCompanyDetail" href="javascript:void(0);"></a>
-                    <div class="clear"></div>
                 </div>
 
                 <div class="c_breakline"></div>
 
                 <div id="Profile">
                     <div class="profile_wrap">
-                        <!--无介绍 -->
-                        <dl class="c_section dn">
-                            <dt>
-                                <h2><em></em>公司介绍</h2>
-                            </dt>
-                            <dd>
-                                <div class="addnew">
-                                    详细公司的发展历程、让求职者更加了解你!<br>
-                                    <a id="addIntro" href="javascript:void(0)">+添加公司介绍</a>
-                                </div>
-                            </dd>
-                        </dl>
-                        <!--编辑介绍-->
-                        <dl class="c_section newIntro dn">
-                            <dt>
-                                <h2><em></em>公司介绍</h2>
-                            </dt>
-                            <dd>
-                                <form id="companyDesForm">
-                                    <textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="companyProfile">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</textarea>
-                                    <div class="word_count fr">你还可以输入 <span>1000</span> 字</div>
-                                    <div class="clear"></div>
-                                    <input type="submit" value="保存" id="submitProfile" class="btn_small">
-                                    <a id="delProfile" class="btn_cancel_s" href="javascript:void(0)">取消</a>
-                                </form>
-                            </dd>
-                        </dl>
 
                         <!--有介绍-->
                         <dl class="c_section">
@@ -124,7 +78,7 @@
                             </dt>
                             <dd>
                                 <div class="c_intro">
-                                    平潭协创进出口贸易有限公司成立于2012年08月03日，注册地位于平潭县岚城乡世界城二期25幢7单元601，法定代表人为周孙文。经营范围包括电子产品、机电设备、食用农产品、服装鞋帽、日用百货、电脑及周边设备、水产品、汽车及零配件（不含品牌轿车）销售；工程机械设备销售、租赁；自营和代理各类商品和技术的进出口业务，但国家法律法规禁止经营的范围除外；法律法规未规定许可的，均可自主选择经营项目开展经营。(依法须经批准的项目，经相关部门批准后方可开展经营活动)
+                                    ${company.desc}
                                 </div>
                                 <a title="编辑公司介绍" id="editIntro" class="c_edit" href="javascript:void(0)"></a>
                             </dd>
@@ -143,7 +97,7 @@
                             <tbody>
                             <tr>
                                 <td width="45">地点</td>
-                                <td>上海</td>
+                                <td>${company.area}</td>
                             </tr>
                             <tr>
                                 <td>规模</td>
@@ -165,56 +119,13 @@
                         <dd>
 
                             <div class="member_wrap">
-
-                                <!-- 无创始人 -->
-                                <div class="member_info addnew_right dn">
-                                    展示公司的领导班子，<br>提升诱人指数！<br>
-                                    <a class="member_edit" href="javascript:void(0)">+添加成员</a>
-                                </div>
-
-                                <!-- 编辑创始人 -->
-                                <div class="member_info newMember dn">
-                                    <form class="memberForm">
-                                        <div class="new_portrait">
-                                            <div class="portrait_upload dn portraitNo">
-                                                <span>上传创始人头像</span>
-                                            </div>
-                                            <div class="portraitShow">
-                                                <img width="120" height="120" src="style/images/leader_default.png">
-                                                <span>更换头像</span>
-                                            </div>
-                                            <input type="file" value="" title="支持jpg、jpeg、gif、png格式，文件小于5M"
-                                                   onchange="member_check(this,'http://www.lagou.com/c/upload.json','portraitNo','portraitShow','type','leaderInfos');"
-                                                   name="myfiles" id="profiles0">
-                                            <input type="hidden" value="7" name="type" class="type">
-                                            <input type="hidden" value="images/leader_default.png" name="photo"
-                                                   class="leaderInfos">
-                                            <em>
-                                                尺寸：120*120px <br>
-                                                大小：小于5M
-                                            </em>
-                                        </div>
-                                        <input type="text" placeholder="请输入创始人姓名" value="孙泰英" name="name">
-                                        <input type="text" placeholder="请输入创始人当前职位" value="ceo" name="position">
-                                        <input type="text" placeholder="请输入创始人新浪微博地址" value="http://weimob.weibo.com"
-                                               name="weibo">
-                                        <textarea placeholder="请输入创始人个人简介" maxlength="500" class="s_textarea"
-                                                  name="remark">一个</textarea>
-                                        <div class="word_count fr">你还可以输入 <span>500</span> 字</div>
-                                        <div class="clear"></div>
-                                        <input type="submit" value="保存" class="btn_small">
-                                        <a class="btn_cancel_s member_delete" href="javascript:void(0)">删除</a>
-                                        <input type="hidden" value="11493" class="leader_id">
-                                    </form>
-                                </div>
-
                                 <!-- 显示创始人 -->
                                 <div class="member_info">
                                     <a title="编辑创始人" class="c_edit member_edit" href="javascript:void(0)"></a>
                                     <div class="m_name">
-                                        孙泰英
+                                        ${requestScope.username}
                                     </div>
-                                    <div class="m_intro">孙泰英，平潭协创贸易有限公司，从事贸易行业。</div>
+                                    <div class="m_intro">${requestScope.username}，${company.name}</div>
                                 </div>
 
                             </div><!-- end .member_wrap -->

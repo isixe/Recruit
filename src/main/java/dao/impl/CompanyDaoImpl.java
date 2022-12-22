@@ -30,7 +30,26 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public int update(Company company) throws Exception {
-        return 0;
+        utils = new ConnectionUtils();
+        int result = 0;
+        try {
+            conn = utils.getConn(); //获取数据库连接
+            sql = "update company set `name`=? ,`area`=?,`desc`=? where id=?";
+            pstmt = conn.prepareStatement(sql);   //定义预编译sql语句.
+
+            pstmt.setString(1, company.getName());
+            pstmt.setString(2,company.getArea());
+            pstmt.setString(3,company.getDesc());
+            pstmt.setInt(4,company.getId());
+            System.out.println(pstmt.toString());
+
+            result = pstmt.executeUpdate()          ;//执行查询
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            utils.closeAll(pstmt, rs);
+        }
+        return result;
     }
 
     @Override
