@@ -9,7 +9,7 @@ public interface ResumeDao {
 
     public Integer add(Resume resume);
 
-    public Integer update(Resume resume);
+    public boolean update(Resume resume);
 
     public Integer delete(int id);
 

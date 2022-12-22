@@ -86,26 +86,29 @@ public class ResumeDaoImpl implements ResumeDao {
 
 
     //简历修改功能
-    public Integer update(Resume resume) {
-        int result = 0;
+    public boolean update(Resume resume) {
         ConnectionUtils utils = new ConnectionUtils();
         try {
             conn = utils.getConn();
-            sql = "update resume set name = ?,email = ?,age = ?,phone =?,school = ?,education = ?, where userid =?";
+            sql = "update resume set name = ?, sex = ?, education = ?, school = ?, workexp = ?, email = ?, phone =?, hope = ?, projectexp = ? where userid =?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, resume.getName());
-            pstmt.setString(2, resume.getEmail());
-            pstmt.setString(3, resume.getSchool());
-            pstmt.setString(4, resume.getPhone());
-            pstmt.setString(5, resume.getEducation());
-            pstmt.setInt(6, resume.getUserid());
-            result = pstmt.executeUpdate();
+            pstmt.setString(2, resume.getSex());
+            pstmt.setString(3, resume.getEducation());
+            pstmt.setString(4, resume.getSchool());
+            pstmt.setString(5, resume.getWorkexp());
+            pstmt.setString(6, resume.getEmail());
+            pstmt.setString(7, resume.getPhone());
+            pstmt.setString(8, resume.getHope());
+            pstmt.setString(9, resume.getProjectexp());
+            pstmt.setInt(10, resume.getUserid());
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             utils.closeAll(pstmt, rs);
         }
-        return result;
+        return false;
     }
 
     //简历删除功能
@@ -135,7 +138,6 @@ public class ResumeDaoImpl implements ResumeDao {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            resumes.clear();
             while (rs.next()) {
                 resume.setId(rs.getInt("id"));
                 resume.setName(rs.getString("name"));

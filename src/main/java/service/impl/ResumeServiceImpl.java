@@ -19,7 +19,7 @@ public class ResumeServiceImpl implements ResumeService {
     public Integer add(Resume resume) {
         return resumeDao.add(resume);
     }
-    public Integer update(Resume resume){
+    public boolean update(Resume resume){
         return  resumeDao.update((resume));
     }
     public  Integer delete(int id){

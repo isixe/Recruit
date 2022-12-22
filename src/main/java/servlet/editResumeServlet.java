@@ -11,22 +11,25 @@ import service.impl.ResumeServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet("/findResumeByIdServlet")
-public class FindResumeByIdServlet extends HttpServlet {
-
+@WebServlet("/editResumeServlet")
+public class editResumeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int uid = Integer.parseInt(req.getParameter("uid"));
-        String type = req.getParameter("type");
+        Resume resume=new Resume();
+        resume.setUserid(uid);
+        resume.setName(req.getParameter("name"));
+        resume.setSex(req.getParameter("sex"));
+        resume.setEducation(req.getParameter("education"));
+        resume.setSchool(req.getParameter("school"));
+        resume.setWorkexp(req.getParameter("workexp"));
+        resume.setEmail(req.getParameter("email"));
+        resume.setPhone(req.getParameter("phone"));
+        resume.setHope(req.getParameter("hope"));
+        resume.setProjectexp(req.getParameter("projectexp"));
         ResumeService resumeService = new ResumeServiceImpl();
-        Resume resume = resumeService.findByUserId(uid);
-        req.setAttribute("resume", resume);
-        if ("preview".equals(type)) {
-            req.getRequestDispatcher("pages/preview.jsp").forward(req, resp);
-        } else if ("edit".equals(type)) {
-            req.getRequestDispatcher("pages/editResume.jsp").forward(req, resp);
-        }
-
+        resumeService.update(resume);
+        req.getRequestDispatcher("findResumeByIdServlet?uid="+uid+"&type=preview").forward(req, resp);
     }
 
     @Override
