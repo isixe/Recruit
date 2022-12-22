@@ -145,7 +145,7 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/preview.jsp">
+                                    <a href="${pageContext.request.contextPath}/findResumeByIdServlet?uid=${sessionScope.userid}&type=preview">
                                         <li>我的简历</li>
                                     </a>
                                     <li>我的求职</li>
@@ -162,7 +162,7 @@
                             <!-- 二级导航 -->
                             <div class="second">
                                 <ul>
-                                    <a href="${pageContext.request.contextPath}/pages/viewUserResumes.jsp">
+                                    <a href="${pageContext.request.contextPath}/findResumeByPageServlet?status=待处理">
                                         <li>求职记录</li>
                                     </a>
                                 </ul>
@@ -193,6 +193,13 @@
                         <input type="text" id="input-search" value="${requestScope.keyword}">
                     </div>
                     <p><a href="JavaScript:search();" style="color: #fff;text-decoration: none">搜职位</a></p>
+                </div>
+                <div class="job">
+                    <span>收营员</span>
+                    <span>理货员</span>
+                    <span>服务员</span>
+                    <span>店员</span>
+                    <span>营业员</span>
                 </div>
             </div>
             <!-- 中间搜索框，以及职业 -->
@@ -335,8 +342,11 @@
                             </div>
                         </div>
                         <div class="right">
-                            <a href="${pageContext.request.contextPath}/pages/success.jsp">
-                                <button class="btn btn-primary">报名参加</button>
+                            <a href="${pageContext.request.contextPath}/pages/updateJob.jsp?jobid=${job.id}">
+                                <button class="btn btn-primary">修改</button>
+                            </a>
+                            <a href="JavaScript:deleteJob(${job.id})">
+                                <button class="btn btn-primary">删除</button>
                             </a>
                         </div>
                     </div>

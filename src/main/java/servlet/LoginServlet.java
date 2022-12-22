@@ -36,9 +36,6 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("name");
             String password = request.getParameter("password");
             String role = request.getParameter("role");
-            if (role ==null ){
-                role ="user";
-            }
 
             //登录验证
             if (action.equals("login")) {
