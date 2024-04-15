@@ -1,5 +1,5 @@
 # Recruit
 基于 SSM 的招聘管理系统
 
-# TODO
+# Todo
 > 等待重构中...
